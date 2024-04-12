@@ -5,12 +5,12 @@ let camelY = 100;
 
 //camel head
 fill(219, 165, 119);
-ellipse(camelX + 155, camelY + 150, camelX - 10, camelY - 10);
+ellipse(camelX + 150, camelY + 150, camelX - 20, camelY - 20);
 
 //camel nose
 noStroke();
 fill(219, 165, 119);
-ellipse(camelX + 179, camelY + 160, camelX - 25, camelY - 25);
+ellipse(camelX + 175, camelY + 162, camelX - 40, camelY - 40);
 
 //camel ears
 fill(219, 165, 119);
