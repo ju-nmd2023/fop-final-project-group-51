@@ -80,3 +80,9 @@ stroke(255, 255, 255, 10);
 ellipse(cloudX + 250, cloudY - 70, 70, 60);
 ellipse(cloudX + 220, cloudY - 70, 60, 40);
 ellipse(cloudX + 290, cloudY - 65, 50, 40);
+
+//sun
+fill(250, 210, 160);
+ellipse(x - 90, y - 50, 140);
+fill(251, 140, 26);
+ellipse(x - 90, y - 50, 100);
