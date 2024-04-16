@@ -1,32 +1,19 @@
-function setup() {
-  createCanvas(570, 700);
-  let canvas = createCanvas(570, 750);
-  frameRate(30);
-  color = (x, x, x);
-}
+/** @format */
 
-function setup() {
-  var cnv = createCanvas(570, 750);
-  var x = (windowWidth - width) / 2;
-  var y = (windowHeight - height) / 2;
-  cnv.position(x, y);
-  background(255, 0, 200);
-}
+let x = 200;
+let y = 200;
 
-function grass() {
-  push();
-  fill(166, 166, 166);
-  noStroke();
-  fill(0, 128, 0);
-  rect(0, 600, width, height);
-  fill(88, 57, 39);
-  ellipse(270, 620, 210, 40);
-  flower(f, r + 160);
-  flower(f + 50, r + 180);
-  flower(f + 530, r + 170);
-  pop();
-}
+//sky
+background(239, 227, 210);
 
-function draw() {
-  grass();
-}
+//dunes
+fill(192, 120, 50);
+noStroke();
+ellipse(x - 100, y + 400, 300);
+ellipse(x + 100, y + 420, 200, 200);
+ellipse(x + 350, y + 400, 250, 300);
+
+//sand
+fill(202, 143, 66);
+noStroke();
+rect(x - 200, y + 400, 600, 300);
