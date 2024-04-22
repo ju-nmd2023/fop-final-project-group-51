@@ -113,3 +113,11 @@ ellipse(camelX + 173, camelY + 153, camelX - 75, camelY - 80);
 //nose dot
 fill(0, 0, 0);
 ellipse(camelX + 196, camelY + 163, camelX - 96, camelY - 92);
+
+//feets
+fill(129, 88, 67);
+ellipse(camelX + 100, camelY + 360, camelX - 92, camelY - 80);
+ellipse(camelX + 80, camelY + 360, camelX - 92, camelY - 80);
+
+ellipse(camelX - 10, camelY + 360, camelX - 92, camelY - 80);
+ellipse(camelX - 30, camelY + 360, camelX - 92, camelY - 80);
