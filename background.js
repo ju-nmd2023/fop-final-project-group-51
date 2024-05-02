@@ -86,3 +86,126 @@ fill(250, 210, 160);
 ellipse(x - 90, y - 50, 140);
 fill(251, 140, 26);
 ellipse(x - 90, y - 50, 100);
+
+let camelX = 100;
+let camelY = 100;
+
+//start position camel
+function camel(camelX, camelY, scale) {
+  //camel head
+  fill(219, 165, 119);
+  ellipse(camelX + 150 * scale, camelY + 150 * scale, 80 * scale, 80 * scale);
+
+  //camel nose
+  noStroke();
+  fill(219, 165, 119);
+  ellipse(camelX + 175 * scale, camelY + 162 * scale, 60 * scale, 60 * scale);
+
+  //camel ears
+  fill(219, 165, 119);
+  ellipse(camelX + 155 * scale, camelY + 110 * scale, 10 * scale, 70 * scale);
+  ellipse(camelX + 128 * scale, camelY + 120 * scale, 10 * scale, 70 * scale);
+
+  //camel neck
+  ellipse(camelX + 123 * scale, camelY + 200 * scale, 40 * scale, 150 * scale);
+
+  //neck dots
+  push();
+  fill(223, 204, 183);
+  ellipse(camelX + 120 * scale, camelY + 152 * scale, 4 * scale, 8 * scale);
+  ellipse(camelX + 112 * scale, camelY + 162 * scale, 4 * scale, 8 * scale);
+  ellipse(camelX + 120 * scale, camelY + 172 * scale, 4 * scale, 8 * scale);
+  ellipse(camelX + 112 * scale, camelY + 182 * scale, 4 * scale, 8 * scale);
+  pop();
+
+  //camel body
+  ellipse(camelX + 35 * scale, camelY + 255 * scale, 200 * scale, 100 * scale);
+
+  //camel legs
+  ellipse(camelX + 100 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
+  ellipse(camelX + 80 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
+  ellipse(camelX - 10 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
+  ellipse(camelX - 30 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
+
+  //camel tail
+  ellipse(camelX - 65 * scale, camelY + 255 * scale, 50 * scale, 10 * scale);
+
+  //camel blanket
+  fill(211, 117, 100);
+  ellipse(camelX + 30 * scale, camelY + 210 * scale, 50 * scale, 110 * scale);
+  ellipse(camelX + 0 * scale, camelY + 220 * scale, 50 * scale, 90 * scale);
+  ellipse(camelX + 55 * scale, camelY + 220 * scale, 50 * scale, 90 * scale);
+
+  //blanket accessories stripes
+  for (let i = 0; i < 9; i++) {
+    ellipse(
+      camelX + (70 - 10 * i) * scale,
+      camelY + (265 - 5 * i) * scale,
+      4 * scale,
+      25 * scale
+    );
+  }
+
+  //blanket accessories dots
+  fill(151, 153, 171);
+  for (let i = 0; i < 9; i++) {
+    ellipse(
+      camelX + (70 - 10 * i) * scale,
+      camelY + (276 - 3 * i) * scale,
+      7 * scale,
+      7 * scale
+    );
+  }
+
+  //hair
+  push();
+  rotate(radians(30));
+  fill(129, 88, 67);
+  ellipse(camelX + 220 * scale, camelY - 25 * scale, 5 * scale, 25 * scale);
+  pop();
+
+  push();
+  rotate(radians(10));
+  fill(129, 88, 67);
+  ellipse(camelX + 180 * scale, camelY + 80 * scale, 5 * scale, 25 * scale);
+  pop();
+
+  push();
+  rotate(radians(-10));
+  fill(129, 88, 67);
+  ellipse(camelX + 107 * scale, camelY + 166 * scale, 5 * scale, 25 * scale);
+  pop();
+
+  push();
+  rotate(radians(-30));
+  fill(129, 88, 67);
+  ellipse(camelX + 8 * scale, camelY + 223 * scale, 5 * scale, 25 * scale);
+  pop();
+
+  push();
+  rotate(radians(-60));
+  fill(129, 88, 67);
+  ellipse(camelX - 162 * scale, camelY + 234 * scale, 5 * scale, 25 * scale);
+  pop();
+
+  //eyes
+  fill(0, 0, 0);
+  ellipse(camelX + 172 * scale, camelY + 150 * scale, 20 * scale, 20 * scale);
+  fill(219, 165, 119);
+  ellipse(camelX + 173 * scale, camelY + 153 * scale, 25 * scale, 20 * scale);
+
+  //nose dot
+  fill(0, 0, 0);
+  ellipse(camelX + 196 * scale, camelY + 163 * scale, 4 * scale, 8 * scale);
+
+  //feets
+  fill(129, 88, 67);
+  ellipse(camelX + 100 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
+  ellipse(camelX + 80 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
+  ellipse(camelX - 10 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
+  ellipse(camelX - 30 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
+}
+
+function draw() {
+  camel(100, 400, 0.6); // Adjust the scale factor as needed (here, 0.5 to scale down by half)
+}
