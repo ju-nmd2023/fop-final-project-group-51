@@ -1,3 +1,5 @@
+/** @format */
+
 let camelX = 100;
 let camelY = 100;
 
