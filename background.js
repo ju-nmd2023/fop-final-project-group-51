@@ -4,8 +4,9 @@ let x = 200;
 let y = 200;
 let cloudX = 200;
 let cloudY = 200;
+let speed = 1;
 
-function dunes() {
+function dunes(x, y) {
   //sky
   background(239, 227, 210);
 
@@ -15,15 +16,20 @@ function dunes() {
   ellipse(x - 100, y + 400, 300);
   ellipse(x + 100, y + 420, 200, 200);
   ellipse(x + 350, y + 400, 250, 300);
+  ellipse(x + 600, y + 400, 300);
+  ellipse(x + 450, y + 500, 250, 300);
+  ellipse(x + 700, y + 500, 250, 200);
 
   //sand
   fill(202, 143, 66);
   noStroke();
-  rect(x - 200, y + 400, 600, 300);
+  rect(x - 200, y + 400, 1000, 300);
 
   //mud
   fill(101, 70, 33);
   noStroke();
+  ellipse(x + 500, y + 590, 300);
+  ellipse(x + 700, y + 620, 500, 300);
   ellipse(x - 100, y + 640, 300);
   ellipse(x + 200, y + 620, 500, 300);
   fill(88, 57, 39);
@@ -40,6 +46,14 @@ function dunes() {
   ellipse(x + 300, y + 550, 30);
   ellipse(x + 250, y + 520, 20, 15);
   ellipse(x + 350, y + 570, 35);
+  ellipse(x + 100, y + 570, 30);
+  ellipse(x + 400, y + 500, 20);
+  ellipse(x + 540, y + 520, 20);
+  ellipse(x + 600, y + 550, 30);
+  ellipse(x + 700, y + 550, 30);
+  ellipse(x + 650, y + 520, 20, 15);
+  ellipse(x + 550, y + 570, 35);
+  ellipse(x + 470, y + 570, 35);
 
   //cactus
   fill(102, 124, 40);
@@ -50,11 +64,11 @@ function dunes() {
   rect(x + 170, y + 330, 50, 20, 100);
 
   fill(10, 64, 40);
-  rect(x - 100, y + 300, 30, 110, 100);
-  rect(x - 100, y + 340, 60, 20, 100);
-  rect(x - 60, y + 320, 20, 40, 100);
-  rect(x - 130, y + 320, 20, 60, 100);
-  rect(x - 130, y + 360, 50, 20, 100);
+  rect(x + 496, y + 260, 30, 150, 100);
+  rect(x + 496, y + 340, 60, 20, 100);
+  rect(x + 540, y + 320, 20, 40, 100);
+  rect(x + 470, y + 290, 20, 60, 100);
+  rect(x + 470, y + 330, 50, 20, 100);
 
   fill(10, 64, 40);
   rect(x - 100, y + 300, 30, 110, 100);
@@ -213,6 +227,18 @@ function camel(camelX, camelY, scale) {
 }
 
 function draw() {
-  dunes();
-  camel(100, 400, 0.6); // Adjust the scale factor as needed (here, 0.5 to scale down by half)
+  dunes(x + 300, y);
+
+  camel(100, 400, 0.6);
+  x = x + speed;
+  speed = speed + 0.1;
+  if (x > 10) x = -600;
+
+  if (keyIsDown(RIGHT_ARROW)) {
+    xDirection = speed;
+  } else if (keyIsDown(LEFT_ARROW)) {
+    xDirection = -speed;
+  } else {
+    xDirection = 0;
+  }
 }
