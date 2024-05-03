@@ -75,7 +75,9 @@ function dunes(x, y) {
   rect(x - 60, y + 320, 20, 40, 100);
   rect(x - 130, y + 320, 20, 60, 100);
   rect(x - 130, y + 360, 50, 20, 100);
+}
 
+function sun(sunX, sunY) {
   //cloud
   fill(255, 255, 255, 200);
   stroke(255, 255, 255, 10);
@@ -210,6 +212,7 @@ function mouseClicked() {
 
 function startScreen() {
   dunes();
+  sun();
   camel();
   textSize(50);
   fill(255, 0, 0);
@@ -227,12 +230,12 @@ let speed = 1;
 let xDirection = 0;
 
 function draw() {
-  dunes(x, y);
+  dunes(x + 30, y);
+  x = x - speed;
+  speed = speed;
+  if (x < -280) x = 100;
 
   camel(camelX, camelY + 300, 0.6);
-  // x = x + speed;
-  //speed = speed + 0.1;
-  // if (x > 10) x = -600;
 
   if (!gameIsRunning && !gameEnd) {
     startScreen();
