@@ -195,6 +195,36 @@ function camel(camelX, camelY, scale) {
   ellipse(camelX - 10 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
   ellipse(camelX - 30 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
 }
+function resetGame() {
+  camel(x, y);
+  cloudflyY = 240;
+  gameIsRunning = true;
+  gameEnd = false;
+}
+
+function mouseClicked() {
+  if (!gameIsRunning) {
+    resetGame();
+  }
+}
+
+function startScreen() {
+  dunes();
+  camel();
+  textSize(50);
+  fill(255, 0, 0);
+  text("CAMEL RUN", 130, 250);
+  textSize(30);
+  fill(255);
+  text("Click to start", 195, 290);
+}
+
+let gameIsRunning = false;
+let gameEnd = false;
+let velocity = 0.5;
+const acceleration = 0.1;
+let speed = 1;
+let xDirection = 0;
 
 function draw() {
   dunes(x, y);
@@ -204,11 +234,19 @@ function draw() {
   //speed = speed + 0.1;
   // if (x > 10) x = -600;
 
-  if (keyIsDown(RIGHT_ARROW)) {
-    xDirection = speed;
-  } else if (keyIsDown(LEFT_ARROW)) {
-    xDirection = -speed;
-  } else {
-    xDirection = 0;
+  if (!gameIsRunning && !gameEnd) {
+    startScreen();
+  } else if (gameIsRunning) {
+    if (keyIsDown(RIGHT_ARROW)) {
+      xDirection = speed;
+    } else if (keyIsDown(LEFT_ARROW)) {
+      xDirection = -speed;
+    } else {
+      xDirection = 0;
+    }
+  }
+  if (camelX >= 315) {
+    gameIsRunning = false;
+    gameEnd = true;
   }
 }
