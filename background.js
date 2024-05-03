@@ -4,7 +4,6 @@ let x = 200;
 let y = 200;
 let cloudX = 200;
 let cloudY = 200;
-let speed = 1;
 
 function dunes(x, y) {
   //sky
@@ -156,57 +155,28 @@ function camel(camelX, camelY, scale) {
   ellipse(camelX + 0 * scale, camelY + 220 * scale, 50 * scale, 90 * scale);
   ellipse(camelX + 55 * scale, camelY + 220 * scale, 50 * scale, 90 * scale);
 
-  //blanket accessories stripes
-  for (let i = 0; i < 9; i++) {
-    ellipse(
-      camelX + (70 - 10 * i) * scale,
-      camelY + (265 - 5 * i) * scale,
-      4 * scale,
-      25 * scale
-    );
-  }
+  //stripes on blanket
+  ellipse(camelX + 70 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
+  ellipse(camelX + 60 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
+  ellipse(camelX + 50 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
+  ellipse(camelX + 40 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
+  ellipse(camelX + 30 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
+  ellipse(camelX + 20 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
+  ellipse(camelX + 10 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
+  ellipse(camelX + 0 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
+  ellipse(camelX - 10 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
 
-  //blanket accessories dots
+  //dots on blanket
   fill(151, 153, 171);
-  for (let i = 0; i < 9; i++) {
-    ellipse(
-      camelX + (70 - 10 * i) * scale,
-      camelY + (276 - 3 * i) * scale,
-      7 * scale,
-      7 * scale
-    );
-  }
-
-  //hair
-  push();
-  rotate(radians(30));
-  fill(129, 88, 67);
-  ellipse(camelX + 220 * scale, camelY - 25 * scale, 5 * scale, 25 * scale);
-  pop();
-
-  push();
-  rotate(radians(10));
-  fill(129, 88, 67);
-  ellipse(camelX + 180 * scale, camelY + 80 * scale, 5 * scale, 25 * scale);
-  pop();
-
-  push();
-  rotate(radians(-10));
-  fill(129, 88, 67);
-  ellipse(camelX + 107 * scale, camelY + 166 * scale, 5 * scale, 25 * scale);
-  pop();
-
-  push();
-  rotate(radians(-30));
-  fill(129, 88, 67);
-  ellipse(camelX + 8 * scale, camelY + 223 * scale, 5 * scale, 25 * scale);
-  pop();
-
-  push();
-  rotate(radians(-60));
-  fill(129, 88, 67);
-  ellipse(camelX - 162 * scale, camelY + 234 * scale, 5 * scale, 25 * scale);
-  pop();
+  ellipse(camelX + 70 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
+  ellipse(camelX + 60 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
+  ellipse(camelX + 50 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
+  ellipse(camelX + 40 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
+  ellipse(camelX + 30 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
+  ellipse(camelX + 20 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
+  ellipse(camelX + 10 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
+  ellipse(camelX + 0 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
+  ellipse(camelX - 10 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
 
   //eyes
   fill(0, 0, 0);
@@ -227,12 +197,12 @@ function camel(camelX, camelY, scale) {
 }
 
 function draw() {
-  dunes(x + 300, y);
+  dunes(x, y);
 
-  camel(100, 400, 0.6);
-  x = x + speed;
-  speed = speed + 0.1;
-  if (x > 10) x = -600;
+  camel(camelX, camelY + 300, 0.6);
+  // x = x + speed;
+  //speed = speed + 0.1;
+  // if (x > 10) x = -600;
 
   if (keyIsDown(RIGHT_ARROW)) {
     xDirection = speed;
