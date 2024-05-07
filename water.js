@@ -1,6 +1,9 @@
 let waterTankX = 100;
 let waterTankY = 100;
 
+let waterDropX = 100;
+let waterDropY = 100;
+
 //watertank
 noStroke();
 fill(121, 205, 244);
@@ -35,10 +38,10 @@ ellipse(waterTankX + 98, waterTankY + 55, 50, 70);
 //waterdrop
 noStroke();
 fill(121, 205, 244);
-ellipse(waterTankX + 250, waterTankY + 55, 20, 40);
+ellipse(waterDropX + 250, waterDropY + 55, 20, 40);
 
 //reflection
 fill(255, 255, 255);
-ellipse(waterTankX + 248, waterTankY + 55, 10, 30);
+ellipse(waterDropX + 248, waterDropY + 55, 10, 30);
 fill(121, 205, 244);
-ellipse(waterTankX + 250, waterTankY + 55, 10, 30);
+ellipse(waterDropX + 250, waterDropY + 55, 10, 30);
