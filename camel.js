@@ -76,37 +76,6 @@ function camel(camelX, camelY) {
   ellipse(camelX + 0, camelY + 273, 7, 7);
   ellipse(camelX - 10, camelY + 276, 7, 7);
 
-  //hair
-  push();
-  rotate(radians(30));
-  fill(129, 88, 67);
-  ellipse(camelX + 220, camelY - 25, 5, 25);
-  pop();
-
-  push();
-  rotate(radians(10));
-  fill(129, 88, 67);
-  ellipse(camelX + 180, camelY + 80, 5, 25);
-  pop();
-
-  push();
-  rotate(radians(-10));
-  fill(129, 88, 67);
-  ellipse(camelX + 107, camelY + 166, 5, 25);
-  pop();
-
-  push();
-  rotate(radians(-30));
-  fill(129, 88, 67);
-  ellipse(camelX + 8, camelY + 223, 5, 25);
-  pop();
-
-  push();
-  rotate(radians(-60));
-  fill(129, 88, 67);
-  ellipse(camelX - 162, camelY + 234, 5, 25);
-  pop();
-
   //eyes
   fill(0, 0, 0);
   ellipse(camelX + 172, camelY + 150, 20, 20);
