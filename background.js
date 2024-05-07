@@ -241,6 +241,8 @@ function draw() {
 
   camel(camelX, camelY + 300, 0.6);
 
+  sun();
+
   if (!gameIsRunning && !gameEnd) {
     startScreen();
   } else if (gameIsRunning) {
@@ -248,7 +250,7 @@ function draw() {
     velocity += acceleration;
     camelY += velocity * 2;
     if (keyIsDown(32)) {
-      velocity = velocity - acceleration * 2;  
+      velocity = velocity - acceleration * 2;
     }
   }
   if (camelX >= 315) {
