@@ -4,6 +4,8 @@ let x = 200;
 let y = 200;
 let cloudX = 200;
 let cloudY = 200;
+let sunX = 200;
+let sunY = 200;
 
 function dunes(x, y) {
   //sky
@@ -77,7 +79,7 @@ function dunes(x, y) {
   rect(x - 130, y + 360, 50, 20, 100);
 }
 
-function sun(sunX, sunY) {
+function sun() {
   //cloud
   fill(255, 255, 255, 200);
   stroke(255, 255, 255, 10);
@@ -102,10 +104,12 @@ function sun(sunX, sunY) {
   }
 
   //sun
+  push();
   fill(250, 210, 160);
-  ellipse(x - 90, y - 50, 140);
+  ellipse(sunX - 90, sunY - 50, 140);
   fill(251, 140, 26);
-  ellipse(x - 90, y - 50, 100);
+  ellipse(sunX - 90, sunY - 50, 100);
+  pop();
 }
 
 let camelX = 100;
@@ -241,10 +245,10 @@ function draw() {
     startScreen();
   } else if (gameIsRunning) {
     camelY += velocity;
-    velocity += acceleration; 
+    velocity += acceleration;
     camelY += velocity * 2;
     if (keyIsDown(32)) {
-      velocity = velocity - acceleration * 2;
+      velocity = velocity - acceleration * 2;  
     }
   }
   if (camelX >= 315) {
