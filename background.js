@@ -215,7 +215,7 @@ function startScreen() {
   sun();
   camel();
   textSize(50);
-  fill(255, 0, 0);
+  fill(255);
   text("CAMEL RUN", 130, 250);
   textSize(30);
   fill(255);
@@ -240,12 +240,11 @@ function draw() {
   if (!gameIsRunning && !gameEnd) {
     startScreen();
   } else if (gameIsRunning) {
-    if (keyIsDown(RIGHT_ARROW)) {
-      xDirection = speed;
-    } else if (keyIsDown(LEFT_ARROW)) {
-      xDirection = -speed;
-    } else {
-      xDirection = 0;
+    camelY += velocity;
+    velocity += acceleration; 
+    camelY += velocity * 2;
+    if (keyIsDown(32)) {
+      velocity = velocity - acceleration * 2;
     }
   }
   if (camelX >= 315) {
