@@ -1,4 +1,5 @@
 /** @format */
+/** @format */
 
 let x = 200;
 let y = 200;
@@ -201,18 +202,6 @@ function camel(camelX, camelY, scale) {
   ellipse(camelX - 10 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
   ellipse(camelX - 30 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
 }
-function resetGame() {
-  camel(x, y);
-  cloudflyY = 240;
-  gameIsRunning = true;
-  gameEnd = false;
-}
-
-function mouseClicked() {
-  if (!gameIsRunning) {
-    resetGame();
-  }
-}
 
 let stars = [];
 
@@ -227,7 +216,7 @@ for (let i = 0; i < 1000; i++) {
   stars.push(star);
 }
 
-function startScreen() {
+function winScreen() {
   dunes(x, y);
   sun();
   camel();
@@ -239,49 +228,6 @@ function startScreen() {
   text("Click to start", 195, 340);
 }
 
-let gameIsRunning = false;
-let gameEnd = false;
-let velocity = 0.5;
-const acceleration = 0.1;
-let speed = 1.5;
-let xDirection = 0;
-let enterPressed = false;
-
-function gameEndScreen() {}
-
-//function for press ENTER
-function keyPressed() {
-  if (keyCode === ENTER) {
-    enterPressed = true;
-  }
-}
-
-//Draw screen
 function draw() {
-  //Make the background move
-  dunes(x + 30, y);
-  x = x - speed;
-  speed = speed;
-  if (x < -280) x = 100;
-  camel(camelX, camelY + 300, 0.6); //scale down the camel
-  sun();
-
-  //Add startscreen before starting game
-  if (!gameIsRunning && !gameEnd) {
-    startScreen();
-  } else if (gameIsRunning && enterPressed) {
-    // Check if Enter-key is pressed
-    camelX += 0.1;
-    camelY += velocity;
-    velocity += acceleration;
-    camelY += velocity * 2; //make the camel fall down
-    if (keyIsDown(32)) {
-      velocity = velocity - acceleration * 2; //add jumping effect
-    }
-
-    if (camelX >= 400 && camelY >= 600) {
-      gameIsRunning = false;
-      gameEnd = true;
-    }
-  }
+  winScreen();
 }
