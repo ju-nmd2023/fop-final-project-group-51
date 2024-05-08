@@ -256,6 +256,7 @@ function draw() {
     startScreen();
   } else if (gameIsRunning && enterPressed) {
     // Check if Enter-key is pressed
+    camelX += 0.5;
     camelY += velocity;
     velocity += acceleration;
     camelY += velocity * 2; //make the camel fall down
@@ -263,7 +264,7 @@ function draw() {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
   }
-  if (camelX >= 315) {
+  if (camelX >= 400) {
     gameIsRunning = false;
     gameEnd = true;
   }
