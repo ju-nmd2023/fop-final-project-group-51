@@ -258,11 +258,11 @@ function camel(camelX, camelY, scale) {
 let stars = [];
 
 //CONFETTI FUNCTION
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 100; i++) {
   const star = {
     x: Math.floor(Math.random() * 570),
-    y: Math.floor(Math.random() * 700),
-    snow: Math.random() * 1,
+    y: Math.floor(Math.random() * 400),
+    snow: Math.random() * 2,
     alpha: Math.random(),
   };
   stars.push(star);
@@ -291,7 +291,7 @@ function winScreen() {
     } else {
       fill(204, 153, 204); //purple confetti
     }
-    ellipse(star.x, star.y, 6, 5);
+    ellipse(star.x, star.y, 10, 10);
     star.alpha = star.alpha + 0.05;
     star.y += star.snow;
     if (star.y > height) {
@@ -303,6 +303,5 @@ function winScreen() {
 function draw() {
   winScreen();
   camel(camelX + 90, camelY + 200, 1); //scale down the camel
-  waterTank(waterTankX + 190, waterTankY + 400);
-  waterDrop(waterDropX - 15, waterDropY + 270);
+  waterTank(waterTankX + 170, waterTankY + 400);
 }
