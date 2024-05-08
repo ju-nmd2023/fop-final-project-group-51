@@ -232,25 +232,35 @@ let velocity = 0.5;
 const acceleration = 0.1;
 let speed = 1;
 let xDirection = 0;
+let enterPressed = false;
 
+//function for press ENTER
+function keyPressed() {
+  if (keyCode === ENTER) {
+    enterPressed = true;
+  }
+}
+
+//Draw screen
 function draw() {
+  //Make the background move
   dunes(x + 30, y);
   x = x - speed;
   speed = speed;
   if (x < -280) x = 100;
-
-  camel(camelX, camelY + 300, 0.6);
-
+  camel(camelX, camelY + 300, 0.6); //scale down the camel
   sun();
 
+  //Add startscreen before starting game
   if (!gameIsRunning && !gameEnd) {
     startScreen();
-  } else if (gameIsRunning) {
+  } else if (gameIsRunning && enterPressed) {
+    // Check if Enter-key is pressed
     camelY += velocity;
     velocity += acceleration;
-    camelY += velocity * 2;
+    camelY += velocity * 2; //make the camel fall down
     if (keyIsDown(32)) {
-      velocity = velocity - acceleration * 2;
+      velocity = velocity - acceleration * 2; //add jumping effect
     }
   }
   if (camelX >= 315) {
