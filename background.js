@@ -6,6 +6,8 @@ let cloudX = 200;
 let cloudY = 200;
 let sunX = 200;
 let sunY = 200;
+let cactusX = 200;
+let cactusY = 200;
 
 function dunes(x, y) {
   //sky
@@ -55,28 +57,29 @@ function dunes(x, y) {
   ellipse(x + 650, y + 520, 20, 15);
   ellipse(x + 550, y + 570, 35);
   ellipse(x + 470, y + 570, 35);
+}
 
-  //cactus
+function cactus(cactusX, cactusY) {
   fill(102, 124, 40);
-  rect(x + 196, y + 260, 30, 150, 100);
-  rect(x + 196, y + 340, 60, 20, 100);
-  rect(x + 240, y + 320, 20, 40, 100);
-  rect(x + 170, y + 290, 20, 60, 100);
-  rect(x + 170, y + 330, 50, 20, 100);
+  rect(cactusX + 196, cactusY + 260, 30, 150, 100);
+  rect(cactusX + 196, cactusY + 340, 60, 20, 100);
+  rect(cactusX + 240, cactusY + 320, 20, 40, 100);
+  rect(cactusX + 170, cactusY + 290, 20, 60, 100);
+  rect(cactusX + 170, cactusY + 330, 50, 20, 100);
 
   fill(10, 64, 40);
-  rect(x + 496, y + 260, 30, 150, 100);
-  rect(x + 496, y + 340, 60, 20, 100);
-  rect(x + 540, y + 320, 20, 40, 100);
-  rect(x + 470, y + 290, 20, 60, 100);
-  rect(x + 470, y + 330, 50, 20, 100);
+  rect(cactusX + 496, cactusY + 260, 30, 150, 100);
+  rect(cactusX + 496, cactusY + 340, 60, 20, 100);
+  rect(cactusX + 540, cactusY + 320, 20, 40, 100);
+  rect(cactusX + 470, cactusY + 290, 20, 60, 100);
+  rect(cactusX + 470, cactusY + 330, 50, 20, 100);
 
   fill(10, 64, 40);
-  rect(x - 100, y + 300, 30, 110, 100);
-  rect(x - 100, y + 340, 60, 20, 100);
-  rect(x - 60, y + 320, 20, 40, 100);
-  rect(x - 130, y + 320, 20, 60, 100);
-  rect(x - 130, y + 360, 50, 20, 100);
+  rect(cactusX - 100, cactusY + 300, 30, 110, 100);
+  rect(cactusX - 100, cactusY + 340, 60, 20, 100);
+  rect(cactusX - 60, cactusY + 320, 20, 40, 100);
+  rect(cactusX - 130, cactusY + 320, 20, 60, 100);
+  rect(cactusX - 130, cactusY + 360, 50, 20, 100);
 }
 
 function sun() {
@@ -264,6 +267,9 @@ function draw() {
   if (x < -280) x = 100;
   camel(camelX, camelY + 300, 0.6); //scale down the camel
   sun();
+  cactus(cactusX, cactusY);
+  cactusX = cactusX - speed;
+  if (cactusX < -280) cactusX = 100;
 
   //Add startscreen before starting game
   if (!gameIsRunning && !gameEnd) {
