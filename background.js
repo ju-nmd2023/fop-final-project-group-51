@@ -228,9 +228,8 @@ for (let i = 0; i < 1000; i++) {
 }
 
 function startScreen() {
-  dunes(x, y);
+  dunes(camelX, y);
   sun();
-  camel();
   textSize(50);
   fill(255);
   text("CAMEL RUN", 130, 300);

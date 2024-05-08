@@ -219,13 +219,32 @@ for (let i = 0; i < 1000; i++) {
 function winScreen() {
   dunes(x, y);
   sun();
-  camel();
   textSize(50);
-  fill(255);
-  text("CAMEL RUN", 130, 300);
+  fill(53, 180, 40);
+  text("YOU WON", 150, 300);
   textSize(30);
   fill(255);
-  text("Click to start", 195, 340);
+  text("Click to restart", 180, 340);
+  for (let star of stars) {
+    const randomValue = Math.random();
+    if (randomValue < 0.2) {
+      fill(204, 204, 102); //yellow confetti
+    } else if (randomValue < 0.4) {
+      fill(204, 153, 204); //pink confetti
+    } else if (randomValue < 0.6) {
+      fill(153, 204, 153); //green confetti
+    } else if (randomValue < 0.8) {
+      fill(153, 204, 204); //blue confetti
+    } else {
+      fill(204, 153, 204); //purple confetti
+    }
+    ellipse(star.x, star.y, 6, 5);
+    star.alpha = star.alpha + 0.05;
+    star.y += star.snow;
+    if (star.y > height) {
+      star.y = 0;
+    }
+  }
 }
 
 function draw() {
