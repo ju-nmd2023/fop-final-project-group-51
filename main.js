@@ -6,6 +6,10 @@ let cloudX = 200;
 let cloudY = 200;
 let sunX = 200;
 let sunY = 200;
+let camelX = 100;
+let camelY = 100;
+let waterDropX = 100;
+let waterDropY = 200;
 
 function setup() {
   createCanvas(700, 800);
@@ -84,6 +88,19 @@ function dunes(x, y) {
   rect(x - 130, y + 360, 50, 20, 100);
 }
 
+function waterDrop() {
+  //waterdrop
+  noStroke();
+  fill(121, 205, 244);
+  ellipse(waterDropX + 250, waterDropY + 55, 20, 40);
+
+  //reflection
+  fill(255, 255, 255);
+  ellipse(waterDropX + 248, waterDropY + 55, 10, 30);
+  fill(121, 205, 244);
+  ellipse(waterDropX + 250, waterDropY + 55, 10, 30);
+}
+
 function sun() {
   //cloud
   fill(255, 255, 255, 200);
@@ -116,9 +133,6 @@ function sun() {
   ellipse(sunX - 90, sunY - 50, 100);
   pop();
 }
-
-let camelX = 100;
-let camelY = 100;
 
 //start position camel
 function camel(camelX, camelY, scale) {
@@ -247,6 +261,8 @@ function draw() {
   camel(camelX, camelY + 300, 0.6);
 
   sun();
+
+  waterDrop();
 
   if (!gameIsRunning && !gameEnd) {
     startScreen();
