@@ -7,6 +7,11 @@ let cloudY = 200;
 let sunX = 200;
 let sunY = 200;
 
+function setup() {
+  createCanvas(700, 800);
+  frameRate(60);
+}
+
 function dunes(x, y) {
   //sky
   background(239, 227, 210);
@@ -24,7 +29,7 @@ function dunes(x, y) {
   //sand
   fill(202, 143, 66);
   noStroke();
-  rect(x - 200, y + 400, 1000, 300);
+  rect(x - 200, y + 400, 900 + 200, 300);
 
   //mud
   fill(101, 70, 33);
