@@ -8,6 +8,21 @@ let sunX = 200;
 let sunY = 200;
 let cactusX = 200;
 let cactusY = 200;
+let waterDropX = 100;
+let waterDropY = 100;
+
+function waterDrop(waterDropX, waterDropY) {
+  //waterdrop
+  noStroke();
+  fill(121, 205, 244);
+  ellipse(waterDropX + 250, waterDropY + 55, 20, 40);
+
+  //reflection
+  fill(255, 255, 255);
+  ellipse(waterDropX + 248, waterDropY + 55, 10, 30);
+  fill(121, 205, 244);
+  ellipse(waterDropX + 250, waterDropY + 55, 10, 30);
+}
 
 function dunes(x, y) {
   //sky
