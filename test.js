@@ -7,21 +7,41 @@ let cloudY = 200;
 let sunX = 200;
 let sunY = 200;
 let cactusX = 200;
-let cactusY = 200;
-let waterDropX = 100;
-let waterDropY = 100;
+let camelX = 100;
+const waterDropInterval = 10000; // Interval in milliseconds
 
-function waterDrop(waterDropX, waterDropY) {
+let cactusY = 200;
+
+/** @format */
+
+let waterDropX = camelX + 40; // Set initial x position relative to camel
+let waterDropY = Math.random() * 400 + 200; // Set initial random y position
+
+function waterDrop() {
   //waterdrop
   noStroke();
   fill(121, 205, 244);
-  ellipse(waterDropX + 250, waterDropY + 55, 20, 40);
+  ellipse(waterDropX, waterDropY, 20, 40);
 
   //reflection
   fill(255, 255, 255);
-  ellipse(waterDropX + 248, waterDropY + 55, 10, 30);
+  ellipse(waterDropX - 2, waterDropY, 10, 30);
   fill(121, 205, 244);
-  ellipse(waterDropX + 250, waterDropY + 55, 10, 30);
+  ellipse(waterDropX, waterDropY, 10, 30);
+}
+
+function resetWaterDrop() {
+  waterDropX = camelX + 200; // Move water drop to be 40px to the right of the camel
+}
+
+function draw() {
+  // Your existing draw function code...
+
+  // Check if camel and water drop align in y-coordinate
+  if (abs(camelY + 300 - waterDropY) < 10) {
+    // Reset water drop position
+    resetWaterDrop();
+  }
 }
 
 function dunes(x, y) {
@@ -130,7 +150,6 @@ function sun() {
   pop();
 }
 
-let camelX = 100;
 let camelY = 100;
 
 //start position camel
@@ -274,7 +293,6 @@ function keyPressed() {
   }
 }
 let lastWaterDropTime = 0;
-let waterDropInterval = 3000; // 3 seconds
 let waterDrops = [];
 // Display and check collisions with water drops
 for (let i = 0; i < waterDrops.length; i++) {
@@ -336,6 +354,230 @@ function draw() {
     camelY += velocity * 2; //make the camel fall down
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
+    }
+
+    if (camelX >= 400 && camelY >= 600) {
+      gameIsRunning = false;
+      gameEnd = true;
+    }
+  }
+}
+
+function draw() {
+  // Your existing draw function code...
+
+  // Check if camel and water drop align in y-coordinate
+  if (abs(camelY + 300 - waterDropY) < 10) {
+    // Reset water drop position
+    resetWaterDrop();
+  }
+}
+
+function dunes(x, y) {
+  //sky
+  background(239, 227, 210);
+
+  //dunes
+  fill(192, 120, 50);
+  noStroke();
+  ellipse(x - 100, y + 400, 300);
+  ellipse(x + 100, y + 420, 200, 200);
+  ellipse(x + 350, y + 400, 250, 300);
+  ellipse(x + 600, y + 400, 300);
+  ellipse(x + 450, y + 500, 250, 300);
+  ellipse(x + 700, y + 500, 250, 200);
+
+  //sand
+  fill(202, 143, 66);
+  noStroke();
+  rect(x - 200, y + 400, 1000, 300);
+
+  //mud
+  fill(101, 70, 33);
+  noStroke();
+  ellipse(x + 500, y + 590, 300);
+  ellipse(x + 700, y + 620, 500, 300);
+  ellipse(x - 100, y + 640, 300);
+  ellipse(x + 200, y + 620, 500, 300);
+  fill(88, 57, 39);
+  noStroke();
+  ellipse(x - 100, y + 520, 20);
+  ellipse(x - 140, y + 560, 20);
+  ellipse(x - 80, y + 570, 30, 20);
+  ellipse(x, y + 570, 40, 30);
+  ellipse(x, y + 570, 30);
+  ellipse(x + 100, y + 570, 30);
+  ellipse(x + 70, y + 520, 20);
+  ellipse(x + 140, y + 520, 20);
+  ellipse(x + 200, y + 550, 30);
+  ellipse(x + 300, y + 550, 30);
+  ellipse(x + 250, y + 520, 20, 15);
+  ellipse(x + 350, y + 570, 35);
+  ellipse(x + 100, y + 570, 30);
+  ellipse(x + 400, y + 500, 20);
+  ellipse(x + 540, y + 520, 20);
+  ellipse(x + 600, y + 550, 30);
+  ellipse(x + 700, y + 550, 30);
+  ellipse(x + 650, y + 520, 20, 15);
+  ellipse(x + 550, y + 570, 35);
+  ellipse(x + 470, y + 570, 35);
+}
+
+function cactus(cactusX, cactusY) {
+  fill(102, 124, 40);
+  rect(cactusX + 196, cactusY + 260, 30, 150, 100);
+  rect(cactusX + 196, cactusY + 340, 60, 20, 100);
+  rect(cactusX + 240, cactusY + 320, 20, 40, 100);
+  rect(cactusX + 170, cactusY + 290, 20, 60, 100);
+  rect(cactusX + 170, cactusY + 330, 50, 20, 100);
+
+  fill(10, 64, 40);
+  rect(cactusX + 496, cactusY + 260, 30, 150, 100);
+  rect(cactusX + 496, cactusY + 340, 60, 20, 100);
+  rect(cactusX + 540, cactusY + 320, 20, 40, 100);
+  rect(cactusX + 470, cactusY + 290, 20, 60, 100);
+  rect(cactusX + 470, cactusY + 330, 50, 20, 100);
+
+  fill(10, 64, 40);
+  rect(cactusX - 100, cactusY + 300, 30, 110, 100);
+  rect(cactusX - 100, cactusY + 340, 60, 20, 100);
+  rect(cactusX - 60, cactusY + 320, 20, 40, 100);
+  rect(cactusX - 130, cactusY + 320, 20, 60, 100);
+  rect(cactusX - 130, cactusY + 360, 50, 20, 100);
+}
+
+function sun() {
+  //cloud
+  fill(255, 255, 255, 200);
+  stroke(255, 255, 255, 10);
+  ellipse(cloudX + 100, cloudY + 10, 70, 60);
+  ellipse(cloudX + 70, cloudY + 10, 60, 40);
+  ellipse(cloudX + 140, cloudY + 15, 50, 40);
+
+  fill(255, 255, 255, 200);
+  stroke(255, 255, 255, 10);
+  ellipse(cloudX + 250, cloudY + 70, 70, 60);
+  ellipse(cloudX + 220, cloudY + 70, 60, 40);
+  ellipse(cloudX + 290, cloudY + 75, 50, 40);
+
+  fill(255, 255, 255, 200);
+  stroke(255, 255, 255, 10);
+  ellipse(cloudX + 250, cloudY - 70, 70, 60);
+  ellipse(cloudX + 220, cloudY - 70, 60, 40);
+  ellipse(cloudX + 290, cloudY - 65, 50, 40);
+  cloudX = cloudX + 0.7;
+  if (cloudX > 750) {
+    cloudX = -250;
+  }
+
+  //sun
+  push();
+  fill(250, 210, 160);
+  ellipse(sunX - 90, sunY - 50, 140);
+  fill(251, 140, 26);
+  ellipse(sunX - 90, sunY - 50, 100);
+  pop();
+}
+
+/** @format */
+
+//CONFETTI FUNCTION
+
+// Start position camel
+function camel(camelX, camelY, scale) {
+  // Your camel drawing code...
+}
+
+// Reset water drop position
+function resetWaterDrop() {
+  waterDropX = camelX + 200; // Move water drop to be 40px to the right of the camel
+}
+
+// Draw water drop
+function waterDrop(x, y) {
+  // Your water drop drawing code...
+}
+
+// Reset game function
+function resetGame() {
+  camel(x, y);
+  cloudFlyY = 240; // Assuming cloudflyY was previously defined
+  gameIsRunning = true;
+  gameEnd = false;
+}
+
+// Start screen function
+function startScreen() {
+  // Your start screen drawing code...
+}
+
+// Game end screen function
+function gameEndScreen() {
+  // Your game end screen drawing code...
+}
+
+// Mouse clicked function
+function mouseClicked() {
+  if (!gameIsRunning) {
+    resetGame();
+  }
+}
+
+// Key pressed function
+function keyPressed() {
+  if (keyCode === ENTER) {
+    enterPressed = true;
+  }
+}
+
+// Draw function
+function draw() {
+  // Make the background move
+  dunes(x + 30, y);
+  x = x - speed;
+  speed = speed;
+  if (x < -280) x = 100;
+  camel(camelX, camelY + 300, 0.6); // Scale down the camel
+  sun();
+  cactus(cactusX, cactusY);
+  cactusX = cactusX - speed;
+  if (cactusX < -280) cactusX = 100;
+
+  // Check if it's time to display a new water drop
+  if (gameIsRunning && millis() - lastWaterDropTime > waterDropInterval) {
+    // Generate random coordinates for the water drop
+    let randomX = Math.random() * width;
+    let randomY = Math.random() * height;
+    // Add the new water drop to the array
+    waterDrops.push({ x: randomX, y: randomY });
+    // Update the last water drop time
+    lastWaterDropTime = millis();
+  }
+
+  // Display and check collisions with water drops
+  for (let i = 0; i < waterDrops.length; i++) {
+    let drop = waterDrops[i];
+    waterDrop(drop.x, drop.y);
+    // Check collision with camel
+    let distance = dist(camelX, camelY + 300, drop.x, drop.y); // Adjusted camelY position
+    if (distance < 50) {
+      // Camel collects the water drop
+      waterDrops.splice(i, 1); // Remove the collected water drop
+      // You can add any additional actions here, such as increasing score
+    }
+  }
+
+  // Add start screen before starting game
+  if (!gameIsRunning && !gameEnd) {
+    startScreen();
+  } else if (gameIsRunning && enterPressed) {
+    // Check if Enter-key is pressed
+    camelX += 0.1;
+    camelY += velocity;
+    velocity += acceleration;
+    camelY += velocity * 2; // Make the camel fall down
+    if (keyIsDown(32)) {
+      velocity = velocity - acceleration * 2; // Add jumping effect
     }
 
     if (camelX >= 400 && camelY >= 600) {
