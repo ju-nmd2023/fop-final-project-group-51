@@ -13,13 +13,12 @@ let waterDropY = 200;
 
 function setup() {
   createCanvas(700, 800);
-  frameRate(60);
+  frameRate(30);
 }
 
 function dunes(x, y) {
   //sky
   background(239, 227, 210);
-
   //dunes
   fill(192, 120, 50);
   noStroke();
@@ -253,11 +252,10 @@ let speed = 1;
 let xDirection = 0;
 
 function draw() {
-  dunes(x + 30, y);
-  x = x - speed;
-  speed = speed;
-  if (x < -280) x = 100;
+  x -= speed;
 
+  if (x < -280) x = 100;
+  dunes(x + 30, y);
   camel(camelX, camelY + 300, 0.6);
 
   sun();
