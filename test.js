@@ -434,7 +434,7 @@ class Camel {
   }
 }
 
-let camel = new Camel(100, 420, 0.5);
+let camel = new Camel(100, 200, 0.5);
 
 function draw() {
   dunes(x, y);
@@ -525,7 +525,7 @@ function draw() {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
 
-    if (camelX + 135 >= cactusX) {
+    if (camelX + 135 >= cactusX && camelY >= cactusY + 10) {
       console.log("hit");
       gameIsRunning = false;
       gameEnd = true;
