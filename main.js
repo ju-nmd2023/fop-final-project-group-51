@@ -1,24 +1,30 @@
-/** @format */
-
 let x = 200;
 let y = 200;
+let camelX = 100;
+let camelY = 100;
 let cloudX = 200;
 let cloudY = 200;
 let sunX = 200;
 let sunY = 200;
-let camelX = 100;
-let camelY = 100;
-let waterDropX = 100;
-let waterDropY = 200;
+let cactusX = 200;
+let cactusY = 200;
+let gameIsRunning = false;
+let gameEnd = false;
+let velocity = 0.5;
+const acceleration = 0.1;
+let speed = 1.5;
+let xDirection = 0;
+let enterPressed = false;
+let stars = [];
 
 function setup() {
-  createCanvas(700, 800);
-  frameRate(30);
+  createCanvas(600, 750);
 }
 
 function dunes(x, y) {
   //sky
   background(239, 227, 210);
+
   //dunes
   fill(192, 120, 50);
   noStroke();
@@ -32,7 +38,7 @@ function dunes(x, y) {
   //sand
   fill(202, 143, 66);
   noStroke();
-  rect(x - 200, y + 400, 900 + 200, 300);
+  rect(x - 200, y + 400, 1000, 300);
 
   //mud
   fill(101, 70, 33);
@@ -63,41 +69,34 @@ function dunes(x, y) {
   ellipse(x + 650, y + 520, 20, 15);
   ellipse(x + 550, y + 570, 35);
   ellipse(x + 470, y + 570, 35);
-
-  //cactus
-  fill(102, 124, 40);
-  rect(x + 196, y + 260, 30, 150, 100);
-  rect(x + 196, y + 340, 60, 20, 100);
-  rect(x + 240, y + 320, 20, 40, 100);
-  rect(x + 170, y + 290, 20, 60, 100);
-  rect(x + 170, y + 330, 50, 20, 100);
-
-  fill(10, 64, 40);
-  rect(x + 496, y + 260, 30, 150, 100);
-  rect(x + 496, y + 340, 60, 20, 100);
-  rect(x + 540, y + 320, 20, 40, 100);
-  rect(x + 470, y + 290, 20, 60, 100);
-  rect(x + 470, y + 330, 50, 20, 100);
-
-  fill(10, 64, 40);
-  rect(x - 100, y + 300, 30, 110, 100);
-  rect(x - 100, y + 340, 60, 20, 100);
-  rect(x - 60, y + 320, 20, 40, 100);
-  rect(x - 130, y + 320, 20, 60, 100);
-  rect(x - 130, y + 360, 50, 20, 100);
 }
 
-function waterDrop() {
-  //waterdrop
-  noStroke();
-  fill(121, 205, 244);
-  ellipse(waterDropX + 250, waterDropY + 55, 20, 40);
+function cactus(cactusX, cactusY) {
+  ellipse(cactusX + 211, cactusY + 335, 80, 200);
 
-  //reflection
-  fill(255, 255, 255);
-  ellipse(waterDropX + 248, waterDropY + 55, 10, 30);
-  fill(121, 205, 244);
-  ellipse(waterDropX + 250, waterDropY + 55, 10, 30);
+  ellipse(cactusX + 511, cactusY + 335, 80, 200);
+
+  ellipse(cactusX - 85, cactusY + 335, 80, 200);
+  fill(102, 124, 40);
+  rect(cactusX + 196, cactusY + 260, 30, 150, 100);
+  rect(cactusX + 196, cactusY + 340, 60, 20, 100);
+  rect(cactusX + 240, cactusY + 320, 20, 40, 100);
+  rect(cactusX + 170, cactusY + 290, 20, 60, 100);
+  rect(cactusX + 170, cactusY + 330, 50, 20, 100);
+
+  fill(10, 64, 40);
+  rect(cactusX + 496, cactusY + 260, 30, 150, 100);
+  rect(cactusX + 496, cactusY + 340, 60, 20, 100);
+  rect(cactusX + 540, cactusY + 320, 20, 40, 100);
+  rect(cactusX + 470, cactusY + 290, 20, 60, 100);
+  rect(cactusX + 470, cactusY + 330, 50, 20, 100);
+
+  fill(10, 64, 40);
+  rect(cactusX - 100, cactusY + 260, 30, 150, 100);
+  rect(cactusX - 100, cactusY + 340, 60, 20, 100);
+  rect(cactusX - 60, cactusY + 320, 20, 40, 100);
+  rect(cactusX - 130, cactusY + 290, 20, 60, 100);
+  rect(cactusX - 130, cactusY + 330, 50, 20, 100);
 }
 
 function sun() {
@@ -232,48 +231,66 @@ function mouseClicked() {
   }
 }
 
-function startScreen() {
-  dunes();
-  sun();
-  camel();
-  textSize(50);
-  fill(255);
-  text("CAMEL RUN", 130, 250);
-  textSize(30);
-  fill(255);
-  text("Click to start", 195, 290);
+//CONFETTI FUNCTION
+for (let i = 0; i < 1000; i++) {
+  const star = {
+    x: Math.floor(Math.random() * 570),
+    y: Math.floor(Math.random() * 700),
+    snow: Math.random() * 1,
+    alpha: Math.random(),
+  };
+  stars.push(star);
 }
 
-let gameIsRunning = false;
-let gameEnd = false;
-let velocity = 0.5;
-const acceleration = 0.1;
-let speed = 1;
-let xDirection = 0;
-
-function draw() {
-  x -= speed;
-
-  if (x < -280) x = 100;
-  dunes(x + 30, y);
-  camel(camelX, camelY + 300, 0.6);
-
+function startScreen() {
+  dunes(camelX, y);
   sun();
+  textSize(50);
+  fill(255);
+  text("CAMEL RUN", 130, 300);
+  textSize(30);
+  fill(255);
+  text("Click to start", 195, 340);
+}
 
-  waterDrop();
+function gameEndScreen() {}
 
+//function for press ENTER
+function keyPressed() {
+  if (keyCode === ENTER) {
+    enterPressed = true;
+  }
+}
+
+//Draw screen
+function draw() {
+  //Make the background move
+  dunes(x + 30, y);
+  x = x - speed;
+  speed = speed;
+  if (x < -280) x = 100;
+  camel(camelX, camelY + 300, 0.6); //scale down the camel
+  sun();
+  cactus(cactusX, cactusY);
+  cactusX = cactusX - speed;
+  if (cactusX < -280) cactusX = 100;
+
+  //Add startscreen before starting game
   if (!gameIsRunning && !gameEnd) {
     startScreen();
-  } else if (gameIsRunning) {
+  } else if (gameIsRunning && enterPressed) {
+    // Check if Enter-key is pressed
+    camelX += 0.1;
     camelY += velocity;
     velocity += acceleration;
-
-    if (keyIsDown(32) && camelY >= 100) {
-      velocity = -7;
+    camelY += velocity * 2; //make the camel fall down
+    if (keyIsDown(32)) {
+      velocity = velocity - acceleration * 2; //add jumping effect
     }
-  }
-  if (camelX >= 315) {
-    gameIsRunning = false;
-    gameEnd = true;
+
+    if (camelX >= 400 && camelY >= 600) {
+      gameIsRunning = false;
+      gameEnd = true;
+    }
   }
 }
