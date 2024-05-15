@@ -287,10 +287,5 @@ function draw() {
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
-
-    if (camelX >= 400 && camelY >= 600) {
-      gameIsRunning = false;
-      gameEnd = true;
-    }
   }
 }
