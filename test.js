@@ -81,6 +81,13 @@ function cactus(cactusX, cactusY) {
   rect(cactusX - 60, cactusY + 320, 20, 40, 100);
   rect(cactusX - 130, cactusY + 320, 20, 60, 100);
   rect(cactusX - 130, cactusY + 360, 50, 20, 100);
+
+  fill(10, 64, 40);
+  rect(cactusX + 605, cactusY + 300, 30, 110, 100);
+  rect(cactusX + 650, cactusY + 340, 60, 20, 100);
+  rect(cactusX + 690, cactusY + 320, 20, 40, 100);
+  rect(cactusX + 620, cactusY + 320, 20, 60, 100);
+  rect(cactusX + 620, cactusY + 360, 50, 20, 100);
 }
 
 function sun() {
@@ -494,6 +501,7 @@ function keyPressed() {
 //Draw screen
 function draw() {
   //Make the background move
+
   dunes(x + 30, y);
   x = x - speed;
   speed = speed;
@@ -517,7 +525,8 @@ function draw() {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
 
-    if (camel.drawX >= 400 && camelY >= 600) {
+    if (camelX + 135 >= cactusX) {
+      console.log("hit");
       gameIsRunning = false;
       gameEnd = true;
     }
