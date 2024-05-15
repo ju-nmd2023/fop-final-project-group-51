@@ -26,6 +26,7 @@ function waterDrop(waterDropX, waterDropY) {
 
 function dunes(x, y) {
   //sky
+
   background(239, 227, 210);
 
   //dunes
@@ -129,7 +130,7 @@ function sun() {
   ellipse(sunX - 90, sunY - 50, 100);
   pop();
 }
-
+//gör till object
 let camelX = 100;
 let camelY = 100;
 
