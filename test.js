@@ -525,7 +525,7 @@ function draw() {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
 
-    if (camelX + 135 >= cactusX && camelY >= cactusY + 10) {
+    if (camelX + 30 >= cactusX && camelY >= cactusY + 10) {
       console.log("hit");
       gameIsRunning = false;
       gameEnd = true;
