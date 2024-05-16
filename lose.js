@@ -226,7 +226,7 @@ function loseScreen() {
 }
 
 //Generate Bubbles
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 100; i++) {
   const bubble = {
     x: Math.floor(Math.random() * 700),
     y: Math.floor(Math.random() * 900),

@@ -577,7 +577,7 @@ function startScreen() {
   text("Click to start", 195, 340);
 }
 
-function displayEndScreen() {
+function loseScreen() {
   dunes(camelX, y);
   sadCamel(camelX + 100, camelY - 20, scale);
   sun();
@@ -587,17 +587,17 @@ function displayEndScreen() {
   textSize(30);
   fill(231, 56, 56);
   text("Click to restart", 180, 340);
-}
+  //Generate Bubbles
 
-//Generate Bubbles
-for (let i = 0; i < 20; i++) {
-  const bubble = {
-    x: Math.floor(Math.random() * 700),
-    y: Math.floor(Math.random() * 900),
-    circle: Math.random() * 10,
-    alpha: Math.random(),
-  };
-  bubbles.push(bubble);
+  for (let i = 0; i < 20; i++) {
+    const bubble = {
+      x: Math.floor(Math.random() * 700),
+      y: Math.floor(Math.random() * 900),
+      circle: Math.random() * 10,
+      alpha: Math.random(),
+    };
+    bubbles.push(bubble);
+  }
 }
 
 let gameIsRunning = false;
@@ -651,6 +651,14 @@ function draw() {
     }
   } // Game end screen doesnt work
   if (gameEnd) {
-    displayEndScreen();
+    loseScreen();
+    for (let bubble of bubbles) {
+      fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
+      ellipse(bubble.x, bubble.y, 20);
+      bubble.y += bubble.circle;
+      if (bubble.y > height) {
+        bubble.y = 0;
+      }
+    }
   }
 }
