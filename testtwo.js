@@ -46,9 +46,8 @@ class WaterDrop {
 
 function generateWaterDrops() {
   for (let i = 0; i < 2; i++) {
-    // Generate only 2 drops
-    let waterDropX = 150 + i * 300; // Adjust X position
-    let waterDropY = 75 + i * 50; // Adjust Y position
+    let waterDropX = 150 + i * 300;
+    let waterDropY = 75 + i * 50;
     waterDrops.push(new WaterDrop(waterDropX, waterDropY));
   }
 }
@@ -67,7 +66,6 @@ function checkWaterDropCollision(camelX, camelY) {
 
 function dunes(x, y) {
   //sky
-
   background(239, 227, 210);
   drawWaterDrops();
 
@@ -133,10 +131,10 @@ class Cactus {
     rect(this.x + 196, this.y + 260, 30, 150, 100);
 
     fill(102, 124, 40);
-    rect(this.x + 196, this.y + 340, 60, 20, 100); // Middle part
-    rect(this.x + 240, this.y + 320, 20, 40, 100); // Right arm
-    rect(this.x + 170, this.y + 290, 20, 60, 100); // Left arm
-    rect(this.x + 170, this.y + 330, 50, 20, 100); // Bottom part of left arm
+    rect(this.x + 196, this.y + 340, 60, 20, 100);
+    rect(this.x + 240, this.y + 320, 20, 40, 100);
+    rect(this.x + 170, this.y + 290, 20, 60, 100);
+    rect(this.x + 170, this.y + 330, 50, 20, 100);
 
     fill(10, 64, 40);
     rect(this.x + 496, this.y + 260, 30, 150, 100);
@@ -584,8 +582,6 @@ function draw() {
   // Move the background
   x -= speed;
   if (x < -280) x = 100;
-
-  // Draw the background and other elements
   dunes(x + 30, y);
   camel.draw();
   sun();
