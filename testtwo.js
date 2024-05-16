@@ -447,14 +447,6 @@ class Camel {
 
 let camel = new Camel(100, 200, 0.5);
 
-function draw() {
-  dunes(x, y);
-  cactus(cactusX, cactusY);
-  sun();
-  camel.draw();
-  waterDrop(waterDropX, waterDropY);
-}
-
 function resetGame() {
   camel.draw();
   cloudflyY = 240;
