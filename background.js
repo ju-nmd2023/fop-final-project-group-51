@@ -588,8 +588,7 @@ function loseScreen() {
   fill(231, 56, 56);
   text("Click to restart", 180, 340);
   //Generate Bubbles
-
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 0.5; i++) {
     const bubble = {
       x: Math.floor(Math.random() * 700),
       y: Math.floor(Math.random() * 900),
@@ -656,9 +655,6 @@ function draw() {
       fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
       ellipse(bubble.x, bubble.y, 20);
       bubble.y += bubble.circle;
-      if (bubble.y > height) {
-        bubble.y = 0;
-      }
     }
   }
 }
