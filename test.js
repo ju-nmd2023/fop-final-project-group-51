@@ -127,6 +127,8 @@ let camelY = 100;
 //position camel
 function sadCamel(camelX, camelY) {
   //camel head
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
   fill(219, 165, 119);
   ellipse(camelX + 125, camelY + 130, 80, 80);
 
@@ -143,8 +145,10 @@ function sadCamel(camelX, camelY) {
 
   //camel neck
   ellipse(camelX + 123, camelY + 200, 40, 150);
+  pop();
 
   //camel body
+  fill(219, 165, 119);
   ellipse(camelX + 35, camelY + 255, 200, 100);
 
   //camel legs
@@ -189,6 +193,7 @@ function sadCamel(camelX, camelY) {
 
   //dead eyes
   push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
   fill(0, 0, 0);
   stroke(0);
   strokeWeight(3);
@@ -206,11 +211,13 @@ function sadCamel(camelX, camelY) {
   pop();
 
   //nose dot
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
   fill(0, 0, 0);
   ellipse(camelX + 116, camelY + 163, 4, 8);
   fill(0, 0, 0);
   ellipse(camelX + 134, camelY + 163, 4, 8);
-
+  pop();
   //feets
   fill(129, 88, 67);
   ellipse(camelX + 100, camelY + 360, 8, 20);
@@ -219,6 +226,7 @@ function sadCamel(camelX, camelY) {
   ellipse(camelX - 10, camelY + 360, 8, 20);
   ellipse(camelX - 30, camelY + 360, 8, 20);
 }
+let rotationAngle = 0;
 
 class Camel {
   constructor(x, y, scale = 1) {
@@ -249,6 +257,8 @@ class Camel {
     );
 
     // camel ears
+    push();
+    rotate(radians(sin(rotationAngle) * 0.2));
     fill(219, 165, 119);
     ellipse(
       this.x + 155 * this.scale,
@@ -262,6 +272,7 @@ class Camel {
       10 * this.scale,
       70 * this.scale
     );
+    pop();
 
     // camel neck
     ellipse(
@@ -309,6 +320,9 @@ class Camel {
     );
 
     // camel legs
+    push();
+    rotate(radians(sin(rotationAngle) * 0.5));
+
     ellipse(
       this.x + 100 * this.scale,
       this.y + 320 * this.scale,
@@ -333,6 +347,35 @@ class Camel {
       10 * this.scale,
       100 * this.scale
     );
+
+    // feet
+    fill(129, 88, 67);
+    ellipse(
+      this.x + 100 * this.scale,
+      this.y + 360 * this.scale,
+      8 * this.scale,
+      20 * this.scale
+    );
+    ellipse(
+      this.x + 80 * this.scale,
+      this.y + 360 * this.scale,
+      8 * this.scale,
+      20 * this.scale
+    );
+    ellipse(
+      this.x - 10 * this.scale,
+      this.y + 360 * this.scale,
+      8 * this.scale,
+      20 * this.scale
+    );
+    ellipse(
+      this.x - 30 * this.scale,
+      this.y + 360 * this.scale,
+      8 * this.scale,
+      20 * this.scale
+    );
+    rotationAngle += 0.2;
+    pop();
 
     // camel tail
     ellipse(
@@ -500,33 +543,6 @@ class Camel {
       4 * this.scale,
       8 * this.scale
     );
-
-    // feet
-    fill(129, 88, 67);
-    ellipse(
-      this.x + 100 * this.scale,
-      this.y + 360 * this.scale,
-      8 * this.scale,
-      20 * this.scale
-    );
-    ellipse(
-      this.x + 80 * this.scale,
-      this.y + 360 * this.scale,
-      8 * this.scale,
-      20 * this.scale
-    );
-    ellipse(
-      this.x - 10 * this.scale,
-      this.y + 360 * this.scale,
-      8 * this.scale,
-      20 * this.scale
-    );
-    ellipse(
-      this.x - 30 * this.scale,
-      this.y + 360 * this.scale,
-      8 * this.scale,
-      20 * this.scale
-    );
   }
 }
 
@@ -571,10 +587,13 @@ function startScreen() {
   sun();
   textSize(50);
   fill(255);
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5));
   text("CAMEL RUN", 130, 300);
   textSize(30);
   fill(255);
   text("Click to start", 195, 340);
+  pop();
 }
 
 function loseScreen() {
