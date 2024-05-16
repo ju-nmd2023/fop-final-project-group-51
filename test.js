@@ -61,6 +61,11 @@ function dunes(x, y) {
 }
 
 function cactus(cactusX, cactusY) {
+  ellipse(cactusX + 211, cactusY + 335, 60, 180);
+
+  ellipse(cactusX + 511, cactusY + 335, 60, 180);
+
+  ellipse(cactusX - 85, cactusY + 335, 60, 180);
   fill(102, 124, 40);
   rect(cactusX + 196, cactusY + 260, 30, 150, 100);
   rect(cactusX + 196, cactusY + 340, 60, 20, 100);
@@ -76,18 +81,11 @@ function cactus(cactusX, cactusY) {
   rect(cactusX + 470, cactusY + 330, 50, 20, 100);
 
   fill(10, 64, 40);
-  rect(cactusX - 100, cactusY + 300, 30, 110, 100);
+  rect(cactusX - 100, cactusY + 260, 30, 150, 100);
   rect(cactusX - 100, cactusY + 340, 60, 20, 100);
   rect(cactusX - 60, cactusY + 320, 20, 40, 100);
-  rect(cactusX - 130, cactusY + 320, 20, 60, 100);
-  rect(cactusX - 130, cactusY + 360, 50, 20, 100);
-
-  fill(10, 64, 40);
-  rect(cactusX + 605, cactusY + 300, 30, 110, 100);
-  rect(cactusX + 650, cactusY + 340, 60, 20, 100);
-  rect(cactusX + 690, cactusY + 320, 20, 40, 100);
-  rect(cactusX + 620, cactusY + 320, 20, 60, 100);
-  rect(cactusX + 620, cactusY + 360, 50, 20, 100);
+  rect(cactusX - 130, cactusY + 290, 20, 60, 100);
+  rect(cactusX - 130, cactusY + 330, 50, 20, 100);
 }
 
 function sun() {
@@ -524,11 +522,10 @@ function draw() {
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
-
-    if (camelX + 30 >= cactusX && camelY >= cactusY + 10) {
-      console.log("hit");
-      gameIsRunning = false;
-      gameEnd = true;
-    }
+  }
+  if (camelX + 135 >= cactusX + 211 && camelY >= cactusY) {
+    console.log("hit");
+    gameIsRunning = false;
+    gameEnd = true;
   }
 }
