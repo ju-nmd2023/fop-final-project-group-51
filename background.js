@@ -579,7 +579,7 @@ function startScreen() {
 
 function loseScreen() {
   dunes(camelX, y);
-  sadCamel(camelX + 100, camelY - 20, scale);
+  sadCamel(camelX + 110, camelY + 30, scale);
   sun();
   textSize(50);
   fill(231, 56, 56);
