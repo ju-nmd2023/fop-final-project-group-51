@@ -9,11 +9,67 @@ let sunY = 200;
 let cactusX = 200;
 let cactusY = 200;
 let bubbles = [];
+let waterDrops = [];
+
+function setup() {
+  generateWaterDrops();
+}
+
+class WaterDrop {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.isVisible = true;
+  }
+
+  draw() {
+    if (this.isVisible) {
+      // Water drop
+      noStroke();
+      fill(121, 205, 244);
+      ellipse(this.x, this.y, 20, 40);
+
+      // Reflection
+      fill(255, 255, 255);
+      ellipse(this.x - 2, this.y, 10, 30);
+      fill(121, 205, 244);
+      ellipse(this.x, this.y, 10, 30);
+    }
+  }
+
+  checkCollision(camelX, camelY) {
+    if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
+      this.isVisible = false;
+    }
+  }
+}
+
+function generateWaterDrops() {
+  for (let i = 0; i < 2; i++) {
+    // Generate only 2 drops
+    let waterDropX = 150 + i * 300; // Adjust X position
+    let waterDropY = 75 + i * 50; // Adjust Y position
+    waterDrops.push(new WaterDrop(waterDropX, waterDropY));
+  }
+}
+
+function drawWaterDrops() {
+  waterDrops.forEach((drop) => {
+    drop.draw();
+  });
+}
+
+function checkWaterDropCollision(camelX, camelY) {
+  waterDrops.forEach((drop) => {
+    drop.checkCollision(camelX, camelY);
+  });
+}
 
 function dunes(x, y) {
   //sky
 
   background(239, 227, 210);
+  drawWaterDrops();
 
   //dunes
   fill(192, 120, 50);
@@ -132,6 +188,7 @@ function sun() {
   ellipse(sunX - 90, sunY - 50, 100);
   pop();
 }
+
 let camelX = 100;
 let camelY = 100;
 
@@ -533,6 +590,7 @@ function draw() {
   camel.draw();
   sun();
   cactus.draw();
+  checkWaterDropCollision(camel.x, camel.y);
 
   // Move the cactus
   cactus.x -= speed;
