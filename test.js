@@ -8,6 +8,7 @@ let sunX = 200;
 let sunY = 200;
 let cactusX = 200;
 let cactusY = 200;
+let bubbles = [];
 
 function dunes(x, y) {
   //sky
@@ -131,6 +132,7 @@ class Camel {
   }
 
   draw() {
+    ellipse(this.x + 20, this.y + 120, 90, 130);
     // camel head
     fill(219, 165, 119);
     ellipse(
@@ -479,6 +481,29 @@ function startScreen() {
   text("Click to start", 195, 340);
 }
 
+function displayEndScreen() {
+  dunes(x, y);
+  camel.draw();
+  sun();
+  textSize(50);
+  fill(231, 56, 56);
+  text("YOU LOSE", 150, 300);
+  textSize(30);
+  fill(231, 56, 56);
+  text("Click to restart", 180, 340);
+}
+
+//Generate Bubbles
+for (let i = 0; i < 20; i++) {
+  const bubble = {
+    x: Math.floor(Math.random() * 700),
+    y: Math.floor(Math.random() * 900),
+    circle: Math.random() * 10,
+    alpha: Math.random(),
+  };
+  bubbles.push(bubble);
+}
+
 let gameIsRunning = false;
 let gameEnd = false;
 let velocity = 0.5;
@@ -486,8 +511,6 @@ const acceleration = 0.1;
 let speed = 1.5;
 let xDirection = 0;
 let enterPressed = false;
-
-function gameEndScreen() {}
 
 //function for press ENTER
 function keyPressed() {
@@ -511,6 +534,7 @@ function draw() {
   if (cactusX < -280) cactusX = 100;
 
   //Add startscreen before starting game
+
   if (!gameIsRunning && !gameEnd) {
     startScreen();
   } else if (gameIsRunning && enterPressed) {
@@ -522,10 +546,15 @@ function draw() {
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
+
+    // Collision doesnt work
+    if (camelX + 135 > cactusX + 211 && camelY > cactusY) {
+      console.log("hit");
+      gameIsRunning = false;
+      gameEnd = true;
+    }
   }
-  if (camelX + 135 >= cactusX + 211 && camelY >= cactusY) {
-    console.log("hit");
-    gameIsRunning = false;
-    gameEnd = true;
+  if (gameEnd) {
+    displayEndScreen();
   }
 }
