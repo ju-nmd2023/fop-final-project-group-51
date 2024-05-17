@@ -111,33 +111,41 @@ function dunes(x, y) {
   ellipse(x + 470, y + 570, 35);
 }
 
-function cactus(cactusX, cactusY) {
-  ellipse(cactusX + 211, cactusY + 335, 60, 180);
+class Cactus {
+  constructor(x, y, scale = 1) {
+    this.x = x;
+    this.y = y;
+    this.scale = scale;
+  }
+  draw() {
+    ellipse(this.x + 211, this.y + 335, 60, 180);
 
-  ellipse(cactusX + 511, cactusY + 335, 60, 180);
+    ellipse(this.x + 511, this.y + 335, 60, 180);
 
-  ellipse(cactusX - 85, cactusY + 335, 60, 180);
-  fill(102, 124, 40);
-  rect(cactusX + 196, cactusY + 260, 30, 150, 100);
-  rect(cactusX + 196, cactusY + 340, 60, 20, 100);
-  rect(cactusX + 240, cactusY + 320, 20, 40, 100);
-  rect(cactusX + 170, cactusY + 290, 20, 60, 100);
-  rect(cactusX + 170, cactusY + 330, 50, 20, 100);
+    ellipse(this.x - 85, this.y + 335, 60, 180);
+    fill(102, 124, 40);
+    rect(this.x + 196, this.y + 260, 30, 150, 100);
+    rect(this.x + 196, this.y + 340, 60, 20, 100);
+    rect(this.x + 240, this.y + 320, 20, 40, 100);
+    rect(this.x + 170, this.y + 290, 20, 60, 100);
+    rect(this.x + 170, this.y + 330, 50, 20, 100);
 
-  fill(10, 64, 40);
-  rect(cactusX + 496, cactusY + 260, 30, 150, 100);
-  rect(cactusX + 496, cactusY + 340, 60, 20, 100);
-  rect(cactusX + 540, cactusY + 320, 20, 40, 100);
-  rect(cactusX + 470, cactusY + 290, 20, 60, 100);
-  rect(cactusX + 470, cactusY + 330, 50, 20, 100);
+    fill(10, 64, 40);
+    rect(this.x + 496, this.y + 260, 30, 150, 100);
+    rect(this.x + 496, this.y + 340, 60, 20, 100);
+    rect(this.x + 540, this.y + 320, 20, 40, 100);
+    rect(this.x + 470, this.y + 290, 20, 60, 100);
+    rect(this.x + 470, this.y + 330, 50, 20, 100);
 
-  fill(10, 64, 40);
-  rect(cactusX - 100, cactusY + 260, 30, 150, 100);
-  rect(cactusX - 100, cactusY + 340, 60, 20, 100);
-  rect(cactusX - 60, cactusY + 320, 20, 40, 100);
-  rect(cactusX - 130, cactusY + 290, 20, 60, 100);
-  rect(cactusX - 130, cactusY + 330, 50, 20, 100);
+    fill(10, 64, 40);
+    rect(this.x - 100, this.y + 260, 30, 150, 100);
+    rect(this.x - 100, this.y + 340, 60, 20, 100);
+    rect(this.x - 60, this.y + 320, 20, 40, 100);
+    rect(this.x - 130, this.y + 290, 20, 60, 100);
+    rect(this.x - 130, this.y + 330, 50, 20, 100);
+  }
 }
+let cactus = new Cactus(200, 200);
 
 function sun() {
   //cloud
@@ -685,7 +693,7 @@ function happyCamel(camelX, camelY, scale) {
 }
 function draw() {
   dunes(x, y);
-  cactus(cactusX, cactusY);
+  Cactus.draw();
   sun();
   camel.draw();
   waterDrop(waterDropX, waterDropY);
@@ -811,9 +819,9 @@ function draw() {
   if (x < -280) x = 100;
   camel.draw();
   sun();
-  cactus(cactusX, cactusY);
-  cactusX = cactusX - speed;
-  if (cactusX < -280) cactusX = 100;
+  cactus.draw();
+  cactus.x = cactus.x - speed;
+  if (cactus.x < -280) cactus.x = 100;
 
   //Add startscreen before starting game
 
