@@ -1,29 +1,73 @@
+/** @format */
+
 let x = 200;
 let y = 200;
-let camelX = 100;
-let camelY = 100;
 let cloudX = 200;
 let cloudY = 200;
 let sunX = 200;
 let sunY = 200;
 let cactusX = 200;
 let cactusY = 200;
-let gameIsRunning = false;
-let gameEnd = false;
-let velocity = 0.5;
-const acceleration = 0.1;
-let speed = 1.5;
-let xDirection = 0;
-let enterPressed = false;
-let stars = [];
+let bubbles = [];
+let waterDrops = [];
 
 function setup() {
-  createCanvas(600, 750);
+  generateWaterDrops();
+}
+
+class WaterDrop {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.isVisible = true;
+  }
+
+  draw() {
+    if (this.isVisible) {
+      // Water drop
+      noStroke();
+      fill(121, 205, 244);
+      ellipse(this.x, this.y, 20, 40);
+
+      // Reflection
+      fill(255, 255, 255);
+      ellipse(this.x - 2, this.y, 10, 30);
+      fill(121, 205, 244);
+      ellipse(this.x, this.y, 10, 30);
+    }
+  }
+
+  checkCollision(camelX, camelY) {
+    if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
+      this.isVisible = false;
+    }
+  }
+}
+
+function generateWaterDrops() {
+  for (let i = 0; i < 2; i++) {
+    let waterDropX = 150 + i * 300;
+    let waterDropY = 75 + i * 50;
+    waterDrops.push(new WaterDrop(waterDropX, waterDropY));
+  }
+}
+
+function drawWaterDrops() {
+  waterDrops.forEach((drop) => {
+    drop.draw();
+  });
+}
+
+function checkWaterDropCollision(camelX, camelY) {
+  waterDrops.forEach((drop) => {
+    drop.checkCollision(camelX, camelY);
+  });
 }
 
 function dunes(x, y) {
   //sky
   background(239, 227, 210);
+  drawWaterDrops();
 
   //dunes
   fill(192, 120, 50);
@@ -71,33 +115,44 @@ function dunes(x, y) {
   ellipse(x + 470, y + 570, 35);
 }
 
-function cactus(cactusX, cactusY) {
-  ellipse(cactusX + 211, cactusY + 335, 80, 200);
+class Cactus {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = 166;
+    this.height = 180;
+  }
 
-  ellipse(cactusX + 511, cactusY + 335, 80, 200);
+  draw() {
+    ellipse(this.x + 211, this.y + 335, 60, 180);
+    ellipse(this.x + 511, this.y + 335, 60, 180);
+    ellipse(this.x - 85, this.y + 335, 60, 180);
+    fill(102, 124, 40);
+    rect(this.x + 196, this.y + 260, 30, 150, 100);
 
-  ellipse(cactusX - 85, cactusY + 335, 80, 200);
-  fill(102, 124, 40);
-  rect(cactusX + 196, cactusY + 260, 30, 150, 100);
-  rect(cactusX + 196, cactusY + 340, 60, 20, 100);
-  rect(cactusX + 240, cactusY + 320, 20, 40, 100);
-  rect(cactusX + 170, cactusY + 290, 20, 60, 100);
-  rect(cactusX + 170, cactusY + 330, 50, 20, 100);
+    fill(102, 124, 40);
+    rect(this.x + 196, this.y + 340, 60, 20, 100);
+    rect(this.x + 240, this.y + 320, 20, 40, 100);
+    rect(this.x + 170, this.y + 290, 20, 60, 100);
+    rect(this.x + 170, this.y + 330, 50, 20, 100);
 
-  fill(10, 64, 40);
-  rect(cactusX + 496, cactusY + 260, 30, 150, 100);
-  rect(cactusX + 496, cactusY + 340, 60, 20, 100);
-  rect(cactusX + 540, cactusY + 320, 20, 40, 100);
-  rect(cactusX + 470, cactusY + 290, 20, 60, 100);
-  rect(cactusX + 470, cactusY + 330, 50, 20, 100);
+    fill(10, 64, 40);
+    rect(this.x + 496, this.y + 260, 30, 150, 100);
+    rect(this.x + 496, this.y + 340, 60, 20, 100);
+    rect(this.x + 540, this.y + 320, 20, 40, 100);
+    rect(this.x + 470, this.y + 290, 20, 60, 100);
+    rect(this.x + 470, this.y + 330, 50, 20, 100);
 
-  fill(10, 64, 40);
-  rect(cactusX - 100, cactusY + 260, 30, 150, 100);
-  rect(cactusX - 100, cactusY + 340, 60, 20, 100);
-  rect(cactusX - 60, cactusY + 320, 20, 40, 100);
-  rect(cactusX - 130, cactusY + 290, 20, 60, 100);
-  rect(cactusX - 130, cactusY + 330, 50, 20, 100);
+    fill(10, 64, 40);
+    rect(this.x - 100, this.y + 260, 30, 150, 100);
+    rect(this.x - 100, this.y + 340, 60, 20, 100);
+    rect(this.x - 60, this.y + 320, 20, 40, 100);
+    rect(this.x - 130, this.y + 290, 20, 60, 100);
+    rect(this.x - 130, this.y + 330, 50, 20, 100);
+  }
 }
+
+let cactus = new Cactus(200, 200);
 
 function sun() {
   //cloud
@@ -132,94 +187,323 @@ function sun() {
   pop();
 }
 
-//start position camel
-function camel(camelX, camelY, scale) {
-  //camel head
-  fill(219, 165, 119);
-  ellipse(camelX + 150 * scale, camelY + 150 * scale, 80 * scale, 80 * scale);
+let camelX = 100;
+let camelY = 100;
 
-  //camel nose
-  noStroke();
-  fill(219, 165, 119);
-  ellipse(camelX + 175 * scale, camelY + 162 * scale, 60 * scale, 60 * scale);
+class Camel {
+  constructor(x, y, scale = 1) {
+    this.x = x;
+    this.y = y;
+    this.scale = scale;
+  }
 
-  //camel ears
-  fill(219, 165, 119);
-  ellipse(camelX + 155 * scale, camelY + 110 * scale, 10 * scale, 70 * scale);
-  ellipse(camelX + 128 * scale, camelY + 120 * scale, 10 * scale, 70 * scale);
+  draw() {
+    ellipse(this.x + 20, this.y + 120, 90, 130);
+    // camel head
+    fill(219, 165, 119);
+    ellipse(
+      this.x + 150 * this.scale,
+      this.y + 150 * this.scale,
+      80 * this.scale,
+      80 * this.scale
+    );
 
-  //camel neck
-  ellipse(camelX + 123 * scale, camelY + 200 * scale, 40 * scale, 150 * scale);
+    // camel nose
+    noStroke();
+    fill(219, 165, 119);
+    ellipse(
+      this.x + 175 * this.scale,
+      this.y + 162 * this.scale,
+      60 * this.scale,
+      60 * this.scale
+    );
 
-  //neck dots
-  push();
-  fill(223, 204, 183);
-  ellipse(camelX + 120 * scale, camelY + 152 * scale, 4 * scale, 8 * scale);
-  ellipse(camelX + 112 * scale, camelY + 162 * scale, 4 * scale, 8 * scale);
-  ellipse(camelX + 120 * scale, camelY + 172 * scale, 4 * scale, 8 * scale);
-  ellipse(camelX + 112 * scale, camelY + 182 * scale, 4 * scale, 8 * scale);
-  pop();
+    // camel ears
+    fill(219, 165, 119);
+    ellipse(
+      this.x + 155 * this.scale,
+      this.y + 110 * this.scale,
+      10 * this.scale,
+      70 * this.scale
+    );
+    ellipse(
+      this.x + 128 * this.scale,
+      this.y + 120 * this.scale,
+      10 * this.scale,
+      70 * this.scale
+    );
 
-  //camel body
-  ellipse(camelX + 35 * scale, camelY + 255 * scale, 200 * scale, 100 * scale);
+    // camel neck
+    ellipse(
+      this.x + 123 * this.scale,
+      this.y + 200 * this.scale,
+      40 * this.scale,
+      150 * this.scale
+    );
 
-  //camel legs
-  ellipse(camelX + 100 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
-  ellipse(camelX + 80 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
-  ellipse(camelX - 10 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
-  ellipse(camelX - 30 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
+    // neck dots
+    push();
+    fill(223, 204, 183);
+    ellipse(
+      this.x + 120 * this.scale,
+      this.y + 152 * this.scale,
+      4 * this.scale,
+      8 * this.scale
+    );
+    ellipse(
+      this.x + 112 * this.scale,
+      this.y + 162 * this.scale,
+      4 * this.scale,
+      8 * this.scale
+    );
+    ellipse(
+      this.x + 120 * this.scale,
+      this.y + 172 * this.scale,
+      4 * this.scale,
+      8 * this.scale
+    );
+    ellipse(
+      this.x + 112 * this.scale,
+      this.y + 182 * this.scale,
+      4 * this.scale,
+      8 * this.scale
+    );
+    pop();
 
-  //camel tail
-  ellipse(camelX - 65 * scale, camelY + 255 * scale, 50 * scale, 10 * scale);
+    // camel body
+    ellipse(
+      this.x + 35 * this.scale,
+      this.y + 255 * this.scale,
+      200 * this.scale,
+      100 * this.scale
+    );
 
-  //camel blanket
-  fill(211, 117, 100);
-  ellipse(camelX + 30 * scale, camelY + 210 * scale, 50 * scale, 110 * scale);
-  ellipse(camelX + 0 * scale, camelY + 220 * scale, 50 * scale, 90 * scale);
-  ellipse(camelX + 55 * scale, camelY + 220 * scale, 50 * scale, 90 * scale);
+    // camel legs
+    ellipse(
+      this.x + 100 * this.scale,
+      this.y + 320 * this.scale,
+      10 * this.scale,
+      100 * this.scale
+    );
+    ellipse(
+      this.x + 80 * this.scale,
+      this.y + 320 * this.scale,
+      10 * this.scale,
+      100 * this.scale
+    );
+    ellipse(
+      this.x - 10 * this.scale,
+      this.y + 320 * this.scale,
+      10 * this.scale,
+      100 * this.scale
+    );
+    ellipse(
+      this.x - 30 * this.scale,
+      this.y + 320 * this.scale,
+      10 * this.scale,
+      100 * this.scale
+    );
 
-  //stripes on blanket
-  ellipse(camelX + 70 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 60 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 50 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 40 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 30 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 20 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 10 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 0 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX - 10 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
+    // camel tail
+    ellipse(
+      this.x - 65 * this.scale,
+      this.y + 255 * this.scale,
+      50 * this.scale,
+      10 * this.scale
+    );
 
-  //dots on blanket
-  fill(151, 153, 171);
-  ellipse(camelX + 70 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 60 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 50 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 40 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 30 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 20 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 10 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 0 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX - 10 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
+    // camel blanket
+    fill(211, 117, 100);
+    ellipse(
+      this.x + 30 * this.scale,
+      this.y + 210 * this.scale,
+      50 * this.scale,
+      110 * this.scale
+    );
+    ellipse(
+      this.x + 0 * this.scale,
+      this.y + 220 * this.scale,
+      50 * this.scale,
+      90 * this.scale
+    );
+    ellipse(
+      this.x + 55 * this.scale,
+      this.y + 220 * this.scale,
+      50 * this.scale,
+      90 * this.scale
+    );
 
-  //eyes
-  fill(0, 0, 0);
-  ellipse(camelX + 172 * scale, camelY + 150 * scale, 20 * scale, 20 * scale);
-  fill(219, 165, 119);
-  ellipse(camelX + 173 * scale, camelY + 153 * scale, 25 * scale, 20 * scale);
+    // stripes on blanket
+    ellipse(
+      this.x + 70 * this.scale,
+      this.y + 265 * this.scale,
+      4 * this.scale,
+      25 * this.scale
+    );
+    ellipse(
+      this.x + 60 * this.scale,
+      this.y + 260 * this.scale,
+      4 * this.scale,
+      25 * this.scale
+    );
+    ellipse(
+      this.x + 50 * this.scale,
+      this.y + 265 * this.scale,
+      4 * this.scale,
+      25 * this.scale
+    );
+    ellipse(
+      this.x + 40 * this.scale,
+      this.y + 260 * this.scale,
+      4 * this.scale,
+      25 * this.scale
+    );
+    ellipse(
+      this.x + 30 * this.scale,
+      this.y + 265 * this.scale,
+      4 * this.scale,
+      25 * this.scale
+    );
+    ellipse(
+      this.x + 20 * this.scale,
+      this.y + 260 * this.scale,
+      4 * this.scale,
+      25 * this.scale
+    );
+    ellipse(
+      this.x + 10 * this.scale,
+      this.y + 265 * this.scale,
+      4 * this.scale,
+      25 * this.scale
+    );
+    ellipse(
+      this.x + 0 * this.scale,
+      this.y + 260 * this.scale,
+      4 * this.scale,
+      25 * this.scale
+    );
+    ellipse(
+      this.x - 10 * this.scale,
+      this.y + 265 * this.scale,
+      4 * this.scale,
+      25 * this.scale
+    );
 
-  //nose dot
-  fill(0, 0, 0);
-  ellipse(camelX + 196 * scale, camelY + 163 * scale, 4 * scale, 8 * scale);
+    // dots on blanket
+    fill(151, 153, 171);
+    ellipse(
+      this.x + 70 * this.scale,
+      this.y + 276 * this.scale,
+      7 * this.scale,
+      7 * this.scale
+    );
+    ellipse(
+      this.x + 60 * this.scale,
+      this.y + 273 * this.scale,
+      7 * this.scale,
+      7 * this.scale
+    );
+    ellipse(
+      this.x + 50 * this.scale,
+      this.y + 276 * this.scale,
+      7 * this.scale,
+      7 * this.scale
+    );
+    ellipse(
+      this.x + 40 * this.scale,
+      this.y + 273 * this.scale,
+      7 * this.scale,
+      7 * this.scale
+    );
+    ellipse(
+      this.x + 30 * this.scale,
+      this.y + 276 * this.scale,
+      7 * this.scale,
+      7 * this.scale
+    );
+    ellipse(
+      this.x + 20 * this.scale,
+      this.y + 273 * this.scale,
+      7 * this.scale,
+      7 * this.scale
+    );
+    ellipse(
+      this.x + 10 * this.scale,
+      this.y + 276 * this.scale,
+      7 * this.scale,
+      7 * this.scale
+    );
+    ellipse(
+      this.x + 0 * this.scale,
+      this.y + 273 * this.scale,
+      7 * this.scale,
+      7 * this.scale
+    );
+    ellipse(
+      this.x - 10 * this.scale,
+      this.y + 276 * this.scale,
+      7 * this.scale,
+      7 * this.scale
+    );
 
-  //feets
-  fill(129, 88, 67);
-  ellipse(camelX + 100 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
-  ellipse(camelX + 80 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
-  ellipse(camelX - 10 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
-  ellipse(camelX - 30 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
+    // eyes
+    fill(0, 0, 0);
+    ellipse(
+      this.x + 172 * this.scale,
+      this.y + 150 * this.scale,
+      20 * this.scale,
+      20 * this.scale
+    );
+    fill(219, 165, 119);
+    ellipse(
+      this.x + 173 * this.scale,
+      this.y + 153 * this.scale,
+      25 * this.scale,
+      20 * this.scale
+    );
+
+    // nose dot
+    fill(0, 0, 0);
+    ellipse(
+      this.x + 196 * this.scale,
+      this.y + 163 * this.scale,
+      4 * this.scale,
+      8 * this.scale
+    );
+
+    // feet
+    fill(129, 88, 67);
+    ellipse(
+      this.x + 100 * this.scale,
+      this.y + 360 * this.scale,
+      8 * this.scale,
+      20 * this.scale
+    );
+    ellipse(
+      this.x + 80 * this.scale,
+      this.y + 360 * this.scale,
+      8 * this.scale,
+      20 * this.scale
+    );
+    ellipse(
+      this.x - 10 * this.scale,
+      this.y + 360 * this.scale,
+      8 * this.scale,
+      20 * this.scale
+    );
+    ellipse(
+      this.x - 30 * this.scale,
+      this.y + 360 * this.scale,
+      8 * this.scale,
+      20 * this.scale
+    );
+  }
 }
+
+let camel = new Camel(100, 200, 0.5);
+
 function resetGame() {
-  camel(x, y);
+  camel.draw();
   cloudflyY = 240;
   gameIsRunning = true;
   gameEnd = false;
@@ -230,6 +514,8 @@ function mouseClicked() {
     resetGame();
   }
 }
+
+let stars = [];
 
 //CONFETTI FUNCTION
 for (let i = 0; i < 1000; i++) {
@@ -253,7 +539,36 @@ function startScreen() {
   text("Click to start", 195, 340);
 }
 
-function gameEndScreen() {}
+function displayEndScreen() {
+  dunes(x, y);
+  camel.draw();
+  sun();
+  textSize(50);
+  fill(231, 56, 56);
+  text("YOU LOSE", 150, 300);
+  textSize(30);
+  fill(231, 56, 56);
+  text("Click to restart", 180, 340);
+}
+
+//Generate Bubbles
+for (let i = 0; i < 20; i++) {
+  const bubble = {
+    x: Math.floor(Math.random() * 700),
+    y: Math.floor(Math.random() * 900),
+    circle: Math.random() * 10,
+    alpha: Math.random(),
+  };
+  bubbles.push(bubble);
+}
+
+let gameIsRunning = false;
+let gameEnd = false;
+let velocity = 0.5;
+const acceleration = 0.1;
+let speed = 1.5;
+let xDirection = 0;
+let enterPressed = false;
 
 //function for press ENTER
 function keyPressed() {
@@ -264,28 +579,37 @@ function keyPressed() {
 
 //Draw screen
 function draw() {
-  //Make the background move
-  dunes(x + 30, y);
-  x = x - speed;
-  speed = speed;
+  // Move the background
+  x -= speed;
   if (x < -280) x = 100;
-  camel(camelX, camelY + 300, 0.6); //scale down the camel
+  dunes(x + 30, y);
+  camel.draw();
   sun();
-  cactus(cactusX, cactusY);
-  cactusX = cactusX - speed;
-  if (cactusX < -280) cactusX = 100;
+  cactus.draw();
+  checkWaterDropCollision(camel.x, camel.y);
 
-  //Add startscreen before starting game
-  if (!gameIsRunning && !gameEnd) {
-    startScreen();
-  } else if (gameIsRunning && enterPressed) {
-    // Check if Enter-key is pressed
-    camelX += 0.1;
-    camelY += velocity;
+  // Move the cactus
+  cactus.x -= speed;
+  if (cactus.x < -280) cactus.x = 100;
+
+  if (gameIsRunning && enterPressed) {
+    camel.x += 0.1;
+    camel.y += velocity;
     velocity += acceleration;
-    camelY += velocity * 2; //make the camel fall down
+    camelY += velocity * 2;
     if (keyIsDown(32)) {
-      velocity = velocity - acceleration * 2; //add jumping effect
+      velocity = velocity - acceleration * 2;
     }
+
+    // Collision detection
+    if (camel.x + 135 > cactus.x + 211 && camelY > cactus.y) {
+      console.log("hit");
+      gameIsRunning = false;
+      gameEnd = true;
+    }
+  }
+
+  if (gameEnd) {
+    displayEndScreen();
   }
 }
