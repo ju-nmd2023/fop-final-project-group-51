@@ -818,8 +818,18 @@ function draw() {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
 
+    let cx1 = cactus.x;
+    let cx2 = cactus.x;
+    let cy1 = cactus.y;
+    let cy2 = cactus.y + 140;
+
+    let ox1 = 200;
+    let ox2 = 100;
+    let oy1 = camel.y - 10;
+    let oy2 = oy1 + 130;
+
     // Collision doesnt work
-    if (camelX + 135 > cactusX + 211 && camelY > cactusY) {
+    if (cx1 <= cx2 && cx2 >= ox1 && cy1 >= oy1 && cy2 <= cy2) {
       console.log("hit");
       gameIsRunning = false;
       gameEnd = true;
