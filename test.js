@@ -118,31 +118,12 @@ class Cactus {
     this.scale = scale;
   }
   draw() {
-    ellipse(this.x + 211, this.y + 335, 60, 180);
-
-    ellipse(this.x + 511, this.y + 335, 60, 180);
-
-    ellipse(this.x - 85, this.y + 335, 60, 180);
     fill(102, 124, 40);
     rect(this.x + 196, this.y + 260, 30, 150, 100);
     rect(this.x + 196, this.y + 340, 60, 20, 100);
     rect(this.x + 240, this.y + 320, 20, 40, 100);
     rect(this.x + 170, this.y + 290, 20, 60, 100);
     rect(this.x + 170, this.y + 330, 50, 20, 100);
-
-    fill(10, 64, 40);
-    rect(this.x + 496, this.y + 260, 30, 150, 100);
-    rect(this.x + 496, this.y + 340, 60, 20, 100);
-    rect(this.x + 540, this.y + 320, 20, 40, 100);
-    rect(this.x + 470, this.y + 290, 20, 60, 100);
-    rect(this.x + 470, this.y + 330, 50, 20, 100);
-
-    fill(10, 64, 40);
-    rect(this.x - 100, this.y + 260, 30, 150, 100);
-    rect(this.x - 100, this.y + 340, 60, 20, 100);
-    rect(this.x - 60, this.y + 320, 20, 40, 100);
-    rect(this.x - 130, this.y + 290, 20, 60, 100);
-    rect(this.x - 130, this.y + 330, 50, 20, 100);
   }
 }
 let cactus = new Cactus(200, 200);
