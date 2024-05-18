@@ -12,6 +12,7 @@ let bubbles = [];
 let waterDrops = [];
 
 function setup() {
+  createCanvas(600, 750);
   generateWaterDrops();
 }
 
