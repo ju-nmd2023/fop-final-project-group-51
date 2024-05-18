@@ -801,8 +801,6 @@ function draw() {
   camel.draw();
   sun();
   cactus.draw();
-  cactus.x = cactus.x - speed;
-  if (cactus.x < -280) cactus.x = 100;
 
   //Add startscreen before starting game
 
@@ -818,18 +816,25 @@ function draw() {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
 
-    let cx1 = cactus.x;
-    let cx2 = cactus.x;
-    let cy1 = cactus.y;
-    let cy2 = cactus.y + 140;
+    // Define the camel's rectangle
+    let camelLeft = camel.x - 30;
+    let camelRight = camel.x + 180;
+    let camelTop = camel.y - 100;
+    let camelBottom = camel.y + 100; // Assuming height is 200 (from -100 to +100)
 
-    let ox1 = 200;
-    let ox2 = 100;
-    let oy1 = camel.y - 10;
-    let oy2 = oy1 + 130;
+    // Define the cactus's rectangle
+    let cactusLeft = cactus.x + 180;
+    let cactusRight = cactus.x + 250;
+    let cactusTop = cactus.y - 130;
+    let cactusBottom = cactus.y - 50;
 
-    // Collision doesnt work
-    if (cx1 <= cx2 && cx2 >= ox1 && cy1 >= oy1 && cy2 <= cy2) {
+    // Check if the rectangles overlap
+    if (
+      camelLeft < cactusRight &&
+      camelRight > cactusLeft &&
+      camelTop < cactusBottom &&
+      camelBottom > cactusTop
+    ) {
       console.log("hit");
       gameIsRunning = false;
       gameEnd = true;
@@ -842,8 +847,11 @@ function draw() {
       ellipse(bubble.x, bubble.y, 20);
       bubble.y += bubble.circle;
     }
+
     // } else {
     // winScreen();
     //waterTank(waterTankX + 170, waterTankY + 400);
   }
+  rect(camel.x - 30, camel.x + 180, camel.y - 100, camel.y - 100);
+  rect(cactus.x + 180, cactus.x + 250, cactus.y - 130, cactus.y - 50);
 }
