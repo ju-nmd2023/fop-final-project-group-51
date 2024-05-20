@@ -269,7 +269,7 @@ function sadCamel(camelX, camelY) {
 let rotationAngle = 0;
 
 class Camel {
-  constructor(x, y, width, height, scale = 0.1) {
+  constructor(x, y, width, height, scale) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -280,314 +280,99 @@ class Camel {
   draw() {
     // camel head
     fill(219, 165, 119);
-    ellipse(
-      this.x + 150 * this.scale,
-      this.y + 150 * this.scale,
-      this.width - 20 * this.scale,
-      this.height - 20 * this.scale
-    );
+    ellipse(this.x + 150, this.y + 150, this.width - 20, this.height - 20);
 
     // camel nose
     noStroke();
     fill(219, 165, 119);
-    ellipse(
-      this.x + 175 * this.scale,
-      this.y + 162 * this.scale,
-      this.width - 40 * this.scale,
-      this.height - 40 * this.scale
-    );
+    ellipse(this.x + 175, this.y + 162, this.width - 40, this.height - 40);
 
     // camel ears
     push();
     rotate(radians(sin(rotationAngle) * 0.2));
     fill(219, 165, 119);
-    ellipse(
-      this.x + 155 * this.scale,
-      this.y + 110 * this.scale,
-      this.width - 90 * this.scale,
-      this.height - 30 * this.scale
-    );
-    ellipse(
-      this.x + 128 * this.scale,
-      this.y + 120 * this.scale,
-      this.width - 90 * this.scale,
-      this.height - 30 * this.scale
-    );
+    ellipse(this.x + 155, this.y + 110, this.width - 90, this.height - 30);
+    ellipse(this.x + 128, this.y + 120, this.width - 90, this.height - 30);
     pop();
 
     // camel neck
-    ellipse(
-      this.x + 123 * this.scale,
-      this.y + 200 * this.scale,
-      this.width - 60 * this.scale,
-      this.height + 50 * this.scale
-    );
+    ellipse(this.x + 123, this.y + 200, this.width - 60, this.height + 50);
 
     // neck dots
     push();
     fill(223, 204, 183);
-    ellipse(
-      this.x + 120 * this.scale,
-      this.y + 152 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 92 * this.scale
-    );
-    ellipse(
-      this.x + 112 * this.scale,
-      this.y + 162 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 92 * this.scale
-    );
-    ellipse(
-      this.x + 120 * this.scale,
-      this.y + 172 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 92 * this.scale
-    );
-    ellipse(
-      this.x + 112 * this.scale,
-      this.y + 182 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 92 * this.scale
-    );
+    ellipse(this.x + 120, this.y + 152, this.width - 96, this.height - 92);
+    ellipse(this.x + 112, this.y + 162, this.width - 96, this.height - 92);
+    ellipse(this.x + 120, this.y + 172, this.width - 96, this.height - 92);
+    ellipse(this.x + 112, this.y + 182, this.width - 96, this.height - 92);
     pop();
 
     // camel body
-    ellipse(
-      this.x + 35 * this.scale,
-      this.y + 255 * this.scale,
-      this.width + 100 * this.scale,
-      this.height * this.scale
-    );
+    ellipse(this.x + 35, this.y + 255, this.width + 100, this.height);
 
     // camel legs
     push();
     rotate(radians(sin(rotationAngle) * 0.5));
 
-    ellipse(
-      this.x + 100 * this.scale,
-      this.y + 320 * this.scale,
-      this.width - 90 * this.scale,
-      this.height * this.scale
-    );
-    ellipse(
-      this.x + 80 * this.scale,
-      this.y + 320 * this.scale,
-      this.width - 90 * this.scale,
-      this.height * this.scale
-    );
-    ellipse(
-      this.x - 10 * this.scale,
-      this.y + 320 * this.scale,
-      this.width - 90 * this.scale,
-      this.height * this.scale
-    );
-    ellipse(
-      this.x - 30 * this.scale,
-      this.y + 320 * this.scale,
-      this.width - 90 * this.scale,
-      this.height * this.scale
-    );
+    ellipse(this.x + 100, this.y + 320, this.width - 90, this.height);
+    ellipse(this.x + 80, this.y + 320, this.width - 90, this.height);
+    ellipse(this.x - 10, this.y + 320, this.width - 90, this.height);
+    ellipse(this.x - 30, this.y + 320, this.width - 90, this.height);
 
     // feet
     fill(129, 88, 67);
-    ellipse(
-      this.x + 100 * this.scale,
-      this.y + 360 * this.scale,
-      this.width - 92 * this.scale,
-      this.height - 80 * this.scale
-    );
-    ellipse(
-      this.x + 80 * this.scale,
-      this.y + 360 * this.scale,
-      this.width - 92 * this.scale,
-      this.height - 80 * this.scale
-    );
-    ellipse(
-      this.x - 10 * this.scale,
-      this.y + 360 * this.scale,
-      this.width - 92 * this.scale,
-      this.height - 80 * this.scale
-    );
-    ellipse(
-      this.x - 30 * this.scale,
-      this.y + 360 * this.scale,
-      this.width - 92 * this.scale,
-      this.height - 80 * this.scale
-    );
+    ellipse(this.x + 100, this.y + 360, this.width - 92, this.height - 80);
+    ellipse(this.x + 80, this.y + 360, this.width - 92, this.height - 80);
+    ellipse(this.x - 10, this.y + 360, this.width - 92, this.height - 80);
+    ellipse(this.x - 30, this.y + 360, this.width - 92, this.height - 80);
     rotationAngle += 0.2;
     pop();
 
     // camel tail
-    ellipse(
-      this.x - 65 * this.scale,
-      this.y + 255 * this.scale,
-      this.width - 50 * this.scale,
-      this.height - 90 * this.scale
-    );
+    ellipse(this.x - 65, this.y + 255, this.width - 50, this.height - 90);
 
     // camel blanket
     fill(211, 117, 100);
-    ellipse(
-      this.x + 30 * this.scale,
-      this.y + 210 * this.scale,
-      this.width - 50 * this.scale,
-      this.height + 10 * this.scale
-    );
-    ellipse(
-      this.x + 0 * this.scale,
-      this.y + 220 * this.scale,
-      this.width - 50 * this.scale,
-      this.height - 10 * this.scale
-    );
-    ellipse(
-      this.x + 55 * this.scale,
-      this.y + 220 * this.scale,
-      this.width - 50 * this.scale,
-      this.height - 10 * this.scale
-    );
+    ellipse(this.x + 30, this.y + 210, this.width - 50, this.height + 10);
+    ellipse(this.x, this.y + 220, this.width - 50, this.height - 10);
+    ellipse(this.x + 55, this.y + 220, this.width - 50, this.height - 10);
 
     // stripes on blanket
-    ellipse(
-      this.x + 70 * this.scale,
-      this.y + 265 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 75 * this.scale
-    );
-    ellipse(
-      this.x + 60 * this.scale,
-      this.y + 260 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 75 * this.scale
-    );
-    ellipse(
-      this.x + 50 * this.scale,
-      this.y + 265 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 75 * this.scale
-    );
-    ellipse(
-      this.x + 40 * this.scale,
-      this.y + 260 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 75 * this.scale
-    );
-    ellipse(
-      this.x + 30 * this.scale,
-      this.y + 265 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 75 * this.scale
-    );
-    ellipse(
-      this.x + 20 * this.scale,
-      this.y + 260 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 75 * this.scale
-    );
-    ellipse(
-      this.x + 10 * this.scale,
-      this.y + 265 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 75 * this.scale
-    );
-    ellipse(
-      this.x + 0 * this.scale,
-      this.y + 260 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 75 * this.scale
-    );
-    ellipse(
-      this.x - 10 * this.scale,
-      this.y + 265 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 75 * this.scale
-    );
+    ellipse(this.x + 70, this.y + 265, this.width - 96, this.height - 75);
+    ellipse(this.x + 60, this.y + 260, this.width - 96, this.height - 75);
+    ellipse(this.x + 50, this.y + 265, this.width - 96, this.height - 75);
+    ellipse(this.x + 40, this.y + 260, this.width - 96, this.height - 75);
+    ellipse(this.x + 30, this.y + 265, this.width - 96, this.height - 75);
+    ellipse(this.x + 20, this.y + 260, this.width - 96, this.height - 75);
+    ellipse(this.x + 10, this.y + 265, this.width - 96, this.height - 75);
+    ellipse(this.x, this.y + 260, this.width - 96, this.height - 75);
+    ellipse(this.x - 10, this.y + 265, this.width - 96, this.height - 75);
 
     // dots on blanket
     fill(151, 153, 171);
-    ellipse(
-      this.x + 70 * this.scale,
-      this.y + 276 * this.scale,
-      this.width - 93 * this.scale,
-      this.height - 93 * this.scale
-    );
-    ellipse(
-      this.x + 60 * this.scale,
-      this.y + 273 * this.scale,
-      this.width - 93 * this.scale,
-      this.height - 93 * this.scale
-    );
-    ellipse(
-      this.x + 50 * this.scale,
-      this.y + 276 * this.scale,
-      this.width - 93 * this.scale,
-      this.height - 93 * this.scale
-    );
-    ellipse(
-      this.x + 40 * this.scale,
-      this.y + 273 * this.scale,
-      this.width - 93 * this.scale,
-      this.height - 93 * this.scale
-    );
-    ellipse(
-      this.x + 30 * this.scale,
-      this.y + 276 * this.scale,
-      this.width - 93 * this.scale,
-      this.height - 93 * this.scale
-    );
-    ellipse(
-      this.x + 20 * this.scale,
-      this.y + 273 * this.scale,
-      this.width - 93 * this.scale,
-      this.height - 93 * this.scale
-    );
-    ellipse(
-      this.x + 10 * this.scale,
-      this.y + 276 * this.scale,
-      this.width - 93 * this.scale,
-      this.height - 93 * this.scale
-    );
-    ellipse(
-      this.x + 0 * this.scale,
-      this.y + 273 * this.scale,
-      this.width - 93 * this.scale,
-      this.height - 93 * this.scale
-    );
-    ellipse(
-      this.x - 10 * this.scale,
-      this.y + 276 * this.scale,
-      this.width - 93 * this.scale,
-      this.height - 93 * this.scale
-    );
+    ellipse(this.x + 70, this.y + 276, this.width - 93, this.height - 93);
+    ellipse(this.x + 60, this.y + 273, this.width - 93, this.height - 93);
+    ellipse(this.x + 50, this.y + 276, this.width - 93, this.height - 93);
+    ellipse(this.x + 40, this.y + 273, this.width - 93, this.height - 93);
+    ellipse(this.x + 30, this.y + 276, this.width - 93, this.height - 93);
+    ellipse(this.x + 20, this.y + 273, this.width - 93, this.height - 93);
+    ellipse(this.x + 10, this.y + 276, this.width - 93, this.height - 93);
+    ellipse(this.x + 0, this.y + 273, this.width - 93, this.height - 93);
+    ellipse(this.x - 10, this.y + 276, this.width - 93, this.height - 93);
 
     // eyes
     fill(0, 0, 0);
-    ellipse(
-      this.x + 172 * this.scale,
-      this.y + 150 * this.scale,
-      this.width - 20 * this.scale,
-      this.height - 80 * this.scale
-    );
+    ellipse(this.x + 172, this.y + 150, this.width - 80, this.height - 80);
     fill(219, 165, 119);
-    ellipse(
-      this.x + 173 * this.scale,
-      this.y + 153 * this.scale,
-      this.width - 75 * this.scale,
-      this.height - 80 * this.scale
-    );
+    ellipse(this.x + 173, this.y + 153, this.width - 75, this.height - 80);
 
     // nose dot
     fill(0, 0, 0);
-    ellipse(
-      this.x + 196 * this.scale,
-      this.y + 163 * this.scale,
-      this.width - 96 * this.scale,
-      this.height - 92 * this.scale
-    );
+    ellipse(this.x + 196, this.y + 163, this.width - 96, this.height - 92);
   }
 }
 
-let camel = new Camel(100, 200, 50, 100, 0.1);
+let camel = new Camel(100, 200, 100, 100, 0.1);
 
 function happyCamel(camelX, camelY, scale) {
   //camel head
@@ -678,7 +463,7 @@ function draw() {
   dunes(x, y);
   Cactus.draw();
   sun();
-  camel.draw();
+  camel.draw(100, 200, 50, 100, 0.1);
   waterDrop(waterDropX, waterDropY);
 }
 
@@ -800,7 +585,7 @@ function draw() {
   x = x - speed;
   speed = speed;
   if (x < -280) x = 100;
-  camel.draw();
+  camel.draw(100, 200, 50, 100, 0.1);
   sun();
   cactus.draw();
 
@@ -843,3 +628,4 @@ if (gameEnd) {
 
 //Cactus(200, 200, 100, 100);
 // Camel(100, 200, 0.5);
+//let camel = new Camel(100, 200, 50, 100, 0.1);

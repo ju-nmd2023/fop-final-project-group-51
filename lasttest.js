@@ -1,3 +1,5 @@
+/** @format */
+
 let x = 200;
 let y = 200;
 let s = 1.0;
