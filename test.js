@@ -819,14 +819,8 @@ function draw() {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
 
-    hitTest(this.x,this.y){
-      return(this.x > this.c &&
-         this.x < this.c + this.w &&
-          this.y > this.a && 
-          this.y < this.a + this.h);
-    }
-    //if () {
-    //console.log("hit");
+    if () {
+    console.log("hit");
     //gameIsRunning = false;
     //gameEnd = true;
   }
@@ -839,13 +833,13 @@ if (gameEnd) {
     bubble.y += bubble.circle;
   }
 }
-//   this.c = x;
-this.a = y;
-this.w = width;
-this.h = height;
+//this.c = x;
+//this.a = y;
+//this.w = width;
+//this.h = height;
 // ¨¨} else {
 // winScreen();
 //waterTank(waterTankX + 170, waterTankY + 400);
-//}
+}
 
 //let camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
