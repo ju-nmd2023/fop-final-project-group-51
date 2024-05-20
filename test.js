@@ -280,28 +280,58 @@ class Camel {
   draw() {
     // camel head
     fill(219, 165, 119);
-    ellipse(this.x + 150, this.y + 150, this.width - 20, this.height - 20);
+    ellipse(
+      this.x + 150 * this.scale,
+      this.y + 150 * this.scale,
+      this.width - 20 * this.scale,
+      this.height - 20 * this.scale
+    );
 
     // camel nose
     noStroke();
     fill(219, 165, 119);
-    ellipse(this.x + 175, this.y + 162, this.width - 40, this.height - 40);
+    ellipse(
+      this.x + 175 * this.scale,
+      this.y + 162 * this.scale,
+      this.width - 40 * this.scale,
+      this.height - 40 * this.scale
+    );
 
     // camel ears
     push();
     rotate(radians(sin(rotationAngle) * 0.2));
     fill(219, 165, 119);
-    ellipse(this.x + 155, this.y + 110, this.width - 90, this.height - 30);
-    ellipse(this.x + 128, this.y + 120, this.width - 90, this.height - 30);
+    ellipse(
+      this.x + 155 * this.scale,
+      this.y + 110 * this.scale,
+      this.width - 90 * this.scale,
+      this.height - 30 * this.scale
+    );
+    ellipse(
+      this.x + 128 * this.scale,
+      this.y + 120 * this.scale,
+      this.width - 90 * this.scale,
+      this.height - 30 * this.scale
+    );
     pop();
 
     // camel neck
-    ellipse(this.x + 123, this.y + 200, this.width - 60, this.height + 50);
+    ellipse(
+      this.x + 123 * this.scale,
+      this.y + 200 * this.scale,
+      this.width - 60 * this.scale,
+      this.height + 50 * this.scale
+    );
 
     // neck dots
     push();
     fill(223, 204, 183);
-    ellipse(this.x + 120, this.y + 152, this.width - 96, this.height - 92);
+    ellipse(
+      this.x + 120 * this.scale,
+      this.y + 152 * this.scale,
+      this.width - 96 * this.scale,
+      this.height - 92
+    );
     ellipse(this.x + 112, this.y + 162, this.width - 96, this.height - 92);
     ellipse(this.x + 120, this.y + 172, this.width - 96, this.height - 92);
     ellipse(this.x + 112, this.y + 182, this.width - 96, this.height - 92);
