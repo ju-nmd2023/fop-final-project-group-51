@@ -13,13 +13,19 @@ let bubbles = [];
 let waterDrops = [];
 waterDropX = 100;
 waterDropY = 100;
+let gameIsRunning = false;
+let gameEnd = false;
+let velocity = 0.5;
+const acceleration = 0.1;
+let speed = 1.5;
+let xDirection = 0;
+let enterPressed = false;
 
 function setup() {
   createCanvas(600, 750);
   generateWaterDrops();
 }
 
-//check collision between camel and water drop
 function checkCollision(camelX, camelY, camelScale, dropX, dropY) {
   let camelWidth = 200 * camelScale;
   let camelHeight = 100 * camelScale;
@@ -37,28 +43,24 @@ function checkCollision(camelX, camelY, camelScale, dropX, dropY) {
 
 function generateWaterDrops() {
   for (let i = 0; i < 10; i++) {
-    // Generate 10 water drops
     waterDrops.push({
       x: random(10, width - 100),
-      y: random(10, height - 100),
+      y: random(-100, -10),
       s: random(0.5, 1.5),
     });
   }
 }
 
-function drops() {
-  for (let i = 0; i < waterDrops.length; i++) {
-    let drop = waterDrops[i];
-    push();
-    noStroke();
-    fill(121, 205, 244);
-    ellipse(drop.x + 250, drop.y + 55, 2, 40);
-    fill(255, 255, 255);
-    ellipse(drop.x + 248, drop.y + 55, 10, 30);
-    fill(121, 205, 244);
-    ellipse(drop.x + 250, drop.y + 55, 10, 30);
-    pop();
-  }
+function drops(x, y) {
+  push();
+  noStroke();
+  fill(121, 205, 244);
+  ellipse(x + 250, y + 55, 2, 40);
+  fill(255, 255, 255);
+  ellipse(x + 248, y + 55, 10, 30);
+  fill(121, 205, 244);
+  ellipse(x + 250, y + 55, 10, 30);
+  pop();
 }
 
 function dunes(x, y) {
@@ -664,14 +666,6 @@ function loseScreen() {
   }
 }
 
-let gameIsRunning = false;
-let gameEnd = false;
-let velocity = 0.5;
-const acceleration = 0.1;
-let speed = 1.5;
-let xDirection = 0;
-let enterPressed = false;
-
 //function for press ENTER
 function keyPressed() {
   if (keyCode === ENTER) {
@@ -694,16 +688,22 @@ function draw() {
   cactus.x -= speed;
   if (cactus.x < -280) cactus.x = 100;
 
-  // Draw and move water drops
   for (let i = waterDrops.length - 1; i >= 0; i--) {
     let drop = waterDrops[i];
     drops(drop.x, drop.y);
-    drop.y += speed;
+    drop.y += 1;
 
     // Check collision with camel
-    if (checkCollision(camel.x, camelY, camel.scale, drop.x, drop.y)) {
-      waterCollected++;
+    if (
+      gameIsRunning &&
+      checkCollision(camel.x, camelY, 0.5, drop.x + 250, drop.y + 55)
+    ) {
       waterDrops.splice(i, 1);
+    }
+
+    // Reset drops when they reach the bottom
+    if (drop.y > height) {
+      drop.y = random(-500, -10);
     }
   }
 
@@ -711,10 +711,10 @@ function draw() {
     startScreen();
   } else if (gameIsRunning && enterPressed) {
     // Check if Enter-key is pressed
-    camel.x += 0.1;
+    camel.x += 1;
     camel.y += velocity;
     velocity += acceleration;
-    camelY += velocity * 2; // make the camel fall down
+    camelY += velocity * 2;
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
