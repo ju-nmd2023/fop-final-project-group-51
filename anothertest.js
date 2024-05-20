@@ -126,16 +126,7 @@ class Cactus {
     rect(this.c + 170, this.a + 290, this.w - 80, this.h - 40, 100);
     rect(this.c + 170, this.a + 330, this.w - 50, this.h - 80, 100);
   }
-  getBoundingBox() {
-    return {
-      x: this.x + 196,
-      y: this.y + 260,
-      width: this.width - 70,
-      height: this.height + 50,
-    };
-  }
 }
-let cactus = new Cactus(200, 200, 100, 100);
 
 function sun() {
   //cloud
@@ -594,16 +585,18 @@ class Camel {
       (this.height - 92) * scale
     );
   }
-  getBoundingBox() {
-    return {
-      x: this.x,
-      y: this.y,
-      width: this.width * this.scale,
-      height: this.height * this.scale,
-    };
+
+  hitTest() {
+    return (
+      this.x === this.c &&
+      this.x === this.c + this.w &&
+      this.y === this.a &&
+      this.y === this.a + this.h
+    );
   }
 }
 
+let cactus = new Cactus(200, 200, 100, 100);
 let camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
 
 function happyCamel(camelX, camelY, scale) {
@@ -809,6 +802,12 @@ function keyPressed() {
   }
 }
 
+{
+  console.log("hit");
+  //gameIsRunning = false;
+  //gameEnd = true;
+}
+
 //Draw screen
 function draw() {
   //Make the background move
@@ -834,22 +833,21 @@ function draw() {
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
-  }
 
-  if (camel.x + camel.width) {
-    console.log("p");
-  }
+    if (camel.hitTest) {
+      console.log("hit");
+    }
 
-  if (gameEnd) {
-    loseScreen();
-    for (let bubble of bubbles) {
-      fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
-      ellipse(bubble.x, bubble.y, 20);
-      bubble.y += bubble.circle;
+    if (gameEnd) {
+      loseScreen();
+      for (let bubble of bubbles) {
+        fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
+        ellipse(bubble.x, bubble.y, 20);
+        bubble.y += bubble.circle;
+      }
     }
   }
 }
-
 //class Cactus {
 // constructor(x, y, width, height) {
 // this.c = x;
