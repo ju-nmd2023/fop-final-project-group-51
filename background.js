@@ -228,14 +228,15 @@ class Camel {
   }
 
   draw() {
-    ellipse(this.x + 20, this.y + 120, 90, 130);
-    // camel head
+    ellipse(this.x + 20, this.y + 120, 90, 130); 
+    // camel head 
+
     fill(219, 165, 119);
     ellipse(
       this.x + 150 * this.scale,
       this.y + 150 * this.scale,
       80 * this.scale,
-      80 * this.scale
+      80 * this.scale 
     );
 
     // camel nose

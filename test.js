@@ -113,18 +113,18 @@ function dunes(x, y) {
 
 class Cactus {
   constructor(x, y, width, height) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
+    this.c = x;
+    this.a = y;
+    this.w = width;
+    this.h = height;
   }
   draw() {
     fill(102, 124, 40);
-    rect(this.x + 196, this.y + 260, this.width - 70, this.height + 50, 100);
-    rect(this.x + 196, this.y + 340, this.width - 40, this.height - 80, 100);
-    rect(this.x + 240, this.y + 320, this.width - 80, this.height - 60, 100);
-    rect(this.x + 170, this.y + 290, this.width - 80, this.height - 40, 100);
-    rect(this.x + 170, this.y + 330, this.width - 50, this.height - 80, 100);
+    rect(this.c + 196, this.a + 260, this.w - 70, this.h + 50, 100);
+    rect(this.c + 196, this.a + 340, this.w - 40, this.h - 80, 100);
+    rect(this.c + 240, this.a + 320, this.w - 80, this.h - 60, 100);
+    rect(this.c + 170, this.a + 290, this.w - 80, this.h - 40, 100);
+    rect(this.c + 170, this.a + 330, this.w - 50, this.h - 80, 100);
   }
 }
 let cactus = new Cactus(200, 200, 100, 100);
@@ -819,9 +819,14 @@ function draw() {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
 
-    // Check if the rectangles overlap
+    hitTest(this.x,this.y){
+      return(this.x > this.c &&
+         this.x < this.c + this.w &&
+          this.y > this.a && 
+          this.y < this.a + this.h);
+    }
     //if () {
-    //  console.log("hit");
+    //console.log("hit");
     //gameIsRunning = false;
     //gameEnd = true;
   }
@@ -833,15 +838,14 @@ if (gameEnd) {
     ellipse(bubble.x, bubble.y, 20);
     bubble.y += bubble.circle;
   }
-
-  // } else {
-  // winScreen();
-  //waterTank(waterTankX + 170, waterTankY + 400);
-  //}
-  // rect(camel.x - 30, camel.x + 180, camel.y - 100, camel.y - 100);
-  //rect(cactus.x + 180, cactus.x + 250, cactus.y - 130, cactus.y - 50);
 }
+//   this.c = x;
+this.a = y;
+this.w = width;
+this.h = height;
+// ¨¨} else {
+// winScreen();
+//waterTank(waterTankX + 170, waterTankY + 400);
+//}
 
-//Cactus(200, 200, 100, 100);
-// Camel(100, 200, 0.5);
-//let camel = new Camel(100, 200, 50, 100, 0.1);
+//let camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
