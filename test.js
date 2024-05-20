@@ -821,7 +821,7 @@ function draw() {
 
     if () {
     console.log("hit");
-    //gameIsRunning = false;
+    //gameIsRunning = false; 
     //gameEnd = true;
   }
 }
