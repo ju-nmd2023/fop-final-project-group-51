@@ -17,10 +17,10 @@ function setup() {
   generateWaterDrops();
 }
 
-// Function to check collision between camel and water drop
+//check collision between camel and water drop
 function checkCollision(camelX, camelY, camelScale, dropX, dropY) {
-  let camelWidth = 200 * camelScale; // Adjusted width based on camel scale
-  let camelHeight = 100 * camelScale; // Adjusted height based on camel scale
+  let camelWidth = 200 * camelScale;
+  let camelHeight = 100 * camelScale;
 
   if (
     dropX >= camelX &&
@@ -28,18 +28,18 @@ function checkCollision(camelX, camelY, camelScale, dropX, dropY) {
     dropY >= camelY &&
     dropY <= camelY + camelHeight
   ) {
-    return true; // Collision detected
+    return true;
   }
-  return false; // No collision
+  return false;
 }
 
 function generateWaterDrops() {
   for (let i = 0; i < 10; i++) {
     // Generate 10 water drops
     waterDrops.push({
-      x: random(10, width - 100), // Random x position within canvas
-      y: random(10, height - 100), // Random y position within canvas
-      s: random(0.5, 1.5), // Random scale for drop size
+      x: random(10, width - 100),
+      y: random(10, height - 100),
+      s: random(0.5, 1.5),
     });
   }
 }
@@ -682,7 +682,7 @@ function draw() {
   // Move the background
   x -= speed;
   if (x < -280) x = 100;
-  camel.x += 0.5; // Adjust the value for the desired speed
+  camel.x += 0.5;
   dunes(x + 30, y);
   camel.draw();
   sun();
@@ -693,15 +693,15 @@ function draw() {
   if (cactus.x < -280) cactus.x = 100;
 
   // Draw and move water drops
-  for (let i = 0; i < 10; i++) {
+  for (let i = waterDrops.length - 1; i >= 0; i--) {
     let drop = waterDrops[i];
     drops(drop.x, drop.y);
-    drop.y += speed; // Move the drop downwards
+    drop.y += speed;
 
     // Check collision with camel
     if (checkCollision(camel.x, camelY, camel.scale, drop.x, drop.y)) {
-      waterCollected++; // Increase water collected count
-      waterDrops.splice(i, 1); // Remove the collected drop from array
+      waterCollected++;
+      waterDrops.splice(i, 1);
     }
   }
 
