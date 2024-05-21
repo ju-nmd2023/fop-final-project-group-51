@@ -15,6 +15,39 @@ let waterDropX = 100;
 let waterDropY = 100;
 let cactuses = [];
 
+function setup() {
+  createCanvas(600, 750);
+  generateWaterDrops();
+}
+
+class WaterDrop {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.isVisible = true;
+  }
+}
+
+function generateWaterDrops() {
+  for (let i = 0; i < 10; i++) {
+    let waterDropX = random(50, width - 50); // Random x position within canvas width
+    let waterDropY = random(50, height - 50); // Random y position within canvas height
+    waterDrops.push(new WaterDrop(waterDropX, waterDropY));
+  }
+}
+
+function drawWaterDrops() {
+  waterDrops.forEach((drop) => {
+    drop.draw();
+    drop.y += 1; // Move the water drops downwards
+  });
+}
+
+function checkWaterDropCollision(camelX, camelY) {
+  waterDrops.forEach((drop) => {
+    drop.checkCollision(camelX, camelY);
+  });
+}
 //watertank
 function waterTank(waterTankX, waterTankY) {
   noStroke();
@@ -159,6 +192,10 @@ class Cactus {
 }
 
 let cactus = new Cactus(200, 500, 100, 100);
+let anotherCactus = new Cactus(600, 500, 100, 100);
+let anotherCactus1 = new Cactus(700, 500, 100, 100);
+let anotherCactus2 = new Cactus(900, 500, 100, 100);
+let anotherCactus3 = new Cactus(1200, 500, 100, 100);
 
 function sun() {
   //cloud
@@ -811,29 +848,6 @@ function happyCamel(camelX, camelY, scale) {
   ellipse(camelX - 10 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
   ellipse(camelX - 30 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
 }
-function setup() {
-  createCanvas(800, 700); // Adjust canvas size as needed
-}
-function draw() {
-  background(239, 227, 210); // Example background
-  drawCactuses();
-  dunes(x, y);
-  Cactus.draw();
-
-  sun();
-  camel.draw(100, 200, 50, 100, 0.1);
-  waterDrop(waterDropX, waterDropY);
-  //Generate Bubbles
-  for (let i = 0; i < 0.5; i++) {
-    const bubble = {
-      x: Math.floor(Math.random() * 700),
-      y: Math.floor(Math.random() * 900),
-      circle: Math.random() * 10,
-      alpha: Math.random(),
-    };
-    bubbles.push(bubble);
-  }
-}
 
 function resetGame() {
   camel.draw();
@@ -900,7 +914,6 @@ function winScreen() {
   dunes(camelX, y);
   sun();
   happyCamel(camelX, camelY, scale);
-
   textSize(50);
   fill(53, 180, 40);
   text("YOU WON", 150, 300);
@@ -945,6 +958,9 @@ function keyPressed() {
 }
 
 //Draw screen
+function setup() {
+  createCanvas(800, 700); // Adjust canvas size as needed
+}
 function draw() {
   //Make the background move
 
@@ -955,7 +971,33 @@ function draw() {
   camel.draw(100, 200, 50, 100, 0.1);
   sun();
   cactus.draw();
-  cactus.x = Math.random() * width; //Add startscreen before starting game
+  cactus.x -= 1;
+  anotherCactus.draw();
+  anotherCactus.x -= 1;
+  anotherCactus1.draw();
+  anotherCactus1.x -= 1;
+  anotherCactus2.draw();
+  anotherCactus2.x -= 1;
+  anotherCactus3.draw();
+  anotherCactus3.x -= 1;
+  if (cactus.x < 0) {
+    cactus.x = 250;
+  }
+  if (anotherCactus.x < 0) {
+    anotherCactus.x = 250;
+  }
+  if (anotherCactus.x < -100) {
+    anotherCactus.x = 300;
+  }
+  if (anotherCactus1.x < 0) {
+    anotherCactus1.x = 700;
+  }
+  if (anotherCactus2.x < 0) {
+    anotherCactus2.x = 400;
+  }
+  if (anotherCactus3.x < -200) {
+    anotherCactus3.x = 800;
+  }
 
   if (!gameIsRunning && !gameEnd) {
     startScreen();
