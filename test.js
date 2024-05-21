@@ -186,7 +186,7 @@ class Cactus {
       x < this.x + this.width &&
       x + width > this.x &&
       y < this.y + this.height &&
-      y + height > this.y
+      y + height > this.y - this.height
     );
   }
 }
