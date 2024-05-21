@@ -121,7 +121,7 @@ class Cactus {
 
   draw() {
     fill(102, 124, 40);
-    rect(this.x, this.y, this.width, this.height, 10);
+    rect(this.x + 25, this.y, this.width / 2, this.height, 10);
     rect(
       this.x + this.width * 0.2,
       this.y - this.height * 0.4,
@@ -137,13 +137,15 @@ class Cactus {
       100
     );
     rect(
-      this.x - this.width * 0.2,
-      this.y - this.height * 0.2,
-      this.width * 0.2,
+      this.x - this.width / 25,
+      this.y + 20 - this.height * 0.2,
+      this.width * 0.3,
       this.height * 0.4,
-      50
+      5
     );
   }
+
+  //
 
   hitTest(x, y, width, height) {
     return (
@@ -154,7 +156,7 @@ class Cactus {
     );
   }
 }
-let cactus = new Cactus(200, 200, 100, 100);
+let cactus = new Cactus(200, 500, 100, 100);
 
 function sun() {
   //cloud
@@ -848,7 +850,7 @@ function draw() {
   }
 
   if (cactus.hitTest(camel.x, camel.y, camel.width, camel.height)) {
-    background(255, 0, 0);
+    gameEnd = true;
   }
 
   if (gameEnd) {
