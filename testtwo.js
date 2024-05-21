@@ -56,7 +56,7 @@ function generateWaterDrops() {
 function drawWaterDrops() {
   waterDrops.forEach((drop) => {
     drop.draw();
-    drop.y += 1; // Move the water drops downwards
+    drop.y += 0.3; // Move the water drops downwards
   });
 }
 
@@ -711,13 +711,6 @@ function draw() {
     camelY += velocity * 2; // make the camel fall down
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
-    }
-
-    // Collision detection
-    if (camel.x + 135 > cactus.x + 211 && camelY > cactus.y) {
-      console.log("hit");
-      gameIsRunning = false;
-      gameEnd = true;
     }
   }
 
