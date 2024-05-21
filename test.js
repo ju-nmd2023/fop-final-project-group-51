@@ -65,7 +65,7 @@ function generateWaterDrops() {
 function drawWaterDrops() {
   waterDrops.forEach((drop) => {
     drop.draw();
-    drop.y += 0.2; // Move the water drops downwards
+    drop.y += 0.3; // Move the water drops downwards
   });
 }
 
