@@ -13,6 +13,13 @@ let bubbles = [];
 let waterDrops = [];
 waterDropX = 100;
 waterDropY = 100;
+let gameIsRunning = false;
+let gameEnd = false;
+let velocity = 0.5;
+const acceleration = 0.1;
+let speed = 1.5;
+let xDirection = 0;
+let enterPressed = false;
 
 function setup() {
   createCanvas(600, 750);
@@ -21,7 +28,7 @@ function setup() {
 
 //check collision between camel and water drop
 function checkCollision(camelX, camelY, camelScale, dropX, dropY) {
-  let camelWidth = 200 * camelScale; 
+  let camelWidth = 200 * camelScale;
   let camelHeight = 100 * camelScale;
 
   if (
@@ -663,14 +670,6 @@ function loseScreen() {
     bubbles.push(bubble);
   }
 }
-
-let gameIsRunning = false;
-let gameEnd = false;
-let velocity = 0.5;
-const acceleration = 0.1;
-let speed = 1.5;
-let xDirection = 0;
-let enterPressed = false;
 
 //function for press ENTER
 function keyPressed() {
