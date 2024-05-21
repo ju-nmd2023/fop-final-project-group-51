@@ -193,6 +193,9 @@ function sun() {
 let camelX = 100;
 let camelY = 100;
 
+let camelA = 100;
+let camelB = 100;
+
 //position camel
 function sadCamel(camelX, camelY) {
   //camel head
@@ -619,6 +622,108 @@ class Camel {
 
 let camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
 
+function sadCamel(camelA, camelB) {
+  //camel head
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(219, 165, 119);
+  ellipse(camelA + 125, camelB + 130, 80, 80);
+
+  //camel nose
+  noStroke();
+  fill(219, 165, 119);
+  ellipse(camelA + 125, camelB + 162, 60, 60);
+
+  //camel ears
+  fill(219, 165, 119);
+  ellipse(camelA + 140, camelB + 100, 10, 70);
+
+  ellipse(camelA + 108, camelB + 100, 10, 70);
+
+  //camel neck
+  ellipse(camelA + 123, camelB + 200, 40, 150);
+  pop();
+
+  //camel body
+  fill(219, 165, 119);
+  ellipse(camelA + 35, camelB + 255, 200, 100);
+
+  //camel legs
+  ellipse(camelA + 100, camelB + 320, 10, 100);
+  ellipse(camelA + 80, camelB + 320, 10, 100);
+
+  ellipse(camelA - 10, camelB + 320, 10, 100);
+  ellipse(camelA - 30, camelB + 320, 10, 100);
+
+  //camel tail
+  ellipse(camelA - 65, camelB + 255, 50, 10);
+
+  //camel blanket
+  fill(211, 117, 100);
+  ellipse(camelA + 30, camelB + 210, 50, 110);
+
+  ellipse(camelA + 0, camelB + 220, 50, 90);
+  ellipse(camelA + 55, camelB + 220, 50, 90);
+
+  //blanket accessories stripes
+  ellipse(camelA + 70, camelB + 265, 4, 25);
+  ellipse(camelA + 60, camelB + 260, 4, 25);
+  ellipse(camelA + 50, camelB + 265, 4, 25);
+  ellipse(camelA + 40, camelB + 260, 4, 25);
+  ellipse(camelA + 30, camelB + 265, 4, 25);
+  ellipse(camelA + 20, camelB + 260, 4, 25);
+  ellipse(camelA + 10, camelB + 265, 4, 25);
+  ellipse(camelA + 0, camelB + 260, 4, 25);
+  ellipse(camelA - 10, camelB + 265, 4, 25);
+
+  //blanket accessories dots
+  fill(151, 153, 171);
+  ellipse(camelA + 70, camelB + 276, 7, 7);
+  ellipse(camelA + 60, camelB + 273, 7, 7);
+  ellipse(camelA + 50, camelB + 276, 7, 7);
+  ellipse(camelA + 40, camelB + 273, 7, 7);
+  ellipse(camelA + 30, camelB + 276, 7, 7);
+  ellipse(camelA + 20, camelB + 273, 7, 7);
+  ellipse(camelA + 10, camelB + 276, 7, 7);
+  ellipse(camelA + 0, camelB + 273, 7, 7);
+  ellipse(camelA - 10, camelB + 276, 7, 7);
+
+  //dead eyes
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(0, 0, 0);
+  stroke(0);
+  strokeWeight(3);
+  //left eye
+  line(camelA + 125 - 15, camelB + 130 + 5, camelA + 125 - 5, camelB + 130 + 5);
+
+  //right eye
+  line(
+    camelA + 125 + 10,
+    camelB + 130 + 5,
+    camelA + 125 + 20,
+    camelB + 130 + 5
+  );
+
+  pop();
+
+  //nose dot
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(0, 0, 0);
+  ellipse(camelA + 116, camelB + 163, 4, 8);
+  fill(0, 0, 0);
+  ellipse(camelA + 134, camelB + 163, 4, 8);
+  pop();
+  //feets
+  fill(129, 88, 67);
+  ellipse(camelA + 100, camelB + 360, 8, 20);
+  ellipse(camelA + 80, camelB + 360, 8, 20);
+
+  ellipse(camelA - 10, camelB + 360, 8, 20);
+  ellipse(camelA - 30, camelB + 360, 8, 20);
+}
+
 function happyCamel(camelX, camelY, scale) {
   //camel head
   fill(219, 165, 119);
@@ -710,6 +815,16 @@ function draw() {
   sun();
   camel.draw(100, 200, 50, 100, 0.1);
   waterDrop(waterDropX, waterDropY);
+  //Generate Bubbles
+  for (let i = 0; i < 0.5; i++) {
+    const bubble = {
+      x: Math.floor(Math.random() * 700),
+      y: Math.floor(Math.random() * 900),
+      circle: Math.random() * 10,
+      alpha: Math.random(),
+    };
+    bubbles.push(bubble);
+  }
 }
 
 function resetGame() {
@@ -754,7 +869,6 @@ function startScreen() {
 
 function loseScreen() {
   dunes(camelX, y);
-  sadCamel(camelX + 110, camelY + 30, scale);
   sun();
   textSize(50);
   fill(231, 56, 56);
@@ -855,6 +969,7 @@ function draw() {
 
   if (gameEnd) {
     loseScreen();
+    sadCamel(camelA + 100, camelB + 200);
     for (let bubble of bubbles) {
       fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
       ellipse(bubble.x, bubble.y, 20);
