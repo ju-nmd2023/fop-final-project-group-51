@@ -10,6 +10,13 @@ let cactusX = 200;
 let cactusY = 200;
 let bubbles = [];
 let waterDrops = [];
+let gameIsRunning = false;
+let gameEnd = false;
+let velocity = 0.5;
+const acceleration = 0.1;
+let speed = 1.5;
+let xDirection = 0;
+let enterPressed = false;
 
 function setup() {
   createCanvas(600, 750);
@@ -41,14 +48,15 @@ class WaterDrop {
   checkCollision(camelX, camelY) {
     if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
       this.isVisible = false;
+      camel.scale += 0.1; //the camel gets bigger while catching drops
     }
   }
 }
 
 function generateWaterDrops() {
   for (let i = 0; i < 12; i++) {
-    let waterDropX = random(50, width - 50);
-    let waterDropY = random(50, height - 50);
+    let waterDropX = random(100, width - 50);
+    let waterDropY = random(100, height - 50);
     waterDrops.push(new WaterDrop(waterDropX, waterDropY));
   }
 }
@@ -56,7 +64,7 @@ function generateWaterDrops() {
 function drawWaterDrops() {
   waterDrops.forEach((drop) => {
     drop.draw();
-    drop.y += 0.3; // Move the water drops downwards
+    drop.y += 0.2; // Move the water drops downwards
   });
 }
 
@@ -669,14 +677,6 @@ function loseScreen() {
     bubbles.push(bubble);
   }
 }
-
-let gameIsRunning = false;
-let gameEnd = false;
-let velocity = 0.5;
-const acceleration = 0.1;
-let speed = 1.5;
-let xDirection = 0;
-let enterPressed = false;
 
 //function for press ENTER
 function keyPressed() {
