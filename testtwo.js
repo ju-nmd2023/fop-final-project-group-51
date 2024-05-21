@@ -46,7 +46,7 @@ class WaterDrop {
 }
 
 function generateWaterDrops() {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 12; i++) {
     let waterDropX = random(50, width - 50); // Random x position within canvas width
     let waterDropY = random(50, height - 50); // Random y position within canvas height
     waterDrops.push(new WaterDrop(waterDropX, waterDropY));
