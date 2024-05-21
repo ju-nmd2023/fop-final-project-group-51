@@ -14,11 +14,11 @@ let waterTankY = 100;
 let waterDropX = 100;
 let waterDropY = 100;
 let cactuses = [];
-
-function setup() {
-  createCanvas(600, 750);
-  generateWaterDrops();
-}
+let rotationAngle = 0;
+let camelX = 100;
+let camelY = 100;
+let camelA = 100;
+let camelB = 100;
 
 class WaterDrop {
   constructor(x, y) {
@@ -52,33 +52,32 @@ function checkWaterDropCollision(camelX, camelY) {
 function waterTank(waterTankX, waterTankY) {
   noStroke();
   fill(121, 205, 244);
-  ellipse(waterTankX + 100, waterTankY + 55, 70, 80);
+  ellipse(waterTankX + 50, waterTankY + 27.5, 35, 40);
+  ellipse(waterTankX + 50, waterTankY + 40, 35, 10);
+  ellipse(waterTankX + 50, waterTankY + 45, 35, 10);
+  ellipse(waterTankX + 50, waterTankY + 50, 35, 10);
+  ellipse(waterTankX + 50, waterTankY + 55, 35, 10);
+  ellipse(waterTankX + 50, waterTankY + 60, 35, 10);
+  ellipse(waterTankX + 50, waterTankY + 65, 35, 10);
+  ellipse(waterTankX + 50, waterTankY + 70, 35, 10);
+  rect(waterTankX + 32.5, waterTankY + 71, 35, 10, 10);
 
-  ellipse(waterTankX + 100, waterTankY + 80, 70, 20);
-  ellipse(waterTankX + 100, waterTankY + 90, 70, 20);
-  ellipse(waterTankX + 100, waterTankY + 100, 70, 20);
-  ellipse(waterTankX + 100, waterTankY + 110, 70, 20);
-  ellipse(waterTankX + 100, waterTankY + 120, 70, 20);
-  ellipse(waterTankX + 100, waterTankY + 130, 70, 20);
-  ellipse(waterTankX + 100, waterTankY + 140, 70, 20);
-  rect(waterTankX + 65, waterTankY + 142, 70, 20, 20);
-
-  //lid
+  // Lid
   fill(187, 189, 191);
-  rect(waterTankX + 85, waterTankY, 30, 20);
+  rect(waterTankX + 42.5, waterTankY, 15, 10);
 
-  //lid stripes
+  // Lid stripes
   fill(0, 0, 0);
-  rect(waterTankX + 88, waterTankY, 1, 20);
-  rect(waterTankX + 91, waterTankY, 1, 20);
-  rect(waterTankX + 94, waterTankY, 1, 20);
-  rect(waterTankX + 97, waterTankY, 1, 20);
+  rect(waterTankX + 44, waterTankY, 0.5, 10);
+  rect(waterTankX + 45.5, waterTankY, 0.5, 10);
+  rect(waterTankX + 47, waterTankY, 0.5, 10);
+  rect(waterTankX + 48.5, waterTankY, 0.5, 10);
 
-  //white reflection
+  // White reflection
   fill(255, 255, 255);
-  ellipse(waterTankX + 95, waterTankY + 55, 50, 60);
+  ellipse(waterTankX + 47.5, waterTankY + 27.5, 25, 30);
   fill(121, 205, 244);
-  ellipse(waterTankX + 98, waterTankY + 55, 50, 70);
+  ellipse(waterTankX + 49, waterTankY + 27.5, 25, 35);
 }
 
 function waterDrop(waterDropX, waterDropY) {
@@ -194,8 +193,6 @@ class Cactus {
 let cactus = new Cactus(200, 500, 100, 100);
 let anotherCactus = new Cactus(600, 500, 100, 100);
 let anotherCactus1 = new Cactus(700, 500, 100, 100);
-let anotherCactus2 = new Cactus(900, 500, 100, 100);
-let anotherCactus3 = new Cactus(1200, 500, 100, 100);
 
 function sun() {
   //cloud
@@ -229,115 +226,6 @@ function sun() {
   ellipse(sunX - 90, sunY - 50, 100);
   pop();
 }
-let camelX = 100;
-let camelY = 100;
-
-let camelA = 100;
-let camelB = 100;
-
-//position camel
-function sadCamel(camelX, camelY) {
-  //camel head
-  push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
-  fill(219, 165, 119);
-  ellipse(camelX + 125, camelY + 130, 80, 80);
-
-  //camel nose
-  noStroke();
-  fill(219, 165, 119);
-  ellipse(camelX + 125, camelY + 162, 60, 60);
-
-  //camel ears
-  fill(219, 165, 119);
-  ellipse(camelX + 140, camelY + 100, 10, 70);
-
-  ellipse(camelX + 108, camelY + 100, 10, 70);
-
-  //camel neck
-  ellipse(camelX + 123, camelY + 200, 40, 150);
-  pop();
-
-  //camel body
-  fill(219, 165, 119);
-  ellipse(camelX + 35, camelY + 255, 200, 100);
-
-  //camel legs
-  ellipse(camelX + 100, camelY + 320, 10, 100);
-  ellipse(camelX + 80, camelY + 320, 10, 100);
-
-  ellipse(camelX - 10, camelY + 320, 10, 100);
-  ellipse(camelX - 30, camelY + 320, 10, 100);
-
-  //camel tail
-  ellipse(camelX - 65, camelY + 255, 50, 10);
-
-  //camel blanket
-  fill(211, 117, 100);
-  ellipse(camelX + 30, camelY + 210, 50, 110);
-
-  ellipse(camelX + 0, camelY + 220, 50, 90);
-  ellipse(camelX + 55, camelY + 220, 50, 90);
-
-  //blanket accessories stripes
-  ellipse(camelX + 70, camelY + 265, 4, 25);
-  ellipse(camelX + 60, camelY + 260, 4, 25);
-  ellipse(camelX + 50, camelY + 265, 4, 25);
-  ellipse(camelX + 40, camelY + 260, 4, 25);
-  ellipse(camelX + 30, camelY + 265, 4, 25);
-  ellipse(camelX + 20, camelY + 260, 4, 25);
-  ellipse(camelX + 10, camelY + 265, 4, 25);
-  ellipse(camelX + 0, camelY + 260, 4, 25);
-  ellipse(camelX - 10, camelY + 265, 4, 25);
-
-  //blanket accessories dots
-  fill(151, 153, 171);
-  ellipse(camelX + 70, camelY + 276, 7, 7);
-  ellipse(camelX + 60, camelY + 273, 7, 7);
-  ellipse(camelX + 50, camelY + 276, 7, 7);
-  ellipse(camelX + 40, camelY + 273, 7, 7);
-  ellipse(camelX + 30, camelY + 276, 7, 7);
-  ellipse(camelX + 20, camelY + 273, 7, 7);
-  ellipse(camelX + 10, camelY + 276, 7, 7);
-  ellipse(camelX + 0, camelY + 273, 7, 7);
-  ellipse(camelX - 10, camelY + 276, 7, 7);
-
-  //dead eyes
-  push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
-  fill(0, 0, 0);
-  stroke(0);
-  strokeWeight(3);
-  //left eye
-  line(camelX + 125 - 15, camelY + 130 + 5, camelX + 125 - 5, camelY + 130 + 5);
-
-  //right eye
-  line(
-    camelX + 125 + 10,
-    camelY + 130 + 5,
-    camelX + 125 + 20,
-    camelY + 130 + 5
-  );
-
-  pop();
-
-  //nose dot
-  push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
-  fill(0, 0, 0);
-  ellipse(camelX + 116, camelY + 163, 4, 8);
-  fill(0, 0, 0);
-  ellipse(camelX + 134, camelY + 163, 4, 8);
-  pop();
-  //feets
-  fill(129, 88, 67);
-  ellipse(camelX + 100, camelY + 360, 8, 20);
-  ellipse(camelX + 80, camelY + 360, 8, 20);
-
-  ellipse(camelX - 10, camelY + 360, 8, 20);
-  ellipse(camelX - 30, camelY + 360, 8, 20);
-}
-let rotationAngle = 0;
 
 class Camel {
   constructor(x, y, width, height, scale) {
@@ -970,33 +858,24 @@ function draw() {
   if (x < -280) x = 100;
   camel.draw(100, 200, 50, 100, 0.1);
   sun();
+  waterTank(waterTankX + 350, waterTankY + 420);
+
   cactus.draw();
   cactus.x -= 1;
   anotherCactus.draw();
   anotherCactus.x -= 1;
   anotherCactus1.draw();
   anotherCactus1.x -= 1;
-  anotherCactus2.draw();
-  anotherCactus2.x -= 1;
-  anotherCactus3.draw();
-  anotherCactus3.x -= 1;
+
   if (cactus.x < 0) {
-    cactus.x = 250;
+    cactus.x = 500;
   }
   if (anotherCactus.x < 0) {
     anotherCactus.x = 250;
   }
-  if (anotherCactus.x < -100) {
-    anotherCactus.x = 300;
-  }
+
   if (anotherCactus1.x < 0) {
-    anotherCactus1.x = 700;
-  }
-  if (anotherCactus2.x < 0) {
-    anotherCactus2.x = 400;
-  }
-  if (anotherCactus3.x < -200) {
-    anotherCactus3.x = 800;
+    anotherCactus1.x = 100;
   }
 
   if (!gameIsRunning && !gameEnd) {
