@@ -14,7 +14,7 @@ let gameIsRunning = false;
 let gameEnd = false;
 let velocity = 0.5;
 const acceleration = 0.1;
-let speed = 1.5;
+let speed = 1;
 let xDirection = 0;
 let enterPressed = false;
 
