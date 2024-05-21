@@ -114,7 +114,6 @@ function dunes(x, y) {
   //sky
 
   background(239, 227, 210);
-  drawWaterDrops();
 
   //dunes
   fill(192, 120, 50);
@@ -1009,6 +1008,7 @@ function draw() {
     startScreen();
   } else if (gameIsRunning && enterPressed) {
     // Check if Enter-key is pressed
+    drawWaterDrops();
     camel.x += 0.5;
     camel.y += velocity;
     velocity += acceleration;
