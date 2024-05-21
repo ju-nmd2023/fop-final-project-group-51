@@ -13,6 +13,7 @@ let waterTankX = 100;
 let waterTankY = 100;
 let waterDropX = 100;
 let waterDropY = 100;
+let cactuses = [];
 
 //watertank
 function waterTank(waterTankX, waterTankY) {
@@ -156,6 +157,7 @@ class Cactus {
     );
   }
 }
+
 let cactus = new Cactus(200, 500, 100, 100);
 
 function sun() {
@@ -809,9 +811,15 @@ function happyCamel(camelX, camelY, scale) {
   ellipse(camelX - 10 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
   ellipse(camelX - 30 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
 }
+function setup() {
+  createCanvas(800, 700); // Adjust canvas size as needed
+}
 function draw() {
+  background(239, 227, 210); // Example background
+  drawCactuses();
   dunes(x, y);
   Cactus.draw();
+
   sun();
   camel.draw(100, 200, 50, 100, 0.1);
   waterDrop(waterDropX, waterDropY);
@@ -947,8 +955,7 @@ function draw() {
   camel.draw(100, 200, 50, 100, 0.1);
   sun();
   cactus.draw();
-
-  //Add startscreen before starting game
+  cactus.x = Math.random() * width; //Add startscreen before starting game
 
   if (!gameIsRunning && !gameEnd) {
     startScreen();
