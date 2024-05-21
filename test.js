@@ -113,26 +113,45 @@ function dunes(x, y) {
 
 class Cactus {
   constructor(x, y, width, height) {
-    this.c = x;
-    this.a = y;
-    this.w = width;
-    this.h = height;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
   }
+
   draw() {
     fill(102, 124, 40);
-    rect(this.c + 196, this.a + 260, this.w - 70, this.h + 50, 100);
-    rect(this.c + 196, this.a + 340, this.w - 40, this.h - 80, 100);
-    rect(this.c + 240, this.a + 320, this.w - 80, this.h - 60, 100);
-    rect(this.c + 170, this.a + 290, this.w - 80, this.h - 40, 100);
-    rect(this.c + 170, this.a + 330, this.w - 50, this.h - 80, 100);
+    rect(this.x, this.y, this.width, this.height, 10);
+    rect(
+      this.x + this.width * 0.2,
+      this.y - this.height * 0.4,
+      this.width * 0.6,
+      this.height * 0.4,
+      100
+    );
+    rect(
+      this.x + this.width * 0.4,
+      this.y - this.height * 0.6,
+      this.width * 0.2,
+      this.height * 0.2,
+      100
+    );
+    rect(
+      this.x - this.width * 0.2,
+      this.y - this.height * 0.2,
+      this.width * 0.2,
+      this.height * 0.4,
+      50
+    );
   }
-  getBoundingBox() {
-    return {
-      x: this.x + 196,
-      y: this.y + 260,
-      width: this.width - 70,
-      height: this.height + 50,
-    };
+
+  hitTest(x, y, width, height) {
+    return (
+      x < this.x + this.width &&
+      x + width > this.x &&
+      y < this.y + this.height &&
+      y + height > this.y
+    );
   }
 }
 let cactus = new Cactus(200, 200, 100, 100);
@@ -594,14 +613,6 @@ class Camel {
       (this.height - 92) * scale
     );
   }
-  getBoundingBox() {
-    return {
-      x: this.x,
-      y: this.y,
-      width: this.width * this.scale,
-      height: this.height * this.scale,
-    };
-  }
 }
 
 let camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
@@ -836,8 +847,8 @@ function draw() {
     }
   }
 
-  if (camel.x + camel.width) {
-    console.log("p");
+  if (cactus.hitTest(camel.x, camel.y, camel.width, camel.height)) {
+    background(255, 0, 0);
   }
 
   if (gameEnd) {
