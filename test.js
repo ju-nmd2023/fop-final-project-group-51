@@ -861,6 +861,13 @@ function draw() {
       bubble.y += bubble.circle;
     }
   }
+  function mousePressed() {
+    if (screen === "lose") {
+      screen = "start"; // Return to start screen on mouse click
+      gameEnd = false; // Reset game end state
+      // Optionally reset other game states here
+    }
+  }
 }
 
 //class Cactus {
