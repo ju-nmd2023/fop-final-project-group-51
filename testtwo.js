@@ -46,9 +46,9 @@ class WaterDrop {
 }
 
 function generateWaterDrops() {
-  for (let i = 0; i < 2; i++) {
-    let waterDropX = 150 + i * 300;
-    let waterDropY = 75 + i * 50;
+  for (let i = 0; i < 10; i++) {
+    let waterDropX = random(50, width - 50); // Random x position within canvas width
+    let waterDropY = random(50, height - 50); // Random y position within canvas height
     waterDrops.push(new WaterDrop(waterDropX, waterDropY));
   }
 }
@@ -56,6 +56,7 @@ function generateWaterDrops() {
 function drawWaterDrops() {
   waterDrops.forEach((drop) => {
     drop.draw();
+    drop.y += 1; // Move the water drops downwards
   });
 }
 
@@ -689,6 +690,7 @@ function draw() {
   // Move the background
   x -= speed;
   if (x < -280) x = 100;
+  camel.x += 0.5;
   dunes(x + 30, y);
   camel.draw();
   sun();
