@@ -20,6 +20,8 @@ const acceleration = 0.1;
 let speed = 1;
 let xDirection = 0;
 let enterPressed = false;
+let collectedWaterDrops = 0;
+let elapsedTime = 0;
 
 function setup() {
   createCanvas(600, 750);
@@ -52,6 +54,7 @@ class WaterDrop {
     if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
       this.isVisible = false;
       camel.scale += 0.1; //the camel gets bigger while catching drops
+      collectedWaterDrops++;
     }
   }
 }
@@ -679,11 +682,114 @@ function sadCamel(camelA, camelB) {
   ellipse(camelA - 30, camelB + 360, 8, 20);
 }
 
+function happyCamel(camelA, camelB) {
+  //camel head
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(219, 165, 119);
+  ellipse(camelA + 125, camelB + 130, 80, 80);
+
+  //camel nose
+  noStroke();
+  fill(219, 165, 119);
+  ellipse(camelA + 125, camelB + 162, 60, 60);
+
+  //camel ears
+  fill(219, 165, 119);
+  ellipse(camelA + 140, camelB + 100, 10, 70);
+
+  ellipse(camelA + 108, camelB + 100, 10, 70);
+
+  //camel neck
+  ellipse(camelA + 123, camelB + 200, 40, 150);
+  pop();
+
+  //camel body
+  fill(219, 165, 119);
+  ellipse(camelA + 35, camelB + 255, 200, 100);
+
+  //camel legs
+  ellipse(camelA + 100, camelB + 320, 10, 100);
+  ellipse(camelA + 80, camelB + 320, 10, 100);
+
+  ellipse(camelA - 10, camelB + 320, 10, 100);
+  ellipse(camelA - 30, camelB + 320, 10, 100);
+
+  //camel tail
+  ellipse(camelA - 65, camelB + 255, 50, 10);
+
+  //camel blanket
+  fill(211, 117, 100);
+  ellipse(camelA + 30, camelB + 210, 50, 110);
+
+  ellipse(camelA + 0, camelB + 220, 50, 90);
+  ellipse(camelA + 55, camelB + 220, 50, 90);
+
+  //blanket accessories stripes
+  ellipse(camelA + 70, camelB + 265, 4, 25);
+  ellipse(camelA + 60, camelB + 260, 4, 25);
+  ellipse(camelA + 50, camelB + 265, 4, 25);
+  ellipse(camelA + 40, camelB + 260, 4, 25);
+  ellipse(camelA + 30, camelB + 265, 4, 25);
+  ellipse(camelA + 20, camelB + 260, 4, 25);
+  ellipse(camelA + 10, camelB + 265, 4, 25);
+  ellipse(camelA + 0, camelB + 260, 4, 25);
+  ellipse(camelA - 10, camelB + 265, 4, 25);
+
+  //blanket accessories dots
+  fill(151, 153, 171);
+  ellipse(camelA + 70, camelB + 276, 7, 7);
+  ellipse(camelA + 60, camelB + 273, 7, 7);
+  ellipse(camelA + 50, camelB + 276, 7, 7);
+  ellipse(camelA + 40, camelB + 273, 7, 7);
+  ellipse(camelA + 30, camelB + 276, 7, 7);
+  ellipse(camelA + 20, camelB + 273, 7, 7);
+  ellipse(camelA + 10, camelB + 276, 7, 7);
+  ellipse(camelA + 0, camelB + 273, 7, 7);
+  ellipse(camelA - 10, camelB + 276, 7, 7);
+
+  //happy eyes
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(255);
+  ellipse(camelA + 125 - 15, camelB + 130 + 5, 10, 20); // Left eye
+  ellipse(camelA + 125 + 10, camelB + 130 + 5, 10, 20); // Right eye
+  fill(0);
+  ellipse(camelA + 125 - 15, camelB + 130 + 5, 7, 7); // Left pupil (slightly bigger)
+  ellipse(camelA + 125 + 10, camelB + 130 + 5, 7, 7); // Right pupil (slightly bigger)
+  pop();
+
+  //right eye
+  line(
+    camelA + 125 + 10,
+    camelB + 130 + 5,
+    camelA + 125 + 20,
+    camelB + 130 + 5
+  );
+
+  //nose dot
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(0, 0, 0);
+  ellipse(camelA + 116, camelB + 163, 4, 8);
+  fill(0, 0, 0);
+  ellipse(camelA + 134, camelB + 163, 4, 8);
+  pop();
+  //feets
+  fill(129, 88, 67);
+  ellipse(camelA + 100, camelB + 360, 8, 20);
+  ellipse(camelA + 80, camelB + 360, 8, 20);
+
+  ellipse(camelA - 10, camelB + 360, 8, 20);
+  ellipse(camelA - 30, camelB + 360, 8, 20);
+}
+
 function resetGame() {
   camel.draw();
   cloudflyY = 240;
   gameIsRunning = true;
   gameEnd = false;
+  elapsedTime = 0;
 }
 
 function mouseClicked() {
@@ -727,7 +833,7 @@ function loseScreen() {
   text("YOU LOSE", 150, 300);
   textSize(30);
   fill(231, 56, 56);
-  text("Click to restart", 180, 340);
+  text("Click to restart", 180, 345);
 
   //Generate Bubbles
   for (let i = 0; i < 0.5; i++) {
@@ -738,6 +844,7 @@ function loseScreen() {
       alpha: Math.random(),
     };
     bubbles.push(bubble);
+    text("Your Time " + elapsedTime.toFixed(2), 170, 250);
   }
 }
 
@@ -769,6 +876,7 @@ function winScreen() {
     textSize(30);
     fill(53, 180, 40);
     text("Click to restart", 180, 340);
+    text("Finished Time " + elapsedTime.toFixed(2), 150, 250);
   }
 }
 
@@ -811,19 +919,16 @@ function draw() {
     anotherCactus1.x = 100;
   }
   camel.draw(100, 200, 50, 100, 0.1);
-
-  if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
-    gameEnd = true;
-    gameIsRunning = false;
-    winScreen();
-    sadCamel(camelA + 100, camelB + 200);
-    waterTank(waterTankX + 250, waterTankY + 450);
-  }
+  fill(102, 124, 40);
+  textSize(25);
+  textAlign(LEFT, TOP);
+  text("Collected Water Drops: " + collectedWaterDrops, 10, 10);
   if (!gameIsRunning && !gameEnd) {
     startScreen();
   } else if (gameIsRunning && enterPressed) {
     // Check if Enter-key is pressed
     drawWaterDrops();
+    elapsedTime += 1; // / framerate
     camel.x += 0.5;
     camel.y += velocity;
     velocity += acceleration;
@@ -831,7 +936,19 @@ function draw() {
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
+    textSize(10);
+    fill(0, 0, 0);
+    text("time" + elapsedTime.toFixed(2), 10, 10);
   }
+
+  if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
+    gameEnd = true;
+    gameIsRunning = false;
+    winScreen();
+    happyCamel(camelA + 100, camelB + 200);
+    waterTank(waterTankX + 250, waterTankY + 450);
+  }
+
   //Camel die when going under ground
   if (camel.y >= 650) {
     loseScreen();
@@ -867,26 +984,3 @@ function draw() {
     }
   }
 }
-
-//class Cactus {
-// constructor(x, y, width, height) {
-// this.c = x;
-//this.a = y;
-//this.w = width;
-//this.h = height;
-//}
-
-//class Camel {
-// constructor(x, y, width, height, scale) {
-//  this.x = x;
-// this.y = y;
-// this.width = width;
-//this.height = height;
-// this.scale = scale;
-//}
-
-// ¨¨} else {
-// winScreen();
-//waterTank(waterTankX + 170, waterTankY + 400);
-
-//let camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
