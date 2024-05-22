@@ -55,7 +55,7 @@ class WaterDrop {
 }
 
 function generateWaterDrops() {
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 4; i++) {
     let waterDropX = random(100, width - 50);
     let waterDropY = random(0, 300);
     waterDrops.push(new WaterDrop(waterDropX, waterDropY));
@@ -365,6 +365,8 @@ class Camel {
     const scale = this.scale;
 
     // camel head
+    push();
+    translate(0, -160 * this.scale);
     fill(219, 165, 119);
     ellipse(
       this.x + 150 * scale,
@@ -669,6 +671,7 @@ class Camel {
       (this.width - 96) * scale,
       (this.height - 92) * scale
     );
+    pop();
   }
 }
 
@@ -964,7 +967,6 @@ function keyPressed() {
 
 function draw() {
   //Make the background move
-
   dunes(x + 30, y);
   x = x - speed;
   speed = speed;
