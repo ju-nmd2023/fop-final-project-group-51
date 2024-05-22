@@ -68,7 +68,7 @@ function drawWaterDrops() {
   waterDrops.forEach((drop) => {
     drop.draw();
     drop.y += 0.3; // Move the water drops downwards
-    drop.x -= 0.3;
+    drop.x -= 0.5;
   });
 }
 
@@ -367,7 +367,7 @@ class Camel {
   draw() {
     const scale = this.scale;
     fill(0, 0, 0);
-    ellipse(this.x, this.y, 30);
+    ellipse(this.x + 10, this.y + 40, 45);
     // camel head
     push();
     translate(0, -160 * this.scale);
