@@ -51,6 +51,7 @@ class WaterDrop {
   checkCollision(camelX, camelY) {
     if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
       this.isVisible = false;
+      velocity += 1;
       camel.scale += 0.1; //the camel gets bigger while catching drops
     }
   }
