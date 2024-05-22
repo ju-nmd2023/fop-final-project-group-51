@@ -976,8 +976,6 @@ function draw() {
   speed = speed;
   if (x < -280) x = 100;
   sun();
-  camel.draw(100, 200, 50, 100, 0.1);
-
   cactus.draw();
   checkWaterDropCollision(camel.x, camel.y);
   cactus.x -= 1;
@@ -1007,7 +1005,7 @@ function draw() {
   if (anotherCactus3.x < -200) {
     anotherCactus3.x = 800;
   }
-
+  camel.draw(100, 200, 50, 100, 0.1);
   if (!gameIsRunning && !gameEnd) {
     startScreen();
   } else if (gameIsRunning && enterPressed) {
