@@ -751,11 +751,11 @@ function happyCamel(camelA, camelB) {
   push();
   rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
   fill(255);
-  ellipse(camelA + 125 - 15, camelB + 130 + 5, 10, 20); // Left eye
-  ellipse(camelA + 125 + 10, camelB + 130 + 5, 10, 20); // Right eye
+  ellipse(camelA + 125 - 15, camelB + 130 + 5, 10, 20);
+  ellipse(camelA + 125 + 10, camelB + 130 + 5, 10, 20);
   fill(0);
-  ellipse(camelA + 125 - 15, camelB + 130 + 5, 7, 7); // Left pupil (slightly bigger)
-  ellipse(camelA + 125 + 10, camelB + 130 + 5, 7, 7); // Right pupil (slightly bigger)
+  ellipse(camelA + 125 - 15, camelB + 130 + 5, 7, 7);
+  ellipse(camelA + 125 + 10, camelB + 130 + 5, 7, 7);
   pop();
 
   //right eye
