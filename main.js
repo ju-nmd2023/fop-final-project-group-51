@@ -24,6 +24,7 @@ let collectedWaterDrops = 0;
 
 function setup() {
   createCanvas(600, 750);
+
   generateWaterDrops();
 }
 
