@@ -759,6 +759,7 @@ function happyCamel(camelA, camelB) {
   pop();
 
   //right eye
+
   line(
     camelA + 125 + 10,
     camelB + 130 + 5,
@@ -976,26 +977,3 @@ function draw() {
     }
   }
 }
-
-//class Cactus {
-// constructor(x, y, width, height) {
-// this.c = x;
-//this.a = y;
-//this.w = width;
-//this.h = height;
-//}
-
-//class Camel {
-// constructor(x, y, width, height, scale) {
-//  this.x = x;
-// this.y = y;
-// this.width = width;
-//this.height = height;
-// this.scale = scale;
-//}
-
-// ¨¨} else {
-// winScreen();
-//waterTank(waterTankX + 170, waterTankY + 400);
-
-//let camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
