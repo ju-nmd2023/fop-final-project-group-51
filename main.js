@@ -766,8 +766,6 @@ function happyCamel(camelA, camelB) {
     camelB + 130 + 5
   );
 
-  pop();
-
   //nose dot
   push();
   rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
