@@ -21,6 +21,8 @@ let speed = 1;
 let xDirection = 0;
 let enterPressed = false;
 let collectedWaterDrops = 0;
+let elapsedTime = 0;
+let speedIncrement = 5.0;
 
 function setup() {
   createCanvas(600, 750);
@@ -54,6 +56,10 @@ class WaterDrop {
       this.isVisible = false;
       camel.scale += 0.1; //the camel gets bigger while catching drops
       collectedWaterDrops++;
+      speedIncrement += 5; // You can adjust this value as needed
+      speedIncrement += 7; // You can adjust this value as needed
+      speedIncrement += 10; // You can adjust this value as needed
+      speedIncrement += 15; // You can adjust this value as needed
     }
   }
 }
@@ -788,6 +794,7 @@ function resetGame() {
   cloudflyY = 240;
   gameIsRunning = true;
   gameEnd = false;
+  elapsedTime = 0;
 }
 
 function mouseClicked() {
@@ -842,6 +849,7 @@ function loseScreen() {
       alpha: Math.random(),
     };
     bubbles.push(bubble);
+    text("Your Time " + elapsedTime.toFixed(2), 170, 250);
   }
 }
 
@@ -873,6 +881,7 @@ function winScreen() {
     textSize(30);
     fill(53, 180, 40);
     text("Click to restart", 180, 340);
+    text("Finished Time " + elapsedTime.toFixed(2), 150, 250);
   }
 }
 
@@ -924,6 +933,7 @@ function draw() {
   } else if (gameIsRunning && enterPressed) {
     // Check if Enter-key is pressed
     drawWaterDrops();
+    elapsedTime += 1; // / framerate
     camel.x += 0.5;
     camel.y += velocity;
     velocity += acceleration;
@@ -931,6 +941,9 @@ function draw() {
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
+    textSize(20);
+    fill(102, 124, 40);
+    text("Played Time: " + elapsedTime.toFixed(2), 12, 40);
   }
 
   if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
