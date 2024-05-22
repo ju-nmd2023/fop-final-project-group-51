@@ -24,7 +24,6 @@ let collectedWaterDrops = 0;
 
 function setup() {
   createCanvas(600, 750);
-
   generateWaterDrops();
 }
 
@@ -682,90 +681,108 @@ function sadCamel(camelA, camelB) {
   ellipse(camelA - 30, camelB + 360, 8, 20);
 }
 
-function happyCamel(camelX, camelY, scale) {
+function happyCamel(camelA, camelB) {
   //camel head
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
   fill(219, 165, 119);
-  ellipse(camelX + 150 * scale, camelY + 150 * scale, 80 * scale, 80 * scale);
+  ellipse(camelA + 125, camelB + 130, 80, 80);
 
   //camel nose
   noStroke();
   fill(219, 165, 119);
-  ellipse(camelX + 175 * scale, camelY + 162 * scale, 60 * scale, 60 * scale);
+  ellipse(camelA + 125, camelB + 162, 60, 60);
 
   //camel ears
   fill(219, 165, 119);
-  ellipse(camelX + 155 * scale, camelY + 110 * scale, 10 * scale, 70 * scale);
-  ellipse(camelX + 128 * scale, camelY + 120 * scale, 10 * scale, 70 * scale);
+  ellipse(camelA + 140, camelB + 100, 10, 70);
+
+  ellipse(camelA + 108, camelB + 100, 10, 70);
 
   //camel neck
-  ellipse(camelX + 123 * scale, camelY + 200 * scale, 40 * scale, 150 * scale);
-
-  //neck dots
-  push();
-  fill(223, 204, 183);
-  ellipse(camelX + 120 * scale, camelY + 152 * scale, 4 * scale, 8 * scale);
-  ellipse(camelX + 112 * scale, camelY + 162 * scale, 4 * scale, 8 * scale);
-  ellipse(camelX + 120 * scale, camelY + 172 * scale, 4 * scale, 8 * scale);
-  ellipse(camelX + 112 * scale, camelY + 182 * scale, 4 * scale, 8 * scale);
+  ellipse(camelA + 123, camelB + 200, 40, 150);
   pop();
 
   //camel body
-  ellipse(camelX + 35 * scale, camelY + 255 * scale, 200 * scale, 100 * scale);
+  fill(219, 165, 119);
+  ellipse(camelA + 35, camelB + 255, 200, 100);
 
   //camel legs
-  ellipse(camelX + 100 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
-  ellipse(camelX + 80 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
-  ellipse(camelX - 10 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
-  ellipse(camelX - 30 * scale, camelY + 320 * scale, 10 * scale, 100 * scale);
+  ellipse(camelA + 100, camelB + 320, 10, 100);
+  ellipse(camelA + 80, camelB + 320, 10, 100);
+
+  ellipse(camelA - 10, camelB + 320, 10, 100);
+  ellipse(camelA - 30, camelB + 320, 10, 100);
 
   //camel tail
-  ellipse(camelX - 65 * scale, camelY + 255 * scale, 50 * scale, 10 * scale);
+  ellipse(camelA - 65, camelB + 255, 50, 10);
 
   //camel blanket
   fill(211, 117, 100);
-  ellipse(camelX + 30 * scale, camelY + 210 * scale, 50 * scale, 110 * scale);
-  ellipse(camelX + 0 * scale, camelY + 220 * scale, 50 * scale, 90 * scale);
-  ellipse(camelX + 55 * scale, camelY + 220 * scale, 50 * scale, 90 * scale);
+  ellipse(camelA + 30, camelB + 210, 50, 110);
 
-  //stripes on blanket
-  ellipse(camelX + 70 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 60 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 50 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 40 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 30 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 20 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 10 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX + 0 * scale, camelY + 260 * scale, 4 * scale, 25 * scale);
-  ellipse(camelX - 10 * scale, camelY + 265 * scale, 4 * scale, 25 * scale);
+  ellipse(camelA + 0, camelB + 220, 50, 90);
+  ellipse(camelA + 55, camelB + 220, 50, 90);
 
-  //dots on blanket
+  //blanket accessories stripes
+  ellipse(camelA + 70, camelB + 265, 4, 25);
+  ellipse(camelA + 60, camelB + 260, 4, 25);
+  ellipse(camelA + 50, camelB + 265, 4, 25);
+  ellipse(camelA + 40, camelB + 260, 4, 25);
+  ellipse(camelA + 30, camelB + 265, 4, 25);
+  ellipse(camelA + 20, camelB + 260, 4, 25);
+  ellipse(camelA + 10, camelB + 265, 4, 25);
+  ellipse(camelA + 0, camelB + 260, 4, 25);
+  ellipse(camelA - 10, camelB + 265, 4, 25);
+
+  //blanket accessories dots
   fill(151, 153, 171);
-  ellipse(camelX + 70 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 60 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 50 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 40 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 30 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 20 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 10 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX + 0 * scale, camelY + 273 * scale, 7 * scale, 7 * scale);
-  ellipse(camelX - 10 * scale, camelY + 276 * scale, 7 * scale, 7 * scale);
+  ellipse(camelA + 70, camelB + 276, 7, 7);
+  ellipse(camelA + 60, camelB + 273, 7, 7);
+  ellipse(camelA + 50, camelB + 276, 7, 7);
+  ellipse(camelA + 40, camelB + 273, 7, 7);
+  ellipse(camelA + 30, camelB + 276, 7, 7);
+  ellipse(camelA + 20, camelB + 273, 7, 7);
+  ellipse(camelA + 10, camelB + 276, 7, 7);
+  ellipse(camelA + 0, camelB + 273, 7, 7);
+  ellipse(camelA - 10, camelB + 276, 7, 7);
 
-  //eyes
-  fill(0, 0, 0);
-  ellipse(camelX + 172 * scale, camelY + 150 * scale, 20 * scale, 20 * scale);
-  fill(219, 165, 119);
-  ellipse(camelX + 173 * scale, camelY + 153 * scale, 25 * scale, 20 * scale);
+  //happy eyes
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(255);
+  ellipse(camelA + 125 - 15, camelB + 130 + 5, 10, 20); // Left eye
+  ellipse(camelA + 125 + 10, camelB + 130 + 5, 10, 20); // Right eye
+  fill(0);
+  ellipse(camelA + 125 - 15, camelB + 130 + 5, 7, 7); // Left pupil (slightly bigger)
+  ellipse(camelA + 125 + 10, camelB + 130 + 5, 7, 7); // Right pupil (slightly bigger)
+  pop();
+
+  //right eye
+  line(
+    camelA + 125 + 10,
+    camelB + 130 + 5,
+    camelA + 125 + 20,
+    camelB + 130 + 5
+  );
+
+  pop();
 
   //nose dot
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
   fill(0, 0, 0);
-  ellipse(camelX + 196 * scale, camelY + 163 * scale, 4 * scale, 8 * scale);
-
+  ellipse(camelA + 116, camelB + 163, 4, 8);
+  fill(0, 0, 0);
+  ellipse(camelA + 134, camelB + 163, 4, 8);
+  pop();
   //feets
   fill(129, 88, 67);
-  ellipse(camelX + 100 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
-  ellipse(camelX + 80 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
-  ellipse(camelX - 10 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
-  ellipse(camelX - 30 * scale, camelY + 360 * scale, 8 * scale, 20 * scale);
+  ellipse(camelA + 100, camelB + 360, 8, 20);
+  ellipse(camelA + 80, camelB + 360, 8, 20);
+
+  ellipse(camelA - 10, camelB + 360, 8, 20);
+  ellipse(camelA - 30, camelB + 360, 8, 20);
 }
 
 function resetGame() {
@@ -832,14 +849,7 @@ function loseScreen() {
 
 function winScreen() {
   dunes(camelX, y);
-  happyCamel(camelX, camelY, scale);
   sun();
-  textSize(50);
-  fill(53, 180, 40);
-  text("YOU WON", 150, 300);
-  textSize(30);
-  fill(53, 180, 40);
-  text("Click to restart", 180, 340);
   for (let star of stars) {
     const randomValue = Math.random();
     if (randomValue < 0.2) {
@@ -859,6 +869,12 @@ function winScreen() {
     if (star.y > height) {
       star.y = 0;
     }
+    textSize(50);
+    fill(53, 180, 40);
+    text("YOU WON", 150, 300);
+    textSize(30);
+    fill(53, 180, 40);
+    text("Click to restart", 180, 340);
   }
 }
 
@@ -905,14 +921,6 @@ function draw() {
   textSize(25);
   textAlign(LEFT, TOP);
   text("Collected Water Drops: " + collectedWaterDrops, 10, 10);
-
-  if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
-    gameEnd = true;
-    gameIsRunning = false;
-    winScreen();
-    happyCamel(camelX + 90, camelY + 200, 1);
-    waterTank(waterTankX + 170, waterTankY + 400);
-  }
   if (!gameIsRunning && !gameEnd) {
     startScreen();
   } else if (gameIsRunning && enterPressed) {
@@ -926,6 +934,15 @@ function draw() {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
   }
+
+  if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
+    gameEnd = true;
+    gameIsRunning = false;
+    winScreen();
+    happyCamel(camelA + 100, camelB + 200);
+    waterTank(waterTankX + 250, waterTankY + 450);
+  }
+
   //Camel die when going under ground
   if (camel.y >= 650) {
     loseScreen();
