@@ -975,8 +975,9 @@ function draw() {
   x = x - speed;
   speed = speed;
   if (x < -280) x = 100;
-  camel.draw(100, 200, 50, 100, 0.1);
   sun();
+  camel.draw(100, 200, 50, 100, 0.1);
+
   cactus.draw();
   checkWaterDropCollision(camel.x, camel.y);
   cactus.x -= 1;
