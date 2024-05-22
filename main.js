@@ -20,6 +20,7 @@ const acceleration = 0.1;
 let speed = 1;
 let xDirection = 0;
 let enterPressed = false;
+let collectedWaterDrops = 0;
 
 function setup() {
   createCanvas(600, 750);
@@ -52,6 +53,7 @@ class WaterDrop {
     if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
       this.isVisible = false;
       camel.scale += 0.1; //the camel gets bigger while catching drops
+      collectedWaterDrops++;
     }
   }
 }
@@ -898,6 +900,10 @@ function draw() {
     anotherCactus1.x = 100;
   }
   camel.draw(100, 200, 50, 100, 0.1);
+  fill(102, 124, 40);
+  textSize(25);
+  textAlign(LEFT, TOP);
+  text("Collected Water Drops: " + collectedWaterDrops, 10, 10);
 
   if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
     gameEnd = true;
