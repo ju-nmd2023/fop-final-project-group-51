@@ -1,3 +1,5 @@
+/** @format */
+
 let x = 200;
 let y = 200;
 let cloudX = 200;
@@ -55,7 +57,7 @@ class WaterDrop {
 }
 
 function generateWaterDrops() {
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 4; i++) {
     let waterDropX = random(100, width - 50);
     let waterDropY = random(0, 300);
     waterDrops.push(new WaterDrop(waterDropX, waterDropY));
@@ -66,6 +68,7 @@ function drawWaterDrops() {
   waterDrops.forEach((drop) => {
     drop.draw();
     drop.y += 0.3; // Move the water drops downwards
+    drop.x -= 0.3;
   });
 }
 
@@ -363,7 +366,8 @@ class Camel {
 
   draw() {
     const scale = this.scale;
-
+    fill(0, 0, 0);
+    ellipse(this.x, this.y, 30);
     // camel head
     fill(219, 165, 119);
     ellipse(
