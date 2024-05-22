@@ -829,8 +829,8 @@ function loseScreen() {
 
 function winScreen() {
   dunes(camelX, y);
-  sun();
   happyCamel(camelX, camelY, scale);
+  sun();
   textSize(50);
   fill(53, 180, 40);
   text("YOU WON", 150, 300);
@@ -903,7 +903,7 @@ function draw() {
     gameEnd = true;
     gameIsRunning = false;
     winScreen();
-    happyCamel(camelX, camelY);
+    happyCamel(camelX + 90, camelY + 200, 1);
     waterTank(waterTankX + 170, waterTankY + 400);
   }
   if (!gameIsRunning && !gameEnd) {
@@ -919,7 +919,7 @@ function draw() {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
   }
-  //ADD TO FINAL CODE
+  //Camel die when going under ground
   if (camel.y >= 650) {
     loseScreen();
     sadCamel(camelA + 100, camelB + 200);
@@ -929,7 +929,7 @@ function draw() {
       bubble.y += bubble.circle;
     }
   }
-  //ADD TO FINAL CODE
+  //Camel die leaving screen
   if (camel.x >= 550) {
     loseScreen();
     sadCamel(camelA + 100, camelB + 200);
