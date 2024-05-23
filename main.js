@@ -933,7 +933,7 @@ function draw() {
     camel.x += speed;
     camel.y += velocity;
     velocity += acceleration;
-    camelY += velocity * 2; // make the camel fall down
+    camelY += velocity * 2;
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
@@ -970,7 +970,7 @@ function draw() {
       bubble.y += bubble.circle;
     }
   }
-
+  //Hit test from Garrits button video
   if (cactus.hitTest(camel.x, camel.y, camel.width, camel.height)) {
     gameEnd = true;
 
