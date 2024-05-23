@@ -8,19 +8,19 @@ let sunX = 200;
 let sunY = 200;
 let cactusX = 200;
 let cactusY = 200;
-let bubbles = [];
+let stars = []; //from Pig Lander
+let bubbles = []; //from Fish Lander
 let waterDrops = [];
 let waterTankX = 100;
 let waterTankY = 100;
-let cactuses = [];
 let gameIsRunning = false;
 let gameEnd = false;
-let velocity = 0.5;
-const acceleration = 0.1;
+let velocity = 0.5; //from Pig and Fish Lander
+const acceleration = 0.1; //from Pig and Fish Lander
 let speed = 1;
 let xDirection = 0;
 let enterPressed = false;
-let collectedWaterDrops = 0;
+let collectedWaterDrops = 0; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
 let elapsedTime = 0;
 let speedIncrement = 5.0;
 
@@ -54,16 +54,16 @@ class WaterDrop {
   checkCollision(camelX, camelY) {
     if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
       this.isVisible = false;
-      camel.scale += 0.1; //the camel gets bigger while catching drops
-      collectedWaterDrops++;
-      speedIncrement += 5; // You can adjust this value as needed
-      speedIncrement += 7; // You can adjust this value as needed
-      speedIncrement += 10; // You can adjust this value as needed
-      speedIncrement += 15; // You can adjust this value as needed
+      camel.scale += 0.1;
+      collectedWaterDrops++; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
+      speedIncrement += 5;
+      speedIncrement += 7;
+      speedIncrement += 10;
+      speedIncrement += 15;
     }
   }
 }
-
+////from Pig and Fish Lander
 function generateWaterDrops() {
   for (let i = 0; i < 4; i++) {
     let waterDropX = random(100, width - 50);
@@ -588,7 +588,7 @@ let camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
 function sadCamel(camelA, camelB) {
   //camel head
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
   fill(219, 165, 119);
   ellipse(camelA + 125, camelB + 130, 80, 80);
 
@@ -653,7 +653,7 @@ function sadCamel(camelA, camelB) {
 
   //dead eyes
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
   fill(0, 0, 0);
   stroke(0);
   strokeWeight(3);
@@ -672,7 +672,7 @@ function sadCamel(camelA, camelB) {
 
   //nose dot
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
   fill(0, 0, 0);
   ellipse(camelA + 116, camelB + 163, 4, 8);
   fill(0, 0, 0);
@@ -690,7 +690,7 @@ function sadCamel(camelA, camelB) {
 function happyCamel(camelA, camelB) {
   //camel head
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
   fill(219, 165, 119);
   ellipse(camelA + 125, camelB + 130, 80, 80);
 
@@ -755,7 +755,7 @@ function happyCamel(camelA, camelB) {
 
   //happy eyes
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  rotate(radians(sin(rotationAngle) * 0.5)); /// Rotation from Pig Lander
   fill(255);
   ellipse(camelA + 125 - 15, camelB + 130 + 5, 10, 20);
   ellipse(camelA + 125 + 10, camelB + 130 + 5, 10, 20);
@@ -775,7 +775,7 @@ function happyCamel(camelA, camelB) {
 
   //nose dot
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
   fill(0, 0, 0);
   ellipse(camelA + 116, camelB + 163, 4, 8);
   fill(0, 0, 0);
@@ -803,9 +803,7 @@ function mouseClicked() {
   }
 }
 
-let stars = [];
-
-//CONFETTI FUNCTION
+//CONFETTI FUNCTION from Pig Lander
 for (let i = 0; i < 1000; i++) {
   const star = {
     x: Math.floor(Math.random() * 570),
@@ -822,7 +820,7 @@ function startScreen() {
   textSize(50);
   fill(255);
   push();
-  rotate(radians(sin(rotationAngle) * 0.5));
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
   text("CAMEL RUN", 130, 300);
   textSize(30);
   fill(255);
@@ -840,7 +838,7 @@ function loseScreen() {
   fill(231, 56, 56);
   text("Click to restart", 180, 340);
 
-  //Generate Bubbles
+  //Generate Bubbles from Fish Lander
   for (let i = 0; i < 0.5; i++) {
     const bubble = {
       x: Math.floor(Math.random() * 700),
@@ -856,6 +854,7 @@ function loseScreen() {
 function winScreen() {
   dunes(camelX, y);
   sun();
+  //CONFETTI FUNCTION from Pig Lander
   for (let star of stars) {
     const randomValue = Math.random();
     if (randomValue < 0.2) {
@@ -927,7 +926,7 @@ function draw() {
   fill(102, 124, 40);
   textSize(25);
   textAlign(LEFT, TOP);
-  text("Collected Water Drops: " + collectedWaterDrops, 10, 10);
+  text("Collected Water Drops: " + collectedWaterDrops, 10, 10); //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
   if (!gameIsRunning && !gameEnd) {
     startScreen();
   } else if (gameIsRunning && enterPressed) {
@@ -981,6 +980,7 @@ function draw() {
     if (gameEnd) {
       loseScreen();
       sadCamel(camelA + 100, camelB + 200);
+      //from Fish Lander
       for (let bubble of bubbles) {
         fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
         ellipse(bubble.x, bubble.y, 20);

@@ -798,11 +798,20 @@ function happyCamel(camelA, camelB) {
 }
 
 function resetGame() {
-  camel.draw();
+  camel = new Camel(); // Reset the camel position and scale
   cloudflyY = 240;
   gameIsRunning = true;
   gameEnd = false;
   elapsedTime = 0;
+  speed = 1;
+  speedIncrement = 5.0;
+  collectedWaterDrops = 0;
+  cactus.y = 500;
+  anotherCactus.y = 500;
+  anotherCactus1.y = 500;
+  anotherCactus2.y = 500;
+  waterDrops = [];
+  generateWaterDrops(); // Regenerate water drops
 }
 
 function mouseClicked() {
