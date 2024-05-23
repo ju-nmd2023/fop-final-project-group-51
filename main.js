@@ -827,6 +827,7 @@ function startScreen() {
   textSize(30);
   fill(255);
   text("Click to start", 195, 340);
+  pop();
 }
 
 function loseScreen() {
