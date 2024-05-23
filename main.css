@@ -2,28 +2,9 @@
 
 body,
 html {
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0e6d2; /* Sand-like background */
-}
-
-#game-container {
-  text-align: center;
-  font-family: "Arial", sans-serif;
-}
-
-#canvas-container {
-  border: 2px solid #8c6849; /* Frame color around the canvas */
-  background-color: #fff;
-  width: 600px;
-  height: 750px;
-}
-
-#canvas-container canvas {
-  display: block;
-  margin: 0 auto;
+  background-color: #f0e6d2; /* Sand background */
 }

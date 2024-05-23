@@ -44,8 +44,6 @@ let anotherCactus1;
 
 function setup() {
   createCanvas(600, 750);
-  let canvas = createCanvas(600, 750);
-
   generateWaterDrops();
   camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
   cactus = new Cactus(250, 250, 100, 200); // Provide appropriate arguments
