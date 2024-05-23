@@ -34,9 +34,9 @@ const GameState = {
   MENU: "menu",
   PLAYING: "playing",
   PAUSED: "paused",
-  GAME_OVER: "game_over",
+  GAME_OVER: "game_over", //chatGPT https://chatgpt.com/share/a68eb52d-dc66-4711-84cc-f3a14c748faf
 };
-let currentState = GameState.MENU;
+let currentState = GameState.MENU; //chatGPT https://chatgpt.com/share/a68eb52d-dc66-4711-84cc-f3a14c748faf
 let camel;
 let cactus;
 let anotherCactus;
@@ -401,7 +401,7 @@ function sun() {
   cloudX = cloudX + 0.7;
   if (cloudX > 750) {
     cloudX = -250;
-  } //sun
+  } //lunar lander game
 
   push();
   fill(250, 210, 160);
@@ -762,7 +762,7 @@ class Cactus {
       y < this.y + this.height &&
       y + height > this.y - this.height
     );
-  }
+  } //Garrit Button-videos
 }
 
 function keyPressed() {
@@ -782,19 +782,20 @@ function keyPressed() {
   } else if (keyCode === ENTER && currentState === GameState.GAME_WON) {
     winScreen(); // Call resetGame() when Enter key is pressed and game is won
   }
-}
+} //ChatGPT //chatGPT https://chatgpt.com/share/a68eb52d-dc66-4711-84cc-f3a14c748faf
 
 function mousePressed() {
   if (currentState === GameState.MENU) {
     currentState = GameState.PLAYING;
     startGame(); // Call startGame() when transitioning to PLAYING state
   }
-}
+} //ChatGPT //chatGPT https://chatgpt.com/share/a68eb52d-dc66-4711-84cc-f3a14c748faf
 
 function resetGame() {
-  elapsedTime = 0;
+  elapsedTime = 0; //Hevin
   collectedWaterDrops = 0;
-  currentState = GameState.MENU;
+  currentState = GameState.MENU; //} //ChatGPT //chatGPT https://chatgpt.com/share/a68eb52d-dc66-4711-84cc-f3a14c748faf
+
   bubbles = [];
   generateWaterDrops();
 }
@@ -900,7 +901,7 @@ function startGame() {
   if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
     currentState = GameState.GAME_WON;
   }
-}
+} //ChatGPT //chatGPT https://chatgpt.com/share/a68eb52d-dc66-4711-84cc-f3a14c748faf
 
 function pauseGame() {
   fill(255);
@@ -909,7 +910,7 @@ function pauseGame() {
   text("PAUSED", width / 2, height / 2 - 40);
   textSize(30);
   text("Press P to Resume", width / 2, height / 2);
-}
+} //ChatGPT //chatGPT https://chatgpt.com/share/a68eb52d-dc66-4711-84cc-f3a14c748faf
 
 function winScreen() {
   dunes(camelX, y);
