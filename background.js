@@ -22,6 +22,15 @@ let xDirection = 0;
 let enterPressed = false;
 let collectedWaterDrops = 0;
 let elapsedTime = 0;
+let speedIncrement = 5.0;
+const GameState = {
+  MENU: "menu",
+  PLAYING: "playing",
+  PAUSED: "paused",
+  GAME_OVER: "game_over",
+};
+
+let currentState = GameState.MENU;
 
 function setup() {
   createCanvas(600, 750);
@@ -55,6 +64,10 @@ class WaterDrop {
       this.isVisible = false;
       camel.scale += 0.1; //the camel gets bigger while catching drops
       collectedWaterDrops++;
+      speedIncrement += 5; // You can adjust this value as needed
+      speedIncrement += 7; // You can adjust this value as needed
+      speedIncrement += 10; // You can adjust this value as needed
+      speedIncrement += 15; // You can adjust this value as needed
     }
   }
 }
@@ -752,11 +765,11 @@ function happyCamel(camelA, camelB) {
   push();
   rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
   fill(255);
-  ellipse(camelA + 125 - 15, camelB + 130 + 5, 10, 20); // Left eye
-  ellipse(camelA + 125 + 10, camelB + 130 + 5, 10, 20); // Right eye
+  ellipse(camelA + 125 - 15, camelB + 130 + 5, 10, 20);
+  ellipse(camelA + 125 + 10, camelB + 130 + 5, 10, 20);
   fill(0);
-  ellipse(camelA + 125 - 15, camelB + 130 + 5, 7, 7); // Left pupil (slightly bigger)
-  ellipse(camelA + 125 + 10, camelB + 130 + 5, 7, 7); // Right pupil (slightly bigger)
+  ellipse(camelA + 125 - 15, camelB + 130 + 5, 7, 7);
+  ellipse(camelA + 125 + 10, camelB + 130 + 5, 7, 7);
   pop();
 
   //right eye
@@ -833,7 +846,7 @@ function loseScreen() {
   text("YOU LOSE", 150, 300);
   textSize(30);
   fill(231, 56, 56);
-  text("Click to restart", 180, 345);
+  text("Click to restart", 180, 340);
 
   //Generate Bubbles
   for (let i = 0; i < 0.5; i++) {
@@ -936,9 +949,9 @@ function draw() {
     if (keyIsDown(32)) {
       velocity = velocity - acceleration * 2; //add jumping effect
     }
-    textSize(10);
-    fill(0, 0, 0);
-    text("time" + elapsedTime.toFixed(2), 10, 10);
+    textSize(20);
+    fill(102, 124, 40);
+    text("Played Time: " + elapsedTime.toFixed(2), 12, 40);
   }
 
   if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
@@ -984,3 +997,26 @@ function draw() {
     }
   }
 }
+
+//class Cactus {
+// constructor(x, y, width, height) {
+// this.c = x;
+//this.a = y;
+//this.w = width;
+//this.h = height;
+//}
+
+//class Camel {
+// constructor(x, y, width, height, scale) {
+//  this.x = x;
+// this.y = y;
+// this.width = width;
+//this.height = height;
+// this.scale = scale;
+//}
+
+// ¨¨} else {
+// winScreen();
+//waterTank(waterTankX + 170, waterTankY + 400);
+
+//let camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
