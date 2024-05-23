@@ -1,4 +1,5 @@
 /** @format */
+let camelX = 100;
 
 let x = 200;
 let y = 200;
@@ -6,27 +7,89 @@ let cloudX = 200;
 let cloudY = 200;
 let sunX = 200;
 let sunY = 200;
-let cactusX = 200;
-let cactusY = 200;
-let stars = []; //from Pig Lander
-let bubbles = []; //from Fish Lander
-let waterDrops = [];
 let waterTankX = 100;
 let waterTankY = 100;
+let cactuses = [];
+camelX = 100;
+let rotationAngle = 0;
+let bubbles = [];
+let waterDrops = [];
+let cactusX = 200;
+let cactusY = 200;
 let gameIsRunning = false;
 let gameEnd = false;
-let velocity = 0.5; //from Pig and Fish Lander
-const acceleration = 0.1; //from Pig and Fish Lander
+let velocity = 0.5;
+const acceleration = 0.1;
 let speed = 1;
 let xDirection = 0;
 let enterPressed = false;
-let collectedWaterDrops = 0; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
+let collectedWaterDrops = 0;
 let elapsedTime = 0;
-let speedIncrement = 0.2;
+let speedIncrement = 10;
+let camelY = 100;
+let stars = [];
+let camelA = 100;
+let camelB = 100;
+
+const GameState = {
+  MENU: "menu",
+  PLAYING: "playing",
+  PAUSED: "paused",
+  GAME_OVER: "game_over",
+};
+let currentState = GameState.MENU;
+let camel;
+let cactus;
+let anotherCactus;
+let anotherCactus1;
 
 function setup() {
   createCanvas(600, 750);
   generateWaterDrops();
+  camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
+  cactus = new Cactus(250, 250, 100, 200); // Provide appropriate arguments
+  cactus = new Cactus(200, 500, 100, 100);
+  anotherCactus = new Cactus(500, 500, 100, 100);
+  anotherCactus1 = new Cactus(200, 500, 100, 100);
+}
+
+function resetGameState() {
+  camelX = 100;
+  x = 200;
+  y = 200;
+  cloudX = 200;
+  cloudY = 200;
+  sunX = 200;
+  sunY = 200;
+  waterTankX = 100;
+  waterTankY = 100;
+  cactuses = [];
+  rotationAngle = 0;
+  bubbles = [];
+  waterDrops = [];
+  cactusX = 200;
+  cactusY = 200;
+  gameIsRunning = false;
+  gameEnd = false;
+  velocity = 0.5;
+  speed = 1;
+  xDirection = 0;
+  enterPressed = false;
+  collectedWaterDrops = 0;
+  elapsedTime = 0;
+  speedIncrement = 10;
+  camelY = 100;
+  stars = [];
+  camelA = 100;
+  camelB = 100;
+}
+
+function keyPressed() {
+  if (key === "r") {
+    currentState = GameState.MENU;
+    resetGameState();
+  }
+  // Add other key presses here if needed
 }
 
 class WaterDrop {
@@ -54,13 +117,13 @@ class WaterDrop {
   checkCollision(camelX, camelY) {
     if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
       this.isVisible = false;
-      camel.scale += 0.1;
-      collectedWaterDrops++; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
-      speed += speedIncrement;
+      camel.scale += 0.1; //the camel gets bigger while catching drops
+      collectedWaterDrops++;
+      speedIncrement = speedIncrement + 20 + 30 + 40 + 15; // Add all the values together
     }
   }
 }
-////from Pig and Fish Lander
+
 function generateWaterDrops() {
   for (let i = 0; i < 4; i++) {
     let waterDropX = random(100, width - 50);
@@ -69,6 +132,26 @@ function generateWaterDrops() {
   }
 }
 
+//Generate confetti
+for (let i = 0; i < 1000; i++) {
+  const star = {
+    x: Math.floor(Math.random() * 800),
+    y: Math.floor(Math.random() * 700),
+    snow: Math.random() * 1,
+    alpha: Math.random(),
+  };
+  stars.push(star);
+}
+//Generate Bubbles
+for (let i = 0; i < 40; i++) {
+  const bubble = {
+    x: Math.floor(Math.random() * 800),
+    y: Math.floor(Math.random() * 700),
+    circle: Math.random() * 10,
+    alpha: Math.random(),
+  };
+  bubbles.push(bubble);
+}
 function drawWaterDrops() {
   waterDrops.forEach((drop) => {
     drop.draw();
@@ -113,6 +196,210 @@ function waterTank(waterTankX, waterTankY) {
   ellipse(waterTankX + 47.5, waterTankY + 27.5, 25, 30);
   fill(121, 205, 244);
   ellipse(waterTankX + 49, waterTankY + 27.5, 25, 35);
+}
+
+function happyCamel(camelA, camelB) {
+  //camel head
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(219, 165, 119);
+  ellipse(camelA + 125, camelB + 130, 80, 80);
+
+  //camel nose
+  noStroke();
+  fill(219, 165, 119);
+  ellipse(camelA + 125, camelB + 162, 60, 60);
+
+  //camel ears
+  fill(219, 165, 119);
+  ellipse(camelA + 140, camelB + 100, 10, 70);
+
+  ellipse(camelA + 108, camelB + 100, 10, 70);
+
+  //camel neck
+  ellipse(camelA + 123, camelB + 200, 40, 150);
+  pop();
+
+  //camel body
+  fill(219, 165, 119);
+  ellipse(camelA + 35, camelB + 255, 200, 100);
+
+  //camel legs
+  ellipse(camelA + 100, camelB + 320, 10, 100);
+  ellipse(camelA + 80, camelB + 320, 10, 100);
+
+  ellipse(camelA - 10, camelB + 320, 10, 100);
+  ellipse(camelA - 30, camelB + 320, 10, 100);
+
+  //camel tail
+  ellipse(camelA - 65, camelB + 255, 50, 10);
+
+  //camel blanket
+  fill(211, 117, 100);
+  ellipse(camelA + 30, camelB + 210, 50, 110);
+
+  ellipse(camelA + 0, camelB + 220, 50, 90);
+  ellipse(camelA + 55, camelB + 220, 50, 90);
+
+  //blanket accessories stripes
+  ellipse(camelA + 70, camelB + 265, 4, 25);
+  ellipse(camelA + 60, camelB + 260, 4, 25);
+  ellipse(camelA + 50, camelB + 265, 4, 25);
+  ellipse(camelA + 40, camelB + 260, 4, 25);
+  ellipse(camelA + 30, camelB + 265, 4, 25);
+  ellipse(camelA + 20, camelB + 260, 4, 25);
+  ellipse(camelA + 10, camelB + 265, 4, 25);
+  ellipse(camelA + 0, camelB + 260, 4, 25);
+  ellipse(camelA - 10, camelB + 265, 4, 25);
+
+  //blanket accessories dots
+  fill(151, 153, 171);
+  ellipse(camelA + 70, camelB + 276, 7, 7);
+  ellipse(camelA + 60, camelB + 273, 7, 7);
+  ellipse(camelA + 50, camelB + 276, 7, 7);
+  ellipse(camelA + 40, camelB + 273, 7, 7);
+  ellipse(camelA + 30, camelB + 276, 7, 7);
+  ellipse(camelA + 20, camelB + 273, 7, 7);
+  ellipse(camelA + 10, camelB + 276, 7, 7);
+  ellipse(camelA + 0, camelB + 273, 7, 7);
+  ellipse(camelA - 10, camelB + 276, 7, 7);
+
+  //happy eyes
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(255);
+  ellipse(camelA + 125 - 15, camelB + 130 + 5, 10, 20);
+  ellipse(camelA + 125 + 10, camelB + 130 + 5, 10, 20);
+  fill(0);
+  ellipse(camelA + 125 - 15, camelB + 130 + 5, 7, 7);
+  ellipse(camelA + 125 + 10, camelB + 130 + 5, 7, 7);
+  pop();
+
+  //right eye
+  line(
+    camelA + 125 + 10,
+    camelB + 130 + 5,
+    camelA + 125 + 20,
+    camelB + 130 + 5
+  );
+
+  //nose dot
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(0, 0, 0);
+  ellipse(camelA + 116, camelB + 163, 4, 8);
+  fill(0, 0, 0);
+  ellipse(camelA + 134, camelB + 163, 4, 8);
+  pop();
+  //feets
+  fill(129, 88, 67);
+  ellipse(camelA + 100, camelB + 360, 8, 20);
+  ellipse(camelA + 80, camelB + 360, 8, 20);
+
+  ellipse(camelA - 10, camelB + 360, 8, 20);
+  ellipse(camelA - 30, camelB + 360, 8, 20);
+}
+
+function sadCamel(camelA, camelB) {
+  //camel head
+  push();
+  rotate(radians(sin(rotationAngle) * 0.2)); // Rotate the head
+  fill(219, 165, 119);
+  ellipse(camelA + 125, camelB + 130, 80, 80);
+
+  //camel nose
+  noStroke();
+  fill(219, 165, 119);
+  ellipse(camelA + 125, camelB + 162, 60, 60);
+
+  //camel ears
+  fill(219, 165, 119);
+  ellipse(camelA + 140, camelB + 100, 10, 70);
+
+  ellipse(camelA + 108, camelB + 100, 10, 70);
+
+  //camel neck
+  ellipse(camelA + 123, camelB + 200, 40, 150);
+  pop();
+
+  //camel body
+  fill(219, 165, 119);
+  ellipse(camelA + 35, camelB + 255, 200, 100);
+
+  //camel legs
+  ellipse(camelA + 100, camelB + 320, 10, 100);
+  ellipse(camelA + 80, camelB + 320, 10, 100);
+
+  ellipse(camelA - 10, camelB + 320, 10, 100);
+  ellipse(camelA - 30, camelB + 320, 10, 100);
+
+  //camel tail
+  ellipse(camelA - 65, camelB + 255, 50, 10);
+
+  //camel blanket
+  fill(211, 117, 100);
+  ellipse(camelA + 30, camelB + 210, 50, 110);
+
+  ellipse(camelA + 0, camelB + 220, 50, 90);
+  ellipse(camelA + 55, camelB + 220, 50, 90);
+
+  //blanket accessories stripes
+  ellipse(camelA + 70, camelB + 265, 4, 25);
+  ellipse(camelA + 60, camelB + 260, 4, 25);
+  ellipse(camelA + 50, camelB + 265, 4, 25);
+  ellipse(camelA + 40, camelB + 260, 4, 25);
+  ellipse(camelA + 30, camelB + 265, 4, 25);
+  ellipse(camelA + 20, camelB + 260, 4, 25);
+  ellipse(camelA + 10, camelB + 265, 4, 25);
+  ellipse(camelA + 0, camelB + 260, 4, 25);
+  ellipse(camelA - 10, camelB + 265, 4, 25);
+
+  //blanket accessories dots
+  fill(151, 153, 171);
+  ellipse(camelA + 70, camelB + 276, 7, 7);
+  ellipse(camelA + 60, camelB + 273, 7, 7);
+  ellipse(camelA + 50, camelB + 276, 7, 7);
+  ellipse(camelA + 40, camelB + 273, 7, 7);
+  ellipse(camelA + 30, camelB + 276, 7, 7);
+  ellipse(camelA + 20, camelB + 273, 7, 7);
+  ellipse(camelA + 10, camelB + 276, 7, 7);
+  ellipse(camelA + 0, camelB + 273, 7, 7);
+  ellipse(camelA - 10, camelB + 276, 7, 7);
+
+  //dead eyes
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(0, 0, 0);
+  stroke(0);
+  strokeWeight(3);
+  //left eye
+  line(camelA + 125 - 15, camelB + 130 + 5, camelA + 125 - 5, camelB + 130 + 5);
+
+  //right eye
+  line(
+    camelA + 125 + 10,
+    camelB + 130 + 5,
+    camelA + 125 + 20,
+    camelB + 130 + 5
+  );
+
+  pop();
+
+  //nose dot
+  push();
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  fill(0, 0, 0);
+  ellipse(camelA + 116, camelB + 163, 4, 8);
+  fill(0, 0, 0);
+  ellipse(camelA + 134, camelB + 163, 4, 8);
+  pop();
+  //feets
+  fill(129, 88, 67);
+  ellipse(camelA + 100, camelB + 360, 8, 20);
+  ellipse(camelA + 80, camelB + 360, 8, 20);
+
+  ellipse(camelA - 10, camelB + 360, 8, 20);
+  ellipse(camelA - 30, camelB + 360, 8, 20);
 }
 
 function dunes(x, y) {
@@ -166,56 +453,6 @@ function dunes(x, y) {
   ellipse(x + 470, y + 570, 35);
 }
 
-class Cactus {
-  constructor(x, y, width, height) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-  }
-
-  draw() {
-    fill(102, 124, 40);
-    rect(this.x + 25, this.y, this.width / 2, this.height, 10);
-    rect(
-      this.x + this.width * 0.2,
-      this.y - this.height * 0.4,
-      this.width * 0.6,
-      this.height * 0.4,
-      100
-    );
-    rect(
-      this.x + this.width * 0.4,
-      this.y - this.height * 0.6,
-      this.width * 0.2,
-      this.height * 0.2,
-      100
-    );
-    rect(
-      this.x - this.width / 25,
-      this.y + 20 - this.height * 0.2,
-      this.width * 0.3,
-      this.height * 0.4,
-      5
-    );
-  }
-
-  //
-
-  hitTest(x, y, width, height) {
-    return (
-      x < this.x + this.width &&
-      x + width > this.x &&
-      y < this.y + this.height &&
-      y + height > this.y - this.height
-    );
-  }
-}
-
-let cactus = new Cactus(200, 500, 100, 100);
-let anotherCactus = new Cactus(500, 500, 100, 100);
-let anotherCactus1 = new Cactus(200, 500, 100, 100);
-
 function sun() {
   //cloud
   fill(255, 255, 255, 200);
@@ -248,13 +485,6 @@ function sun() {
   ellipse(sunX - 90, sunY - 50, 100);
   pop();
 }
-let camelX = 100;
-let camelY = 100;
-
-let camelA = 100;
-let camelB = 100;
-
-let rotationAngle = 0;
 
 class Camel {
   constructor(x, y, width, height, scale) {
@@ -580,235 +810,112 @@ class Camel {
   }
 }
 
-let camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
+class Cactus {
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
 
-function sadCamel(camelA, camelB) {
-  //camel head
-  push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
-  fill(219, 165, 119);
-  ellipse(camelA + 125, camelB + 130, 80, 80);
+  draw() {
+    fill(102, 124, 40);
+    rect(this.x + 25, this.y, this.width / 2, this.height, 10);
+    rect(
+      this.x + this.width * 0.2,
+      this.y - this.height * 0.4,
+      this.width * 0.6,
+      this.height * 0.4,
+      100
+    );
+    rect(
+      this.x + this.width * 0.4,
+      this.y - this.height * 0.6,
+      this.width * 0.2,
+      this.height * 0.2,
+      100
+    );
+    rect(
+      this.x - this.width / 25,
+      this.y + 20 - this.height * 0.2,
+      this.width * 0.3,
+      this.height * 0.4,
+      5
+    );
+  }
 
-  //camel nose
-  noStroke();
-  fill(219, 165, 119);
-  ellipse(camelA + 125, camelB + 162, 60, 60);
+  //
 
-  //camel ears
-  fill(219, 165, 119);
-  ellipse(camelA + 140, camelB + 100, 10, 70);
-
-  ellipse(camelA + 108, camelB + 100, 10, 70);
-
-  //camel neck
-  ellipse(camelA + 123, camelB + 200, 40, 150);
-  pop();
-
-  //camel body
-  fill(219, 165, 119);
-  ellipse(camelA + 35, camelB + 255, 200, 100);
-
-  //camel legs
-  ellipse(camelA + 100, camelB + 320, 10, 100);
-  ellipse(camelA + 80, camelB + 320, 10, 100);
-
-  ellipse(camelA - 10, camelB + 320, 10, 100);
-  ellipse(camelA - 30, camelB + 320, 10, 100);
-
-  //camel tail
-  ellipse(camelA - 65, camelB + 255, 50, 10);
-
-  //camel blanket
-  fill(211, 117, 100);
-  ellipse(camelA + 30, camelB + 210, 50, 110);
-
-  ellipse(camelA + 0, camelB + 220, 50, 90);
-  ellipse(camelA + 55, camelB + 220, 50, 90);
-
-  //blanket accessories stripes
-  ellipse(camelA + 70, camelB + 265, 4, 25);
-  ellipse(camelA + 60, camelB + 260, 4, 25);
-  ellipse(camelA + 50, camelB + 265, 4, 25);
-  ellipse(camelA + 40, camelB + 260, 4, 25);
-  ellipse(camelA + 30, camelB + 265, 4, 25);
-  ellipse(camelA + 20, camelB + 260, 4, 25);
-  ellipse(camelA + 10, camelB + 265, 4, 25);
-  ellipse(camelA + 0, camelB + 260, 4, 25);
-  ellipse(camelA - 10, camelB + 265, 4, 25);
-
-  //blanket accessories dots
-  fill(151, 153, 171);
-  ellipse(camelA + 70, camelB + 276, 7, 7);
-  ellipse(camelA + 60, camelB + 273, 7, 7);
-  ellipse(camelA + 50, camelB + 276, 7, 7);
-  ellipse(camelA + 40, camelB + 273, 7, 7);
-  ellipse(camelA + 30, camelB + 276, 7, 7);
-  ellipse(camelA + 20, camelB + 273, 7, 7);
-  ellipse(camelA + 10, camelB + 276, 7, 7);
-  ellipse(camelA + 0, camelB + 273, 7, 7);
-  ellipse(camelA - 10, camelB + 276, 7, 7);
-
-  //dead eyes
-  push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
-  fill(0, 0, 0);
-  stroke(0);
-  strokeWeight(3);
-  //left eye
-  line(camelA + 125 - 15, camelB + 130 + 5, camelA + 125 - 5, camelB + 130 + 5);
-
-  //right eye
-  line(
-    camelA + 125 + 10,
-    camelB + 130 + 5,
-    camelA + 125 + 20,
-    camelB + 130 + 5
-  );
-
-  pop();
-
-  //nose dot
-  push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
-  fill(0, 0, 0);
-  ellipse(camelA + 116, camelB + 163, 4, 8);
-  fill(0, 0, 0);
-  ellipse(camelA + 134, camelB + 163, 4, 8);
-  pop();
-  //feets
-  fill(129, 88, 67);
-  ellipse(camelA + 100, camelB + 360, 8, 20);
-  ellipse(camelA + 80, camelB + 360, 8, 20);
-
-  ellipse(camelA - 10, camelB + 360, 8, 20);
-  ellipse(camelA - 30, camelB + 360, 8, 20);
-}
-
-function happyCamel(camelA, camelB) {
-  //camel head
-  push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
-  fill(219, 165, 119);
-  ellipse(camelA + 125, camelB + 130, 80, 80);
-
-  //camel nose
-  noStroke();
-  fill(219, 165, 119);
-  ellipse(camelA + 125, camelB + 162, 60, 60);
-
-  //camel ears
-  fill(219, 165, 119);
-  ellipse(camelA + 140, camelB + 100, 10, 70);
-
-  ellipse(camelA + 108, camelB + 100, 10, 70);
-
-  //camel neck
-  ellipse(camelA + 123, camelB + 200, 40, 150);
-  pop();
-
-  //camel body
-  fill(219, 165, 119);
-  ellipse(camelA + 35, camelB + 255, 200, 100);
-
-  //camel legs
-  ellipse(camelA + 100, camelB + 320, 10, 100);
-  ellipse(camelA + 80, camelB + 320, 10, 100);
-
-  ellipse(camelA - 10, camelB + 320, 10, 100);
-  ellipse(camelA - 30, camelB + 320, 10, 100);
-
-  //camel tail
-  ellipse(camelA - 65, camelB + 255, 50, 10);
-
-  //camel blanket
-  fill(211, 117, 100);
-  ellipse(camelA + 30, camelB + 210, 50, 110);
-
-  ellipse(camelA + 0, camelB + 220, 50, 90);
-  ellipse(camelA + 55, camelB + 220, 50, 90);
-
-  //blanket accessories stripes
-  ellipse(camelA + 70, camelB + 265, 4, 25);
-  ellipse(camelA + 60, camelB + 260, 4, 25);
-  ellipse(camelA + 50, camelB + 265, 4, 25);
-  ellipse(camelA + 40, camelB + 260, 4, 25);
-  ellipse(camelA + 30, camelB + 265, 4, 25);
-  ellipse(camelA + 20, camelB + 260, 4, 25);
-  ellipse(camelA + 10, camelB + 265, 4, 25);
-  ellipse(camelA + 0, camelB + 260, 4, 25);
-  ellipse(camelA - 10, camelB + 265, 4, 25);
-
-  //blanket accessories dots
-  fill(151, 153, 171);
-  ellipse(camelA + 70, camelB + 276, 7, 7);
-  ellipse(camelA + 60, camelB + 273, 7, 7);
-  ellipse(camelA + 50, camelB + 276, 7, 7);
-  ellipse(camelA + 40, camelB + 273, 7, 7);
-  ellipse(camelA + 30, camelB + 276, 7, 7);
-  ellipse(camelA + 20, camelB + 273, 7, 7);
-  ellipse(camelA + 10, camelB + 276, 7, 7);
-  ellipse(camelA + 0, camelB + 273, 7, 7);
-  ellipse(camelA - 10, camelB + 276, 7, 7);
-
-  //happy eyes
-  push();
-  rotate(radians(sin(rotationAngle) * 0.5)); /// Rotation from Pig Lander
-  fill(255);
-  ellipse(camelA + 125 - 15, camelB + 130 + 5, 10, 20);
-  ellipse(camelA + 125 + 10, camelB + 130 + 5, 10, 20);
-  fill(0);
-  ellipse(camelA + 125 - 15, camelB + 130 + 5, 7, 7);
-  ellipse(camelA + 125 + 10, camelB + 130 + 5, 7, 7);
-  pop();
-
-  //right eye
-
-  line(
-    camelA + 125 + 10,
-    camelB + 130 + 5,
-    camelA + 125 + 20,
-    camelB + 130 + 5
-  );
-
-  //nose dot
-  push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
-  fill(0, 0, 0);
-  ellipse(camelA + 116, camelB + 163, 4, 8);
-  fill(0, 0, 0);
-  ellipse(camelA + 134, camelB + 163, 4, 8);
-  pop();
-  //feets
-  fill(129, 88, 67);
-  ellipse(camelA + 100, camelB + 360, 8, 20);
-  ellipse(camelA + 80, camelB + 360, 8, 20);
-
-  ellipse(camelA - 10, camelB + 360, 8, 20);
-  ellipse(camelA - 30, camelB + 360, 8, 20);
-}
-
-function resetGame() {
-  new Camel(100, 200, 100, 100, 0.5);
-  cloudflyY = 240;
-  gameIsRunning = true;
-  gameEnd = false;
-  elapsedTime = 0;
-}
-function mouseClicked() {
-  if (!gameIsRunning || gameEnd) {
-    resetGame();
+  hitTest(x, y, width, height) {
+    return (
+      x < this.x + this.width &&
+      x + width > this.x &&
+      y < this.y + this.height &&
+      y + height > this.y - this.height
+    );
   }
 }
 
-//CONFETTI FUNCTION from Pig Lander
-for (let i = 0; i < 1000; i++) {
-  const star = {
-    x: Math.floor(Math.random() * 570),
-    y: Math.floor(Math.random() * 700),
-    snow: Math.random() * 1,
-    alpha: Math.random(),
-  };
-  stars.push(star);
+function keyPressed() {
+  if (keyCode === ENTER && currentState === GameState.MENU) {
+    currentState = GameState.PLAYING;
+  } else if (key === "p" && currentState === GameState.PLAYING) {
+    currentState = GameState.PAUSED;
+  } else if (key === "p" && currentState === GameState.PAUSED) {
+    currentState = GameState.PLAYING;
+  } else if (key === "r" && currentState === GameState.GAME_OVER) {
+    resetGameState();
+    currentState = GameState.PLAYING;
+    // Call resetGame() when "r" key is pressed and game is over
+  } else if (keyCode === ENTER && currentState === GameState.PLAYING) {
+    enterPressed = true; // Set enterPressed to true when Enter key is pressed during gameplay
+  } else if (keyCode === ENTER && currentState === GameState.GAME_WON) {
+    resetGameState();
+    currentState = GameState.PLAYING;
+  }
+  // Call resetGame() when Enter key is pressed and game is won
+}
+
+function mousePressed() {
+  if (currentState === GameState.MENU) {
+    currentState = GameState.PLAYING;
+    startGame(); // Call startGame() when transitioning to PLAYING state
+  }
+}
+
+// Function to generate water drops
+function generateWaterDrops() {
+  // Your code to generate water drops
+}
+
+function draw() {
+  background(239, 227, 210); // Clear the screen every frame
+
+  rotationAngle += 0.2; // or adjust the value as needed
+
+  switch (currentState) {
+    case GameState.MENU:
+      startScreen();
+      break;
+    case GameState.PLAYING:
+      startGame();
+      gameIsRunning = true;
+      gameEnd = false;
+      break;
+    case GameState.PAUSED:
+      pauseGame();
+      break;
+    case GameState.GAME_OVER:
+      endGame();
+      gameIsRunning = false;
+      gameEnd = true;
+      break;
+    case GameState.GAME_WON:
+      winScreen();
+      gameIsRunning = false;
+      gameEnd = true;
+      break;
+  }
 }
 
 function startScreen() {
@@ -817,7 +924,7 @@ function startScreen() {
   textSize(50);
   fill(255);
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
+  rotate(radians(sin(rotationAngle) * 0.5));
   text("CAMEL RUN", 130, 300);
   textSize(30);
   fill(255);
@@ -825,33 +932,86 @@ function startScreen() {
   pop();
 }
 
-function loseScreen() {
-  dunes(camelX, y);
+function startGame() {
+  dunes(x + 30, y);
+  x = x - speed;
+  speed = speed;
+  if (x < -280) x = 100;
   sun();
-  textSize(50);
-  fill(231, 56, 56);
-  text("YOU LOSE", 150, 300);
-  textSize(30);
-  fill(231, 56, 56);
-  text("Click to restart", 180, 340);
+  waterTank(waterTankX + 420, waterTankY + 420);
 
-  //Generate Bubbles from Fish Lander
-  for (let i = 0; i < 0.5; i++) {
-    const bubble = {
-      x: Math.floor(Math.random() * 700),
-      y: Math.floor(Math.random() * 900),
-      circle: Math.random() * 10,
-      alpha: Math.random(),
-    };
-    bubbles.push(bubble);
-    text("Your Time " + elapsedTime.toFixed(2), 170, 250);
+  cactus.draw();
+  anotherCactus.draw();
+  anotherCactus1.draw();
+
+  checkWaterDropCollision(camel.x, camel.y);
+
+  cactus.x -= 1;
+  anotherCactus.x -= 1;
+  anotherCactus1.x -= 1;
+
+  if (cactus.x < 0) {
+    cactus.x = 250;
   }
+  if (anotherCactus.x < -200) {
+    anotherCactus.x = 250;
+  }
+  if (anotherCactus.x < -100) {
+    anotherCactus.x = 300;
+  }
+  if (anotherCactus1.x < 0) {
+    anotherCactus1.x = 100;
+  }
+
+  camel.draw(x, y, width, height, 0.5);
+  fill(102, 124, 40);
+  textSize(25);
+  textAlign(LEFT, TOP);
+  text("Collected Water Drops: " + collectedWaterDrops, 10, 10);
+
+  if (enterPressed) {
+    drawWaterDrops();
+    elapsedTime += 1;
+    camel.x += 0.5;
+    camel.y += velocity;
+    velocity += acceleration;
+    camelY += velocity * 2;
+    if (keyIsDown(32)) {
+      velocity = velocity - acceleration * 2;
+    }
+    textSize(20);
+    fill(102, 124, 40);
+    text("Played Time: " + elapsedTime.toFixed(2), 12, 40);
+  }
+  if (cactus.hitTest(camel.x, camel.y, camel.width, camel.height)) {
+    currentState = GameState.GAME_OVER; // Set game state to game over
+  }
+  if (camel.x >= 550) {
+    currentState = GameState.GAME_OVER; // Set game state to game over
+  }
+  if (camel.y >= 650) {
+    currentState = GameState.GAME_OVER; // Set game state to game over
+  }
+  if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
+    currentState = GameState.GAME_WON;
+  }
+}
+
+function pauseGame() {
+  fill(255);
+  textSize(50);
+  textAlign(CENTER, CENTER);
+  text("PAUSED", width / 2, height / 2 - 40);
+  textSize(30);
+  text("Press P to Resume", width / 2, height / 2);
 }
 
 function winScreen() {
   dunes(camelX, y);
   sun();
-  //CONFETTI FUNCTION from Pig Lander
+  happyCamel(camelA + 150, camelB + 200);
+  waterTank(waterTankX + 200, waterTankY + 500);
+
   for (let star of stars) {
     const randomValue = Math.random();
     if (randomValue < 0.2) {
@@ -881,108 +1041,42 @@ function winScreen() {
   }
 }
 
-//function for press ENTER
-function keyPressed() {
-  if (keyCode === ENTER) {
-    enterPressed = true;
-  }
-}
-
-function draw() {
-  //Make the background move
-  dunes(x + 30, y);
-  x = x - speed;
-  speed = speed;
-  if (x < -280) x = 100;
+function endGame() {
+  dunes(camelX, y);
   sun();
+  sadCamel(camelA + 110, camelB + 200);
 
-  waterTank(waterTankX + 420, waterTankY + 420);
+  textSize(50);
+  fill(231, 56, 56);
+  text("YOU LOSE", 150, 300);
+  textSize(30);
+  fill(231, 56, 56);
+  text("Click to restart", 180, 340);
 
-  cactus.draw();
+  //Generate Bubbles
 
-  checkWaterDropCollision(camel.x, camel.y);
-  cactus.x -= 1;
-  anotherCactus.draw();
-  anotherCactus.x -= 1;
-  anotherCactus1.draw();
-  anotherCactus1.x -= 1;
-
-  if (cactus.x < 0) {
-    cactus.x = 250;
-  }
-  if (anotherCactus.x < -200) {
-    anotherCactus.x = 250;
-  }
-  if (anotherCactus.x < -100) {
-    anotherCactus.x = 300;
-  }
-  if (anotherCactus1.x < 0) {
-    anotherCactus1.x = 100;
-  }
-  camel.draw(100, 200, 50, 100, 0.1);
-  fill(102, 124, 40);
-  textSize(25);
-  textAlign(LEFT, TOP);
-  text("Collected Water Drops: " + collectedWaterDrops, 10, 10); //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
-  if (!gameIsRunning && !gameEnd) {
-    startScreen();
-  } else if (gameIsRunning && enterPressed) {
-    // Check if Enter-key is pressed
-    drawWaterDrops();
-    elapsedTime += 1; // / framerate
-    camel.x += speed;
-    camel.y += velocity;
-    velocity += acceleration;
-    camelY += velocity * 2;
-    if (keyIsDown(32)) {
-      velocity = velocity - acceleration * 2; //add jumping effect
-    }
-    textSize(20);
-    fill(102, 124, 40);
-    text("Played Time: " + elapsedTime.toFixed(2), 12, 40);
-  }
-
-  if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
-    gameEnd = true;
-    gameIsRunning = false;
-    winScreen();
-    happyCamel(camelA + 100, camelB + 200);
-    waterTank(waterTankX + 250, waterTankY + 450);
-  }
-
-  //Camel die when going under ground
-  if (camel.y >= 650) {
-    loseScreen();
-    sadCamel(camelA + 100, camelB + 200);
-    for (let bubble of bubbles) {
-      fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
-      ellipse(bubble.x, bubble.y, 20);
-      bubble.y += bubble.circle;
-    }
-  }
-  //Camel die leaving screen
-  if (camel.x >= 550) {
-    loseScreen();
-    sadCamel(camelA + 100, camelB + 200);
-    for (let bubble of bubbles) {
-      fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
-      ellipse(bubble.x, bubble.y, 20);
-      bubble.y += bubble.circle;
-    }
-  }
-  //Hit test from Garrits button video
-  if (cactus.hitTest(camel.x, camel.y, camel.width, camel.height)) {
-    gameEnd = true;
-
-    if (gameEnd) {
-      loseScreen();
-      sadCamel(camelA + 100, camelB + 200);
-      //from Fish Lander
-      for (let bubble of bubbles) {
-        fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
-        ellipse(bubble.x, bubble.y, 20);
-        bubble.y += bubble.circle;
-      }
-    }
+  text("Your Time " + elapsedTime.toFixed(2), 170, 250);
+  for (let bubble of bubbles) {
+    fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
+    ellipse(bubble.x, bubble.y, 20);
+    bubble.y += bubble.circle;
   }
 }
+
+// Generate Bubbles
+if (bubbles.length === 0) {
+  for (let i = 0; i < 50; i++) {
+    const bubble = {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 10,
+      alpha: Math.random(),
+    };
+    bubbles.push(bubble);
+  }
+}
+
+bubbles.forEach((bubble) => {
+  fill(255, 255, 255, bubble.alpha * 255);
+  ellipse(bubble.x, bubble.y, bubble.size);
+});
