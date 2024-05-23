@@ -19,12 +19,12 @@ let gameIsRunning = false;
 let gameEnd = false;
 let velocity = 0.5; //from Pig and Fish Lander
 const acceleration = 0.1; //from Pig and Fish Lander
-let speed = 1;
+let speed = 0.7;
 let xDirection = 0;
 let enterPressed = false;
 let collectedWaterDrops = 0; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
 let elapsedTime = 0;
-let speedIncrement = 0.3;
+let speedIncrement = 0.2;
 let camelY = 100;
 let stars = []; //from Pig Lander
 let camelA = 100;
@@ -943,7 +943,7 @@ function winScreen() {
     text("YOU WON", 150, 300);
     textSize(30);
     fill(53, 180, 40);
-    text("Click to restart", 180, 340);
+    text("Refresh Page to Restart", 120, 360);
     text("Finished Time " + elapsedTime.toFixed(2), 150, 250);
   }
 }
@@ -958,7 +958,7 @@ function endGame() {
   text("YOU LOSE", 150, 300);
   textSize(30);
   fill(231, 56, 56);
-  text("Click to restart", 180, 340); //From Fish Lander
+  text("Refresh Page to Restart", 120, 360); //From Fish Lander
 
   text("Your Time " + elapsedTime.toFixed(2), 170, 250);
   for (let bubble of bubbles) {
