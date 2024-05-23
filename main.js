@@ -22,7 +22,7 @@ let xDirection = 0;
 let enterPressed = false;
 let collectedWaterDrops = 0; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
 let elapsedTime = 0;
-let speedIncrement = 5.0;
+let speedIncrement = 0.2;
 
 function setup() {
   createCanvas(600, 750);
@@ -56,10 +56,7 @@ class WaterDrop {
       this.isVisible = false;
       camel.scale += 0.1;
       collectedWaterDrops++; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
-      speedIncrement += 5;
-      speedIncrement += 7;
-      speedIncrement += 10;
-      speedIncrement += 15;
+      speed += speedIncrement;
     }
   }
 }
@@ -933,7 +930,7 @@ function draw() {
     // Check if Enter-key is pressed
     drawWaterDrops();
     elapsedTime += 1; // / framerate
-    camel.x += 0.5;
+    camel.x += speed;
     camel.y += velocity;
     velocity += acceleration;
     camelY += velocity * 2; // make the camel fall down
