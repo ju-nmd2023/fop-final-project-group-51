@@ -44,12 +44,22 @@ let anotherCactus1;
 
 function setup() {
   createCanvas(600, 750);
+  let canvas = createCanvas(600, 750);
+
   generateWaterDrops();
   camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
   cactus = new Cactus(250, 250, 100, 200); // Provide appropriate arguments
   cactus = new Cactus(200, 500, 100, 100);
   anotherCactus = new Cactus(500, 500, 100, 100);
   anotherCactus1 = new Cactus(200, 500, 100, 100);
+}
+
+function setup() {
+  var cnv = createCanvas(570, 750);
+  var x = (windowWidth - width) / 2;
+  var y = (windowHeight - height) / 2;
+  cnv.position(x, y);
+  background(255, 0, 200);
 }
 
 class WaterDrop {
