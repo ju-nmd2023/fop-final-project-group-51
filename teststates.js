@@ -25,7 +25,7 @@ let xDirection = 0;
 let enterPressed = false;
 let collectedWaterDrops = 0;
 let elapsedTime = 0;
-let speedIncrement = 5.0;
+let speedIncrement = 10;
 let camelY = 100;
 let stars = [];
 
@@ -81,10 +81,7 @@ class WaterDrop {
       this.isVisible = false;
       camel.scale += 0.1; //the camel gets bigger while catching drops
       collectedWaterDrops++;
-      speedIncrement += 5; // You can adjust this value as needed
-      speedIncrement += 7; // You can adjust this value as needed
-      speedIncrement += 10; // You can adjust this value as needed
-      speedIncrement += 15; // You can adjust this value as needed
+      speedIncrement = speedIncrement + 20 + 30 + 40 + 50; // Add all the values together
     }
   }
 }
@@ -108,15 +105,14 @@ for (let i = 0; i < 1000; i++) {
   stars.push(star);
 }
 //Generate Bubbles
-for (let i = 0; i < 0.5; i++) {
+for (let i = 0; i < 40; i++) {
   const bubble = {
     x: Math.floor(Math.random() * 800),
-    y: Math.floor(Math.random() * 900),
+    y: Math.floor(Math.random() * 700),
     circle: Math.random() * 10,
     alpha: Math.random(),
   };
   bubbles.push(bubble);
-  text("Your Time " + elapsedTime.toFixed(2), 170, 250);
 }
 function drawWaterDrops() {
   waterDrops.forEach((drop) => {
@@ -269,7 +265,7 @@ function happyCamel(camelA, camelB) {
 function sadCamel(camelA, camelB) {
   //camel head
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
+  rotate(radians(sin(rotationAngle) * 0.2)); // Rotate the head
   fill(219, 165, 119);
   ellipse(camelA + 125, camelB + 130, 80, 80);
 
@@ -857,6 +853,8 @@ function resetGame() {
 function draw() {
   background(239, 227, 210); // Clear the screen every frame
 
+  rotationAngle += 0.2; // or adjust the value as needed
+
   switch (currentState) {
     case GameState.MENU:
       startScreen();
@@ -1013,15 +1011,12 @@ function endGame() {
   text("Click to restart", 180, 340);
 
   //Generate Bubbles
-  for (let i = 0; i < 0.5; i++) {
-    const bubble = {
-      x: Math.floor(Math.random() * 700),
-      y: Math.floor(Math.random() * 900),
-      circle: Math.random() * 10,
-      alpha: Math.random(),
-    };
-    bubbles.push(bubble);
-    text("Your Time " + elapsedTime.toFixed(2), 170, 250);
+
+  text("Your Time " + elapsedTime.toFixed(2), 170, 250);
+  for (let bubble of bubbles) {
+    fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
+    ellipse(bubble.x, bubble.y, 20);
+    bubble.y += bubble.circle;
   }
 }
 
