@@ -1,5 +1,6 @@
 /** @format */
 let camelX = 100;
+
 let x = 200;
 let y = 200;
 let cloudX = 200;
@@ -8,24 +9,25 @@ let sunX = 200;
 let sunY = 200;
 let waterTankX = 100;
 let waterTankY = 100;
+let cactuses = [];
 camelX = 100;
-let rotationAngle = 0; //from Pig Lander
-let bubbles = []; //from Fish Lander
+let rotationAngle = 0;
+let bubbles = [];
 let waterDrops = [];
 let cactusX = 200;
 let cactusY = 200;
 let gameIsRunning = false;
 let gameEnd = false;
-let velocity = 0.5; //from Pig and Fish Lander
-const acceleration = 0.1; //from Pig and Fish Lander
+let velocity = 0.5;
+const acceleration = 0.1;
 let speed = 1;
 let xDirection = 0;
 let enterPressed = false;
-let collectedWaterDrops = 0; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
+let collectedWaterDrops = 0;
 let elapsedTime = 0;
-let speedIncrement = 0.3;
+let speedIncrement = 10;
 let camelY = 100;
-let stars = []; //from Pig Lander
+let stars = [];
 let camelA = 100;
 let camelB = 100;
 
@@ -49,6 +51,45 @@ function setup() {
   cactus = new Cactus(200, 500, 100, 100);
   anotherCactus = new Cactus(500, 500, 100, 100);
   anotherCactus1 = new Cactus(200, 500, 100, 100);
+}
+
+function resetGameState() {
+  camelX = 100;
+  x = 200;
+  y = 200;
+  cloudX = 200;
+  cloudY = 200;
+  sunX = 200;
+  sunY = 200;
+  waterTankX = 100;
+  waterTankY = 100;
+  cactuses = [];
+  rotationAngle = 0;
+  bubbles = [];
+  waterDrops = [];
+  cactusX = 200;
+  cactusY = 200;
+  gameIsRunning = false;
+  gameEnd = false;
+  velocity = 0.5;
+  speed = 1;
+  xDirection = 0;
+  enterPressed = false;
+  collectedWaterDrops = 0;
+  elapsedTime = 0;
+  speedIncrement = 10;
+  camelY = 100;
+  stars = [];
+  camelA = 100;
+  camelB = 100;
+}
+
+function keyPressed() {
+  if (key === "r") {
+    currentState = GameState.MENU;
+    resetGameState();
+  }
+  // Add other key presses here if needed
 }
 
 class WaterDrop {
@@ -77,12 +118,12 @@ class WaterDrop {
     if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
       this.isVisible = false;
       camel.scale += 0.1; //the camel gets bigger while catching drops
-      collectedWaterDrops++; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
-      speed += speedIncrement;
+      collectedWaterDrops++;
+      speedIncrement = speedIncrement + 20 + 30 + 40 + 15; // Add all the values together
     }
   }
 }
-////from Pig and Fish Lander
+
 function generateWaterDrops() {
   for (let i = 0; i < 4; i++) {
     let waterDropX = random(100, width - 50);
@@ -91,7 +132,7 @@ function generateWaterDrops() {
   }
 }
 
-//Generate confetti from Pig Lander
+//Generate confetti
 for (let i = 0; i < 1000; i++) {
   const star = {
     x: Math.floor(Math.random() * 800),
@@ -101,7 +142,7 @@ for (let i = 0; i < 1000; i++) {
   };
   stars.push(star);
 }
-//Generate Bubbles from Fish Lander
+//Generate Bubbles
 for (let i = 0; i < 40; i++) {
   const bubble = {
     x: Math.floor(Math.random() * 800),
@@ -244,7 +285,7 @@ function happyCamel(camelA, camelB) {
 
   //nose dot
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
   fill(0, 0, 0);
   ellipse(camelA + 116, camelB + 163, 4, 8);
   fill(0, 0, 0);
@@ -262,7 +303,7 @@ function happyCamel(camelA, camelB) {
 function sadCamel(camelA, camelB) {
   //camel head
   push();
-  rotate(radians(sin(rotationAngle) * 0.2)); // Rotation from Pig Lander
+  rotate(radians(sin(rotationAngle) * 0.2)); // Rotate the head
   fill(219, 165, 119);
   ellipse(camelA + 125, camelB + 130, 80, 80);
 
@@ -327,7 +368,7 @@ function sadCamel(camelA, camelB) {
 
   //dead eyes
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
   fill(0, 0, 0);
   stroke(0);
   strokeWeight(3);
@@ -346,7 +387,7 @@ function sadCamel(camelA, camelB) {
 
   //nose dot
   push();
-  rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
+  rotate(radians(sin(rotationAngle) * 0.5)); // Rotate up and down
   fill(0, 0, 0);
   ellipse(camelA + 116, camelB + 163, 4, 8);
   fill(0, 0, 0);
@@ -481,7 +522,7 @@ class Camel {
 
     // camel ears
     push();
-    rotate(radians(sin(rotationAngle) * 0.2)); // Rotation from Pig Lander
+    rotate(radians(sin(rotationAngle) * 0.2));
     fill(219, 165, 119);
     ellipse(
       this.x + 155 * scale,
@@ -544,7 +585,7 @@ class Camel {
 
     // camel legs
     push();
-    rotate(radians(sin(rotationAngle) * 0.5)); // Rotation from Pig Lander
+    rotate(radians(sin(rotationAngle) * 0.5));
     ellipse(
       this.x + 100 * scale,
       this.y + 320 * scale,
@@ -818,21 +859,21 @@ class Cactus {
 function keyPressed() {
   if (keyCode === ENTER && currentState === GameState.MENU) {
     currentState = GameState.PLAYING;
-    startGame(); // Call startGame() when transitioning to PLAYING state
   } else if (key === "p" && currentState === GameState.PLAYING) {
     currentState = GameState.PAUSED;
   } else if (key === "p" && currentState === GameState.PAUSED) {
     currentState = GameState.PLAYING;
   } else if (key === "r" && currentState === GameState.GAME_OVER) {
+    resetGameState();
     currentState = GameState.PLAYING;
-    gameEnd = false;
-    gameIsRunning = true;
     // Call resetGame() when "r" key is pressed and game is over
   } else if (keyCode === ENTER && currentState === GameState.PLAYING) {
     enterPressed = true; // Set enterPressed to true when Enter key is pressed during gameplay
   } else if (keyCode === ENTER && currentState === GameState.GAME_WON) {
-    winScreen(); // Call resetGame() when Enter key is pressed and game is won
+    resetGameState();
+    currentState = GameState.PLAYING;
   }
+  // Call resetGame() when Enter key is pressed and game is won
 }
 
 function mousePressed() {
@@ -842,18 +883,15 @@ function mousePressed() {
   }
 }
 
-function resetGame() {
-  elapsedTime = 0;
-  collectedWaterDrops = 0;
-  currentState = GameState.MENU;
-  bubbles = [];
-  generateWaterDrops();
+// Function to generate water drops
+function generateWaterDrops() {
+  // Your code to generate water drops
 }
 
 function draw() {
   background(239, 227, 210); // Clear the screen every frame
 
-  rotationAngle += 0.2; // Rotation from Pig Lander
+  rotationAngle += 0.2; // or adjust the value as needed
 
   switch (currentState) {
     case GameState.MENU:
@@ -861,16 +899,21 @@ function draw() {
       break;
     case GameState.PLAYING:
       startGame();
+      gameIsRunning = true;
+      gameEnd = false;
       break;
     case GameState.PAUSED:
       pauseGame();
       break;
     case GameState.GAME_OVER:
       endGame();
+      gameIsRunning = false;
+      gameEnd = true;
       break;
     case GameState.GAME_WON:
-      // Call a function to handle the game won state
       winScreen();
+      gameIsRunning = false;
+      gameEnd = true;
       break;
   }
 }
@@ -924,12 +967,12 @@ function startGame() {
   fill(102, 124, 40);
   textSize(25);
   textAlign(LEFT, TOP);
-  text("Collected Water Drops: " + collectedWaterDrops, 10, 10); //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
+  text("Collected Water Drops: " + collectedWaterDrops, 10, 10);
 
   if (enterPressed) {
     drawWaterDrops();
     elapsedTime += 1;
-    camel.x += speed;
+    camel.x += 0.5;
     camel.y += velocity;
     velocity += acceleration;
     camelY += velocity * 2;
@@ -968,7 +1011,7 @@ function winScreen() {
   sun();
   happyCamel(camelA + 150, camelB + 200);
   waterTank(waterTankX + 200, waterTankY + 500);
-  //from Pig Lander
+
   for (let star of stars) {
     const randomValue = Math.random();
     if (randomValue < 0.2) {
@@ -1010,7 +1053,7 @@ function endGame() {
   fill(231, 56, 56);
   text("Click to restart", 180, 340);
 
-  //From Fish Lander
+  //Generate Bubbles
 
   text("Your Time " + elapsedTime.toFixed(2), 170, 250);
   for (let bubble of bubbles) {
@@ -1020,7 +1063,7 @@ function endGame() {
   }
 }
 
-//From Fish Lander
+// Generate Bubbles
 if (bubbles.length === 0) {
   for (let i = 0; i < 50; i++) {
     const bubble = {
@@ -1032,7 +1075,7 @@ if (bubbles.length === 0) {
     bubbles.push(bubble);
   }
 }
-//From Fish Lander
+
 bubbles.forEach((bubble) => {
   fill(255, 255, 255, bubble.alpha * 255);
   ellipse(bubble.x, bubble.y, bubble.size);
