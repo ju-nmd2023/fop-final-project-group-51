@@ -2,6 +2,10 @@
 
 let x = 200;
 let y = 200;
+let camelX = 100;
+let camelY = 100;
+let camelA = 100;
+let camelB = 100;
 let cloudX = 200;
 let cloudY = 200;
 let sunX = 200;
@@ -15,12 +19,13 @@ let waterTankY = 100;
 let cactuses = [];
 let gameIsRunning = false;
 let gameEnd = false;
-let velocity = 0.5;
-const acceleration = 0.1;
+let velocity = 0.5; //from Pig and Fish Lander
+const acceleration = 0.1; //from Pig and Fish Lander
 let speed = 1;
 let xDirection = 0;
 let enterPressed = false;
-let collectedWaterDrops = 0;
+let collectedWaterDrops = 0; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
+let stars = [];
 
 function setup() {
   createCanvas(600, 750);
@@ -248,11 +253,6 @@ function sun() {
   ellipse(sunX - 90, sunY - 50, 100);
   pop();
 }
-let camelX = 100;
-let camelY = 100;
-
-let camelA = 100;
-let camelB = 100;
 
 //position camel
 function sadCamel(camelX, camelY) {
@@ -884,8 +884,6 @@ function mouseClicked() {
     resetGame();
   }
 }
-
-let stars = [];
 
 //CONFETTI FUNCTION
 for (let i = 0; i < 1000; i++) {
