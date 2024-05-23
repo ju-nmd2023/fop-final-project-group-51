@@ -26,6 +26,8 @@ let enterPressed = false;
 let collectedWaterDrops = 0;
 let elapsedTime = 0;
 let speedIncrement = 10;
+let endGameStartTime;
+const endGameDuration = 3; // Display end game screen for 3 seconds
 let camelY = 100;
 let stars = [];
 
@@ -81,7 +83,7 @@ class WaterDrop {
       this.isVisible = false;
       camel.scale += 0.1; //the camel gets bigger while catching drops
       collectedWaterDrops++;
-      speedIncrement = speedIncrement + 20 + 30 + 40 + 50; // Add all the values together
+      speedIncrement = speedIncrement + 20 + 30 + 40 + 15; // Add all the values together
     }
   }
 }
@@ -827,14 +829,19 @@ function keyPressed() {
   } else if (key === "p" && currentState === GameState.PAUSED) {
     currentState = GameState.PLAYING;
   } else if (key === "r" && currentState === GameState.GAME_OVER) {
-    resetGame(); // Call resetGame() when "r" key is pressed and game is over
+    currentState = GameState.PLAYING;
+    gameEnd = false;
+    gameIsRunning = true;
+    // Call resetGame() when "r" key is pressed and game is over
   } else if (keyCode === ENTER && currentState === GameState.PLAYING) {
     enterPressed = true; // Set enterPressed to true when Enter key is pressed during gameplay
   } else if (keyCode === ENTER && currentState === GameState.GAME_WON) {
     winScreen(); // Call resetGame() when Enter key is pressed and game is won
   }
+  if (!endGameStartTime) {
+    endGameStartTime = millis();
+  }
 }
-
 function mousePressed() {
   if (currentState === GameState.MENU) {
     currentState = GameState.PLAYING;
