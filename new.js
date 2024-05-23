@@ -1011,6 +1011,7 @@ function endGame() {
   text("Click to restart", 180, 340);
 
   //From Fish Lander
+
   text("Your Time " + elapsedTime.toFixed(2), 170, 250);
   for (let bubble of bubbles) {
     fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
