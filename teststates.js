@@ -26,8 +26,7 @@ let enterPressed = false;
 let collectedWaterDrops = 0;
 let elapsedTime = 0;
 let speedIncrement = 10;
-let endGameStartTime;
-const endGameDuration = 3; // Display end game screen for 3 seconds
+
 let camelY = 100;
 let stars = [];
 
@@ -838,10 +837,8 @@ function keyPressed() {
   } else if (keyCode === ENTER && currentState === GameState.GAME_WON) {
     winScreen(); // Call resetGame() when Enter key is pressed and game is won
   }
-  if (!endGameStartTime) {
-    endGameStartTime = millis();
-  }
 }
+
 function mousePressed() {
   if (currentState === GameState.MENU) {
     currentState = GameState.PLAYING;
