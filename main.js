@@ -54,14 +54,6 @@ function setup() {
   anotherCactus1 = new Cactus(200, 500, 100, 100);
 }
 
-function setup() {
-  var cnv = createCanvas(570, 750);
-  var x = (windowWidth - width) / 2;
-  var y = (windowHeight - height) / 2;
-  cnv.position(x, y);
-  background(255, 0, 200);
-}
-
 class WaterDrop {
   constructor(x, y) {
     this.x = x;
