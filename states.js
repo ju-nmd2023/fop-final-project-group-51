@@ -27,6 +27,100 @@ function setup() {
   generateWaterDrops();
 }
 
+function draw() {
+  //Make the background move
+  dunes(x + 30, y);
+  x = x - speed;
+  speed = speed;
+  if (x < -280) x = 100;
+  sun();
+
+  waterTank(waterTankX + 420, waterTankY + 420);
+
+  cactus.draw();
+
+  checkWaterDropCollision(camel.x, camel.y);
+  cactus.x -= 1;
+  anotherCactus.draw();
+  anotherCactus.x -= 1;
+  anotherCactus1.draw();
+  anotherCactus1.x -= 1;
+
+  if (cactus.x < 0) {
+    cactus.x = 250;
+  }
+  if (anotherCactus.x < -200) {
+    anotherCactus.x = 250;
+  }
+  if (anotherCactus.x < -100) {
+    anotherCactus.x = 300;
+  }
+  if (anotherCactus1.x < 0) {
+    anotherCactus1.x = 100;
+  }
+  camel.draw(100, 200, 50, 100, 0.1);
+  fill(102, 124, 40);
+  textSize(25);
+  textAlign(LEFT, TOP);
+  text("Collected Water Drops: " + collectedWaterDrops, 10, 10);
+  if (!gameIsRunning && !gameEnd) {
+    startScreen();
+  } else if (gameIsRunning && enterPressed) {
+    // Check if Enter-key is pressed
+    drawWaterDrops();
+    camel.x += 0.5;
+    camel.y += velocity;
+    velocity += acceleration;
+    camelY += velocity * 2; // make the camel fall down
+    if (keyIsDown(32)) {
+      velocity = velocity - acceleration * 2; //add jumping effect
+    }
+  }
+
+  if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
+    gameEnd = true;
+    gameIsRunning = false;
+    winScreen();
+    happyCamel(camelA + 100, camelB + 200);
+    waterTank(waterTankX + 250, waterTankY + 450);
+  }
+
+  //Camel die when going under ground
+  if (camel.y >= 650) {
+    loseScreen();
+    sadCamel(camelA + 100, camelB + 200);
+    for (let bubble of bubbles) {
+      fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
+      ellipse(bubble.x, bubble.y, 20);
+      bubble.y += bubble.circle;
+    }
+  }
+  //Camel die leaving screen
+  if (camel.x >= 550) {
+    loseScreen();
+    sadCamel(camelA + 100, camelB + 200);
+    for (let bubble of bubbles) {
+      fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
+      ellipse(bubble.x, bubble.y, 20);
+      bubble.y += bubble.circle;
+    }
+  }
+
+  if (cactus.hitTest(camel.x, camel.y, camel.width, camel.height)) {
+    gameEnd = true;
+
+    if (gameEnd) {
+      loseScreen();
+      sadCamel(camelA + 100, camelB + 200);
+      for (let bubble of bubbles) {
+        fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
+        ellipse(bubble.x, bubble.y, 20);
+        bubble.y += bubble.circle;
+      }
+    }
+  }
+}
+
 class WaterDrop {
   constructor(x, y) {
     this.x = x;
@@ -880,99 +974,5 @@ function winScreen() {
 function keyPressed() {
   if (keyCode === ENTER) {
     enterPressed = true;
-  }
-}
-
-function draw() {
-  //Make the background move
-  dunes(x + 30, y);
-  x = x - speed;
-  speed = speed;
-  if (x < -280) x = 100;
-  sun();
-
-  waterTank(waterTankX + 420, waterTankY + 420);
-
-  cactus.draw();
-
-  checkWaterDropCollision(camel.x, camel.y);
-  cactus.x -= 1;
-  anotherCactus.draw();
-  anotherCactus.x -= 1;
-  anotherCactus1.draw();
-  anotherCactus1.x -= 1;
-
-  if (cactus.x < 0) {
-    cactus.x = 250;
-  }
-  if (anotherCactus.x < -200) {
-    anotherCactus.x = 250;
-  }
-  if (anotherCactus.x < -100) {
-    anotherCactus.x = 300;
-  }
-  if (anotherCactus1.x < 0) {
-    anotherCactus1.x = 100;
-  }
-  camel.draw(100, 200, 50, 100, 0.1);
-  fill(102, 124, 40);
-  textSize(25);
-  textAlign(LEFT, TOP);
-  text("Collected Water Drops: " + collectedWaterDrops, 10, 10);
-  if (!gameIsRunning && !gameEnd) {
-    startScreen();
-  } else if (gameIsRunning && enterPressed) {
-    // Check if Enter-key is pressed
-    drawWaterDrops();
-    camel.x += 0.5;
-    camel.y += velocity;
-    velocity += acceleration;
-    camelY += velocity * 2; // make the camel fall down
-    if (keyIsDown(32)) {
-      velocity = velocity - acceleration * 2; //add jumping effect
-    }
-  }
-
-  if (camel.x >= waterTankX + 380 && camel.y >= waterTankY + 320) {
-    gameEnd = true;
-    gameIsRunning = false;
-    winScreen();
-    happyCamel(camelA + 100, camelB + 200);
-    waterTank(waterTankX + 250, waterTankY + 450);
-  }
-
-  //Camel die when going under ground
-  if (camel.y >= 650) {
-    loseScreen();
-    sadCamel(camelA + 100, camelB + 200);
-    for (let bubble of bubbles) {
-      fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
-      ellipse(bubble.x, bubble.y, 20);
-      bubble.y += bubble.circle;
-    }
-  }
-  //Camel die leaving screen
-  if (camel.x >= 550) {
-    loseScreen();
-    sadCamel(camelA + 100, camelB + 200);
-    for (let bubble of bubbles) {
-      fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
-      ellipse(bubble.x, bubble.y, 20);
-      bubble.y += bubble.circle;
-    }
-  }
-
-  if (cactus.hitTest(camel.x, camel.y, camel.width, camel.height)) {
-    gameEnd = true;
-
-    if (gameEnd) {
-      loseScreen();
-      sadCamel(camelA + 100, camelB + 200);
-      for (let bubble of bubbles) {
-        fill(231, 56, 56, Math.abs(Math.sin(bubble.alpha)) * 455);
-        ellipse(bubble.x, bubble.y, 20);
-        bubble.y += bubble.circle;
-      }
-    }
   }
 }
