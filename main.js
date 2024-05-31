@@ -22,7 +22,7 @@ const acceleration = 0.1; //from Pig and Fish Lander
 let speed = 0.7;
 let xDirection = 0;
 let enterPressed = false;
-let collectedWaterDrops = 0; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
+let collectedWaterDrops = 0; //ChatGPT https://chatgpt.com/share/e88943e4-1251-43ca-b5fb-963d9d037c2e
 let elapsedTime = 0;
 let speedIncrement = 0.2;
 let camelY = 100;
@@ -77,7 +77,7 @@ class WaterDrop {
     if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
       this.isVisible = false;
       camel.scale += 0.1; //the camel gets bigger while catching drops
-      collectedWaterDrops++; //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
+      collectedWaterDrops++; //ChatGPT https://chatgpt.com/share/e88943e4-1251-43ca-b5fb-963d9d037c2e
       speed += speedIncrement;
     }
   }
@@ -873,7 +873,7 @@ function startGame() {
   fill(102, 124, 40);
   textSize(25);
   textAlign(LEFT, TOP);
-  text("Collected Water Drops: " + collectedWaterDrops, 10, 10); //ChatGPT https://chatgpt.com/share/110ff9ee-02cc-4224-a7db-5fb9a611cc33
+  text("Collected Water Drops: " + collectedWaterDrops, 10, 10); //ChatGPT https://chatgpt.com/share/e88943e4-1251-43ca-b5fb-963d9d037c2e
 
   if (enterPressed) {
     drawWaterDrops();
