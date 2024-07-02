@@ -29,10 +29,10 @@ let camelY = 100;
 let stars = []; //from Pig Lander
 let camelA = 100;
 let camelB = 100;
-let r = 239;
+let r = 239; //chatGPT https://chatgpt.com/share/a718bc07-9316-4e1a-bd35-d30de446a3c4
 let g = 227;
 let b = 210;
-const colourDecrese = 40;
+const colourDecrese = 40; //chatGPT
 
 const GameState = {
   MENU: "menu",
@@ -86,7 +86,7 @@ class WaterDrop {
       speed += speedIncrement;
       r = r - colourDecrese;
       g = g - colourDecrese;
-      b = b - colourDecrese;
+      b = b - colourDecrese; //chatGPT https://chatgpt.com/share/a718bc07-9316-4e1a-bd35-d30de446a3c4
     }
   }
 }
