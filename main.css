@@ -1,0 +1,10 @@
+/** @format */
+
+body,
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0e6d2; /* Sand background */
+}
