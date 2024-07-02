@@ -29,6 +29,10 @@ let camelY = 100;
 let stars = []; //from Pig Lander
 let camelA = 100;
 let camelB = 100;
+let r = 239;
+let g = 227;
+let b = 210;
+const colourDecrese = 40;
 
 const GameState = {
   MENU: "menu",
@@ -76,9 +80,13 @@ class WaterDrop {
   checkCollision(camelX, camelY) {
     if (this.isVisible && dist(camelX, camelY, this.x, this.y) < 50) {
       this.isVisible = false;
+
       camel.scale += 0.1; //the camel gets bigger while catching drops
       collectedWaterDrops++; //ChatGPT https://chatgpt.com/share/e88943e4-1251-43ca-b5fb-963d9d037c2e
       speed += speedIncrement;
+      r = r - colourDecrese;
+      g = g - colourDecrese;
+      b = b - colourDecrese;
     }
   }
 }
@@ -334,7 +342,7 @@ function sadCamel(camelA, camelB) {
 function dunes(x, y) {
   //sky
 
-  background(239, 227, 210); //dunes
+  background(r, g, b); //dunes
 
   fill(192, 120, 50);
   noStroke();
