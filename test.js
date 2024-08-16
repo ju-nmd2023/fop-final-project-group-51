@@ -1,12 +1,8 @@
-/** @format */
-
 let camelX = 100;
 let x = 200;
 let y = 200;
 let cloudX = 200;
 let cloudY = 200;
-let sunX = 200;
-let sunY = 200;
 let smileyX = 200;
 let smileyY = 200;
 let waterTankX = 100;
@@ -413,18 +409,11 @@ function sun() {
     cloudX = -250;
   } //lunar lander game
 
-  push();
-  fill(250, 210, 160);
-  ellipse(sunX - 90, sunY - 50, 140);
-  fill(251, 140, 26);
-  ellipse(sunX - 90, sunY - 50, 100);
-  pop();
-
-  //enemy test
+  //enemy
   push();
   fill(216, 45, 37);
   stroke(0, 0, 0);
-  ellipse(smileyX + 100, smileyY - 20, 60); //body
+  ellipse(smileyX + 100, smileyY - 20, 63); //body
   pop();
 
   fill(255, 255, 255);
@@ -433,7 +422,7 @@ function sun() {
   ellipse(smileyX + 90, smileyY - 22, 10, 17); //eyes left
   ellipse(smileyX + 110, smileyY - 22, 10, 17); //eyes right
   pop();
-  push();
+
   fill(0, 0, 0);
   ellipse(smileyX + 89, smileyY - 19, 7, 11); //pupils left
   ellipse(smileyX + 109, smileyY - 19, 7, 11); //pupils right
@@ -445,7 +434,6 @@ function sun() {
   fill(255, 182, 193);
   stroke(0, 0, 0);
   rect(smileyX + 90, smileyY - 6, 20, 7, 5); //mouth
-  pop();
 }
 
 class Camel {
