@@ -468,7 +468,7 @@ class enemy {
 
 class Camel {
   constructor(x, y, width, height, scale) {
-    this.x = x;
+    this.x = x; 
     this.y = y;
     this.width = width;
     this.height = height;
