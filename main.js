@@ -419,33 +419,58 @@ function sun() {
   fill(251, 140, 26);
   ellipse(sunX - 90, sunY - 50, 100);
   pop();
+}
 
-  //enemy test
-  push();
-  fill(216, 45, 37);
-  stroke(0, 0, 0);
-  ellipse(smileyX + 100, smileyY - 20, 60); //body
-  pop();
+class enemy {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
 
-  fill(255, 255, 255);
-  push();
-  stroke(0, 0, 0);
-  ellipse(smileyX + 90, smileyY - 22, 10, 17); //eyes left
-  ellipse(smileyX + 110, smileyY - 22, 10, 17); //eyes right
-  pop();
-  push();
-  fill(0, 0, 0);
-  ellipse(smileyX + 89, smileyY - 19, 7, 11); //pupils left
-  ellipse(smileyX + 109, smileyY - 19, 7, 11); //pupils right
+  display() {
+    // Draw body
+    push();
+    fill(216, 45, 37);
+    stroke(0, 0, 0);
+    ellipse(this.x + 100, this.y - 20, 60); // body
+    pop();
 
-  fill(0, 0, 0);
-  rect(smileyX + 81, smileyY - 31, 16, 4, 5); //eyebrow left
-  rect(smileyX + 103, smileyY - 31, 16, 4, 5); //eyebrow right
+    // Draw eyes
+    push();
+    fill(255, 255, 255);
+    stroke(0, 0, 0);
+    ellipse(this.x + 90, this.y - 22, 10, 17); // eyes left
+    ellipse(this.x + 110, this.y - 22, 10, 17); // eyes right
+    pop();
 
-  fill(255, 182, 193);
-  stroke(0, 0, 0);
-  rect(smileyX + 90, smileyY - 6, 20, 7, 5); //mouth
-  pop();
+    // Draw pupils
+    push();
+    fill(0, 0, 0);
+    ellipse(this.x + 89, this.y - 19, 7, 11); // pupils left
+    ellipse(this.x + 109, this.y - 19, 7, 11); // pupils right
+    pop();
+
+    // Draw eyebrows
+    push();
+    fill(0, 0, 0);
+    rect(this.x + 81, this.y - 31, 16, 4, 5); // eyebrow left
+    rect(this.x + 103, this.y - 31, 16, 4, 5); // eyebrow right
+    pop();
+
+    // Draw mouth
+    push();
+    fill(255, 182, 193);
+    stroke(0, 0, 0);
+    rect(this.x + 90, this.y - 6, 20, 7, 5); // mouth
+    pop();
+  }
+
+  update() {
+    this.x += 0.7;
+    if (this.x > 750) {
+      this.x = -250;
+    }
+  }
 }
 
 class Camel {
@@ -884,6 +909,7 @@ function startGame() {
   waterTank(waterTankX + 420, waterTankY + 420);
 
   cactus.draw();
+  enemy.draw();
   anotherCactus.draw();
   anotherCactus1.draw();
 
