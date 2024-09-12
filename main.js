@@ -475,7 +475,7 @@ class enemy {
 
 class Camel {
   constructor(x, y, width, height, scale) {
-    this.x = x; 
+    this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
@@ -909,14 +909,8 @@ function startGame() {
   waterTank(waterTankX + 420, waterTankY + 420);
 
   cactus.draw();
-<<<<<<< HEAD
-=======
   enemy1.draw();
-<<<<<<< HEAD
   enemy1.update();
-=======
->>>>>>> 6cd935bb4fc8f65b136eb59f31097b101e48fe67
->>>>>>> baf0eced2a588116bc62333357ca76fffc6a1145
   anotherCactus.draw();
   anotherCactus1.draw();
 
