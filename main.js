@@ -50,7 +50,7 @@ let anotherCactus1;
 function setup() {
   createCanvas(600, 750);
   generateWaterDrops();
-  enemy1 = new enemy(200, 200);
+  enemy1 = new enemy(300, 200);
   camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
   cactus = new Cactus(250, 250, 100, 200); // Provide appropriate arguments
   cactus = new Cactus(200, 500, 100, 100);
@@ -463,6 +463,13 @@ class enemy {
     stroke(0, 0, 0);
     rect(this.x + 90, this.y - 6, 20, 7, 5); // mouth
     pop();
+  }
+
+  update() {
+    this.y = this.y + 2;
+    if (this.y > 500) {
+      this.y = -0;
+    }
   }
 }
 
@@ -903,6 +910,7 @@ function startGame() {
 
   cactus.draw();
   enemy1.draw();
+  enemy1.update();
   anotherCactus.draw();
   anotherCactus1.draw();
 
