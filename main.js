@@ -7,8 +7,7 @@ let cloudX = 200;
 let cloudY = 200;
 let sunX = 200;
 let sunY = 200;
-let smileyX = 200;
-let smileyY = 200;
+let enemy1;
 let waterTankX = 100;
 let waterTankY = 100;
 camelX = 100;
@@ -51,6 +50,7 @@ let anotherCactus1;
 function setup() {
   createCanvas(600, 750);
   generateWaterDrops();
+  enemy1 = new enemy(200, 200);
   camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
   cactus = new Cactus(250, 250, 100, 200); // Provide appropriate arguments
   cactus = new Cactus(200, 500, 100, 100);
@@ -427,7 +427,7 @@ class enemy {
     this.y = y;
   }
 
-  display() {
+  draw() {
     // Draw body
     push();
     fill(216, 45, 37);
@@ -463,13 +463,6 @@ class enemy {
     stroke(0, 0, 0);
     rect(this.x + 90, this.y - 6, 20, 7, 5); // mouth
     pop();
-  }
-
-  update() {
-    this.x += 0.7;
-    if (this.x > 750) {
-      this.x = -250;
-    }
   }
 }
 
@@ -909,7 +902,7 @@ function startGame() {
   waterTank(waterTankX + 420, waterTankY + 420);
 
   cactus.draw();
-  enemy.draw();
+  enemy1.draw();
   anotherCactus.draw();
   anotherCactus1.draw();
 
