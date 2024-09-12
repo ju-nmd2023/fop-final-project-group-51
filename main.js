@@ -909,7 +909,6 @@ function startGame() {
   waterTank(waterTankX + 420, waterTankY + 420);
 
   cactus.draw();
-  enemy.draw();
   anotherCactus.draw();
   anotherCactus1.draw();
 
