@@ -17,7 +17,7 @@ let waterDrops = [];
 let cactusX = 200;
 let cactusY = 200;
 let gameIsRunning = false;
-let gameEnd = false; 
+let gameEnd = false;
 let velocity = 0.5; //from Pig and Fish Lander
 const acceleration = 0.1; //from Pig and Fish Lander
 let speed = 0.7;
@@ -436,33 +436,28 @@ class enemy {
     stroke(0, 0, 0);
     ellipse(this.x + 100, this.y - 20, this.width, this.height); // body
 
-    pop();
+    pop(); // Draw eyes
 
-    // Draw eyes
     push();
 
     fill(255, 255, 255);
     stroke(0, 0, 0);
     ellipse(this.x + 90, this.y - 22, 10, 17); // eyes left
     ellipse(this.x + 110, this.y - 22, 10, 17); // eyes right
-    pop();
+    pop(); // Draw pupils
 
-    // Draw pupils
     push();
     rotate(radians(sin(rotationAngle) * 0.2)); // Rotation from Pig Lander
     fill(0, 0, 0);
     ellipse(this.x + 89, this.y - 19, 7, 11); // pupils left
     ellipse(this.x + 109, this.y - 19, 7, 11); // pupils right
-    pop();
+    pop(); // Draw eyebrows
 
-    // Draw eyebrows
     push();
     fill(0, 0, 0);
     rect(this.x + 81, this.y - 31, 16, 4, 5); // eyebrow left
     rect(this.x + 103, this.y - 31, 16, 4, 5); // eyebrow right
-    pop();
-
-    // Draw mouth
+    pop(); // Draw mouth
 
     push();
     fill(255, 182, 193);
@@ -472,7 +467,6 @@ class enemy {
   }
 
   hitTest(x, y, width, height) {
-  hitTest(x, y, width, height) { 
     return (
       x < this.x + 70 + this.width &&
       x + width > this.x + 70 &&
