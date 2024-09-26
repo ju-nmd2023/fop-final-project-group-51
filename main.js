@@ -470,6 +470,8 @@ class enemy {
     rect(this.x + 90, this.y - 6, 20, 7, 5); // mouth
     pop();
   }
+
+  hitTest(x, y, width, height) {
   hitTest(x, y, width, height) { 
     return (
       x < this.x + 70 + this.width &&
