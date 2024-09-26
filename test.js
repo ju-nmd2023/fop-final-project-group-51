@@ -3,8 +3,9 @@ let x = 200;
 let y = 200;
 let cloudX = 200;
 let cloudY = 200;
-let smileyX = 200;
-let smileyY = 200;
+let sunX = 200;
+let sunY = 200;
+let enemy1;
 let waterTankX = 100;
 let waterTankY = 100;
 camelX = 100;
@@ -47,6 +48,7 @@ let anotherCactus1;
 function setup() {
   createCanvas(600, 750);
   generateWaterDrops();
+  enemy1 = new enemy(300, 200);
   camel = new Camel(100, 200, 100, 100, 0.5); // Example scale factor of 0.5
   cactus = new Cactus(250, 250, 100, 200); // Provide appropriate arguments
   cactus = new Cactus(200, 500, 100, 100);
@@ -409,31 +411,64 @@ function sun() {
     cloudX = -250;
   } //lunar lander game
 
-  //enemy
   push();
-  fill(216, 45, 37);
-  stroke(0, 0, 0);
-  ellipse(smileyX + 100, smileyY - 20, 63); //body
+  fill(250, 210, 160);
+  ellipse(sunX - 90, sunY - 50, 140);
+  fill(251, 140, 26);
+  ellipse(sunX - 90, sunY - 50, 100);
   pop();
+}
 
-  fill(255, 255, 255);
-  push();
-  stroke(0, 0, 0);
-  ellipse(smileyX + 90, smileyY - 22, 10, 17); //eyes left
-  ellipse(smileyX + 110, smileyY - 22, 10, 17); //eyes right
-  pop();
+class enemy {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
 
-  fill(0, 0, 0);
-  ellipse(smileyX + 89, smileyY - 19, 7, 11); //pupils left
-  ellipse(smileyX + 109, smileyY - 19, 7, 11); //pupils right
+  draw() {
+    // Draw body
+    push();
+    fill(216, 45, 37);
+    stroke(0, 0, 0);
+    ellipse(this.x + 100, this.y - 20, 60); // body
+    pop();
 
-  fill(0, 0, 0);
-  rect(smileyX + 81, smileyY - 31, 16, 4, 5); //eyebrow left
-  rect(smileyX + 103, smileyY - 31, 16, 4, 5); //eyebrow right
+    // Draw eyes
+    push();
+    fill(255, 255, 255);
+    stroke(0, 0, 0);
+    ellipse(this.x + 90, this.y - 22, 10, 17); // eyes left
+    ellipse(this.x + 110, this.y - 22, 10, 17); // eyes right
+    pop();
 
-  fill(255, 182, 193);
-  stroke(0, 0, 0);
-  rect(smileyX + 90, smileyY - 6, 20, 7, 5); //mouth
+    // Draw pupils
+    push();
+    fill(0, 0, 0);
+    ellipse(this.x + 89, this.y - 19, 7, 11); // pupils left
+    ellipse(this.x + 109, this.y - 19, 7, 11); // pupils right
+    pop();
+
+    // Draw eyebrows
+    push();
+    fill(0, 0, 0);
+    rect(this.x + 81, this.y - 31, 16, 4, 5); // eyebrow left
+    rect(this.x + 103, this.y - 31, 16, 4, 5); // eyebrow right
+    pop();
+
+    // Draw mouth
+    push();
+    fill(255, 182, 193);
+    stroke(0, 0, 0);
+    rect(this.x + 90, this.y - 6, 20, 7, 5); // mouth
+    pop();
+  }
+
+  update() {
+    this.y = this.y + 2;
+    if (this.y > 500) {
+      this.y = -0;
+    }
+  }
 }
 
 class Camel {
@@ -872,6 +907,8 @@ function startGame() {
   waterTank(waterTankX + 420, waterTankY + 420);
 
   cactus.draw();
+  enemy1.draw();
+  enemy1.update();
   anotherCactus.draw();
   anotherCactus1.draw();
 
