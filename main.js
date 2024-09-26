@@ -435,10 +435,12 @@ class enemy {
     fill(216, 45, 37);
     stroke(0, 0, 0);
     ellipse(this.x + 100, this.y - 20, this.width, this.height); // body
+
     pop();
 
     // Draw eyes
     push();
+
     fill(255, 255, 255);
     stroke(0, 0, 0);
     ellipse(this.x + 90, this.y - 22, 10, 17); // eyes left
@@ -447,6 +449,7 @@ class enemy {
 
     // Draw pupils
     push();
+    rotate(radians(sin(rotationAngle) * 0.2)); // Rotation from Pig Lander
     fill(0, 0, 0);
     ellipse(this.x + 89, this.y - 19, 7, 11); // pupils left
     ellipse(this.x + 109, this.y - 19, 7, 11); // pupils right
@@ -460,6 +463,7 @@ class enemy {
     pop();
 
     // Draw mouth
+
     push();
     fill(255, 182, 193);
     stroke(0, 0, 0);
@@ -472,7 +476,7 @@ class enemy {
       x + width > this.x + 70 &&
       y < this.y - 50 + this.height &&
       y + height > this.y - 50
-    );
+    ); //hitTest from cactus
   }
 }
 
