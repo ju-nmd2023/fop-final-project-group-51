@@ -468,10 +468,10 @@ class enemy {
   }
   hitTest(x, y, width, height) {
     return (
-      x < this.x + this.width &&
-      x + width > this.x &&
-      y < this.y + this.height &&
-      y + height > this.y
+      x < this.x + 70 + this.width &&
+      x + width > this.x + 70 &&
+      y < this.y - 50 + this.height &&
+      y + height > this.y - 50
     );
   }
 }
@@ -911,7 +911,7 @@ function startGame() {
   sun();
   waterTank(waterTankX + 420, waterTankY + 420);
 
-  cactus.draw();
+  camel.draw(x, y, width, height, 0.5);
   enemy1.draw();
 
   anotherCactus.draw();
