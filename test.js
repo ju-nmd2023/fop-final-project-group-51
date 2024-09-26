@@ -425,6 +425,8 @@ class enemy {
   constructor(x, y) {
     this.x = x;
     this.y = y;
+    this.width = 60;
+    this.height = 60;
   }
 
   draw() {
@@ -432,7 +434,7 @@ class enemy {
     push();
     fill(216, 45, 37);
     stroke(0, 0, 0);
-    ellipse(this.x + 100, this.y - 20, 60); // body
+    ellipse(this.x + 100, this.y - 20, this.width, this.height); // body
     pop();
 
     // Draw eyes
@@ -464,12 +466,13 @@ class enemy {
     rect(this.x + 90, this.y - 6, 20, 7, 5); // mouth
     pop();
   }
-
-  update() {
-    this.y = this.y + 2;
-    if (this.y > 500) {
-      this.y = -0;
-    }
+  hitTest(x, y, width, height) {
+    return (
+      x < this.x + this.width &&
+      x + width > this.x &&
+      y < this.y + this.height &&
+      y + height > this.y
+    );
   }
 }
 
@@ -910,7 +913,7 @@ function startGame() {
 
   cactus.draw();
   enemy1.draw();
-  enemy1.update();
+
   anotherCactus.draw();
   anotherCactus1.draw();
 
@@ -919,6 +922,10 @@ function startGame() {
   cactus.x -= 1;
   anotherCactus.x -= 1;
   anotherCactus1.x -= 1;
+
+  if (enemy1.hitTest(camel.x, camel.y, camel.width, camel.height)) {
+    currentState = GameState.GAME_OVER;
+  }
 
   if (cactus.x < 0) {
     cactus.x = 250;
